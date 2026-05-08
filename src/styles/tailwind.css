@@ -179,13 +179,18 @@
 @theme {
   /* Her tilføjes theme variable // tokens */
 
-  /*Farver */
-  --color-primary-400: #00e4f5;
-  --color-primary-500: #006269;
-  --color-primary-600: #006d75;
-  --color-secondary-400: #f5e400;
-  --color-secondary-500: #f5a600;
-  --color-secondary-600: #f57a00;
+  /* Farver */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --color-gray-50: #eeeeee;
+  --color-gray-100: #e4e4e4;
+  --color-gray-200: #e1e1e1;
+  --color-gray-300: #d5d5d5;
+  --color-gray-400: #c7c7c7;
+  --color-gray-500: #8b8b8b;
+  --color-gray-600: #8b8b8b;
+  --color-gray-700: #2e2926;
 
   /*Typografi */
   --font-helv: "Helvetica Neue", sans-serif;
