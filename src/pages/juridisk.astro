@@ -1,0 +1,111 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Heading from "../components/Heading.astro";
+import Text from "../components/Text.astro";
+---
+
+<MainLayout title="Juridisk – Tusindfryd">
+  <main class="w-full max-w-[734px] mx-auto">
+    <div class="flex flex-col gap-[50px] px-5 pt-16 md:pt-[150px] pb-[150px]">
+      <section class="JuridiskHero">
+        <Heading htmlheading="h1" type="h2_large">Juridisk</Heading>
+      </section>
+
+      <section id="ombytning">
+        <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-6">
+          Ombytnings- & returportal
+        </Heading>
+        <div class="flex flex-col gap-1">
+          <Text teksttype="p_medium">
+            Ønsker du at ombytte eller returnere et produkt, bedes du kontakte
+            os på info@tusindfryd.io inden for 14 dage fra modtagelse. Angiv dit
+            ordrenummer og en kort beskrivelse af årsagen til returneringen.
+          </Text>
+          <Text teksttype="p_medium">
+            Vi behandler din henvendelse inden for 24 timer og vender tilbage
+            med videre instruktioner. Bemærk at varer skal returneres i samme
+            stand som ved modtagelse, og at returforsendelse sker for købers
+            regning, medmindre andet er aftalt.
+          </Text>
+        </div>
+      </section>
+
+      <section id="returpolitik">
+        <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-6">
+          Returpolitik
+        </Heading>
+        <div class="flex flex-col gap-1">
+          <Text teksttype="p_medium">
+            Du har 14 dages returret fra den dag, du modtager din ordre. Ønsker
+            du at benytte din returret, skal du give os besked inden for denne
+            periode.
+          </Text>
+          <Text teksttype="p_medium">
+            Varen skal returneres i væsentlig samme stand og mængde som ved
+            modtagelsen. Fortryder du hele købet, refunderes købsprisen. Du
+            betaler selv returforsendelsen, medmindre varen er mangelfuld eller
+            fejlleveret.
+          </Text>
+          <Text teksttype="p_medium">
+            Refundering sker til det betalingsmiddel, du anvendte ved købet,
+            inden for 5-7 hverdage efter vi har modtaget og godkendt returen.
+          </Text>
+        </div>
+      </section>
+
+      <section id="privatlivspolitik">
+        <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-6">
+          Privatlivspolitik
+        </Heading>
+        <div class="flex flex-col gap-1">
+          <Text teksttype="p_medium">
+            Tusindfryd behandler dine personoplysninger med respekt og i
+            overensstemmelse med GDPR. Vi indsamler kun de oplysninger, der er
+            nødvendige for at behandle din ordre og besvare dine henvendelser.
+          </Text>
+          <Text teksttype="p_medium">
+            De oplysninger vi indsamler omfatter navn, adresse, e-mailadresse og
+            telefonnummer. Disse oplysninger videregives ikke til tredjeparter
+            uden dit samtykke, med undtagelse af de transportører vi benytter
+            til levering af din ordre.
+          </Text>
+          <Text teksttype="p_medium">
+            Du har til enhver tid ret til indsigt i, rettelse eller sletning af
+            dine personoplysninger. Kontakt os på info@tusindfryd.io for at gøre
+            brug af disse rettigheder.
+          </Text>
+        </div>
+      </section>
+
+      <section id="handelsbetingelser">
+        <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-6">
+          Handelsbetingelser
+        </Heading>
+        <div class="flex flex-col gap-1">
+          <Text teksttype="p_medium">
+            Alle priser på tusindfryd.io er angivet i danske kroner (DKK) inkl.
+            moms. Vi forbeholder os ret til at ændre priser uden forudgående
+            varsel.
+          </Text>
+          <Text teksttype="p_medium">
+            En ordre betragtes som bindende, når du har modtaget en
+            ordrebekræftelse fra os pr. e-mail. Vi forbeholder os ret til at
+            annullere en ordre, hvis varen viser sig at være udgået eller
+            fejlbehæftet.
+          </Text>
+          <Text teksttype="p_medium">
+            Levering sker normalt inden for 3-5 hverdage i Danmark. Ved køb af
+            større møbler aftales levering individuelt. Tusindfryd er ikke
+            ansvarlig for forsinkelser som følge af forhold uden for vores
+            kontrol.
+          </Text>
+          <Text teksttype="p_medium">
+            Tvister søges løst i mindelighed. Kan parterne ikke nå til enighed,
+            kan du klage til Forbrugerklagenævnet, Carl Jacobsens Vej 35, 2500
+            Valby.
+          </Text>
+        </div>
+      </section>
+    </div>
+  </main>
+</MainLayout>
