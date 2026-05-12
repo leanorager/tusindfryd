@@ -23,12 +23,21 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
       </div>
     </section>
 
-    <section>
+    <section class="pb-[2px] md:pb-[5px] bg-white">
       <ShowroomBlock
         image="https://placehold.co/1512x808"
         imageAlt="Billede af Tusindfryds showroom"
         address="Trindsøvej 10 st 8000 Aarhus C"
       />
     </section>
+
+    <video
+      src="/vid/værksted.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      class="relative left-1/2 w-screen -translate-x-1/2 block h-[500px] md:h-[700px] object-cover"
+    ></video>
   </main></MainLayout
 >
