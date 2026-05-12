@@ -1,0 +1,60 @@
+---
+import Link from "./Link.astro";
+const {
+  image = "https://placehold.co/1512x808",
+  imageAlt = "Tusindfryd hero",
+} = Astro.props;
+---
+
+<section
+  class="IndexHero sticky top-0 z-0 w-full h-[calc(100vh-72px)] overflow-hidden"
+>
+  <img
+    src={image}
+    alt={imageAlt}
+    class="absolute inset-0 w-full h-full object-cover"
+  />
+  <div class="absolute inset-0 bg-black/10"></div>
+
+  <div
+    class="relative h-full flex flex-col justify-between pt-72 md:pt-96 px-5 pb-5"
+  >
+    <!-- Nav links -->
+    <div class="flex justify-between items-center">
+      <Link
+        variant="plain"
+        stylingclasses="text-white text-sm font-medium font-mont"
+        >NYESTE DROP</Link
+      >
+      <Link
+        variant="plain"
+        stylingclasses="hidden md:block text-white text-sm font-medium font-mont"
+        >SHOP SOFAER</Link
+      >
+      <Link
+        variant="plain"
+        stylingclasses="hidden md:block text-white text-sm font-medium font-mont"
+        >SHOP STOLE</Link
+      >
+      <Link
+        variant="plain"
+        stylingclasses="text-white text-sm font-medium font-mont"
+        >SE ALLE PRODUKTER</Link
+      >
+    </div>
+
+    <!-- Bottom row -->
+    <div class="flex justify-between items-end">
+      <p
+        class="text-neutral-50 text-2xl md:text-3xl font-normal font-mont max-w-[540px]"
+      >
+        Shop design, kvalitet og unikke fund<br />
+        fundet af eksperter. Vi finder vintage - og<br />
+        designmøbler fra hele verden.
+      </p>
+      <span class="text-neutral-50 text-sm font-medium font-mont"
+        >(SCROLL NED)</span
+      >
+    </div>
+  </div>
+</section>
