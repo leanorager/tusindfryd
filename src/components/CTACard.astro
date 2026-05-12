@@ -1,0 +1,25 @@
+---
+const {
+  image = "https://placehold.co/375x630",
+  href = "#",
+  label = "CTA Label",
+} = Astro.props;
+---
+
+<a
+  href={href}
+  class="w-full md:w-[375px] relative overflow-hidden h-[400px] md:h-[630px] bg-neutral-200 block group"
+>
+  <img
+    src={image}
+    alt={label}
+    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+  />
+  <div class="absolute bottom-0 left-0 w-full px-2.5 pb-2.5">
+    <span
+      class="py-0.5 border-b border-white text-white text-sm font-normal font-helv transition-opacity duration-300 group-hover:opacity-70"
+    >
+      {label}
+    </span>
+  </div>
+</a>

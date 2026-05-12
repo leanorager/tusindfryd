@@ -7,6 +7,7 @@ import Button from "../components/Button.astro";
 import { Image } from "astro:assets";
 import thumbsup from "../assets/images/thumbsup.png";
 import ArrowLink from "../components/ArrowLink.astro";
+import CTACard from "../components/CTACard.astro";
 ---
 
 <MainLayout title="Titel">
@@ -151,5 +152,13 @@ import ArrowLink from "../components/ArrowLink.astro";
       >
     </section>
     <!-- Slut på Buttons komponent instanser -->
+
+    <!-- Start på CTACard komponent -->
+    <CTACard
+      image="https://placehold.co/375x630"
+      href="/bliv-medlem"
+      label="Bliv medlem og få fordele"
+    />
+    <!-- Slut på CTACard komponent -->
   </main>
 </MainLayout>
