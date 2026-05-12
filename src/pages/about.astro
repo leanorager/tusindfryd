@@ -1,0 +1,227 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Link from "../components/Link.astro";
+import { Image } from "astro:assets";
+import thumbsup from "../assets/images/thumbsup.png";
+import Heading from "../components/Heading.astro";
+import Text from "../components/Text.astro";
+import Button from "../components/Button.astro";
+import TeamCard from "../components/TeamCard.astro";
+---
+
+<MainLayout title="Om os">
+  <main>
+    <section class="OmHero sticky top-0 z-0">
+      <div
+        class="w-full bg-zinc-100 overflow-hidden
+                  pb-4 flex flex-col gap-5
+                  md:block md:relative md:h-[calc(100vh-108px)] md:pb-0"
+      >
+        <!-- Image strip -->
+        <div
+          class="bg-neutral-200 overflow-hidden
+                    px-5 pt-5 pb-4 flex justify-center items-center gap-3
+                    md:absolute md:left-0 md:top-0 md:w-full md:h-80
+                    md:px-0 md:pt-0 md:pb-0 md:pr-5 md:justify-end md:items-center md:gap-4"
+        >
+          <img
+            class="w-40 h-56 md:w-52 md:h-72"
+            src="https://placehold.co/204x294"
+          />
+          <img
+            class="w-40 h-56 md:w-52 md:h-72"
+            src="https://placehold.co/205x294"
+          />
+        </div>
+
+        <!-- Text section -->
+        <div
+          class="relative h-72
+                    md:absolute md:left-0 md:bottom-0 md:w-full md:h-auto md:p-5"
+        >
+          <!-- Inner content: mobile=absolutely offset, desktop=static full-width -->
+          <div
+            class="absolute left-[25px] top-0 w-80 flex flex-col gap-6
+                      md:static md:w-full md:gap-16"
+          >
+            <p
+              class="text-black text-3xl font-normal font-['Neue_Montreal']
+                      md:max-w-[505px]"
+            >
+              Tusindfryd er defineret af stil, design og interiør – udvalgt af
+              eksperter. <br />Her er historien bag.
+            </p>
+
+            <div class="text-black text-8xl font-medium font-['Neue_Montreal']">
+              Om os
+            </div>
+          </div>
+        </div>
+
+        <!-- SCROLL NED: mobile=right-aligned flow, desktop=absolute bottom-right -->
+        <div
+          class="text-right px-5 text-black text-sm font-normal font-['Neue_Montreal']
+                    md:absolute md:bottom-5 md:right-5 md:px-0 md:font-medium"
+        >
+          (SCROLL NED)
+        </div>
+      </div>
+    </section>
+
+    <section class="OmText">
+      <div>
+        <div
+          class="w-full max-w-[734px] mx-auto text-black text-sm font-normal font-['Neue_Montreal']
+                    opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 intersect-once"
+        >
+          Tusindfryd er et møbel- og interiørstudie i Aarhus med fokus på brugte
+          møbler med kvalitet, karakter og historie. Vi håndplukker hvert eneste
+          stykke — fordi vi tror på, at gode møbler skal bruges, til de er
+          færdige.<br /><br />Det hele startede under corona med et par puder
+          fra Marketplace og en dårlig ryg. I dag er Tusindfryd vokset til et
+          showroom og værksted fyldt med møbler, vi selv finder, reparerer,
+          sammensætter og sender videre.<br />Bag udvælgelsen står Sara, som
+          gennem årene har opbygget et særligt blik for især italienske og
+          skandinaviske møbler fra 60'erne og 70'erne. Ikke ud fra regler eller
+          designmanualer, men ud fra intuition, farver, former og det, der føles
+          rigtigt. Det er den tilgang, der former Tusindfryds udvalg. Nogle
+          møbler får nye sokler. Andre bliver repareret, renset eller polstret
+          om. Ikke for at gøre dem perfekte — men for at gøre dem relevante for
+          den måde, vi bor på i dag. Mange af os bor mindre, anderledes og mere
+          fleksibelt end før i tiden. Det skal møblerne kunne følge med til.<br
+          />Vi arbejder med møbler, der holder. Møbler med godt håndværk,
+          materialer der kan repareres, og løsninger der giver mening at leve
+          med i mange år. Derfor finder du både store designklassikere, mindre
+          hverdagsfund og møbler til folk, der lige er flyttet hjemmefra.<br
+          /><br />Vi arbejder med unikke fund, skiftende udvalg og møbler, der
+          sjældent findes i din lokale genbrugsbutik.
+        </div>
+      </div>
+    </section>
+
+    <section class="TeamImages">
+      <div class="">
+        <div
+          class="mb-4 opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-500 intersect-once"
+        >
+          <Heading htmlheading="h2" type="h2_medium"
+            >Teamet Bag Tusindfryd</Heading
+          >
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div
+            class="opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-0 intersect-once"
+          >
+            <TeamCard
+              navn="Sara Tusindfryd Moen"
+              jobbeskrivelse="Stylist,Founder & CEO"
+              billede="https://placehold.co/364x497"
+            />
+          </div>
+          <div
+            class="opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-150 intersect-once"
+          >
+            <TeamCard
+              navn="Stine Askefrø"
+              jobbeskrivelse="Værkstedsansvarlig & Logistik"
+              billede="https://placehold.co/364x497"
+            />
+          </div>
+          <div
+            class="opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-300 intersect-once"
+          >
+            <TeamCard
+              navn="Signe Sjøstrand"
+              jobbeskrivelse="Stylist, SoMe & Showroom"
+              billede="https://placehold.co/364x497"
+            />
+          </div>
+          <div
+            class="opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-[450ms] intersect-once"
+          >
+            <TeamCard
+              navn="Eik Moen"
+              jobbeskrivelse="Co-founder & IT"
+              billede="https://placehold.co/364x497"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="TeamText">
+      <div class="grid grid-cols-12 gap-y-2 md:gap-0 items-start">
+        <span
+          class="col-span-12 md:col-start-2 md:col-span-1 pt-2 font-mont font-normal text-[12px] text-black uppercase tracking-widest
+                    opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-500 intersect-once"
+          >Teamet</span
+        >
+        <p
+          class="col-span-12 md:col-start-3 md: font-mont font-medium text-[30px] text-black
+                    opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-100 intersect-once"
+        >
+          Bag Tusindfryd står et lille team med store kompetencer.
+        </p>
+        <p
+          class="col-span-12 md:col-start-2 md:col-end-12 font-mont font-medium text-[30px] text-black
+                    opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-200 intersect-once"
+        >
+          Sara finder møblerne — med et skarpt øje for stil, form og det der
+          særlige, som er svært at sætte ord på. Eik bygger og vedligeholder de
+          systemer, der holder det hele kørende bag kulisserne. Signe står for
+          det visuelle. Fra billeder og sociale medier til showroomet, der altid
+          fremstår præcist som det skal. Og Stine er kvinden i værkstedet, der
+          med passion for håndværk reparerer, restaurerer og sørger for at hvert
+          møbel er istandsat og optimeret.
+        </p>
+      </div>
+    </section>
+
+    <section class="Princip">
+      <div class="grid grid-cols-12 gap-2">
+        <!-- Left: square image (hidden mobile) + heading — order 2 on mobile -->
+        <div
+          class="col-span-12 md:col-span-6 flex flex-col gap-2 md:pb-32 order-2 md:order-1"
+        >
+          <div
+            class="hidden md:block self-end w-96 h-96 overflow-hidden opacity-0 intersect:opacity-100 transition-opacity duration-1000 intersect-once"
+          >
+            <img
+              class="w-full h-full object-cover object-center"
+              src="https://placehold.co/402x604"
+            />
+          </div>
+          <p
+            class="w-full text-black text-5xl md:text-7xl font-medium font-['Neue_Montreal'] md:pl-[calc(100%/6)]
+                      opacity-0 translate-y-8 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-150 intersect-once"
+          >
+            Princip:<br />Ting skal bruges<br />til de er færdige.
+          </p>
+        </div>
+
+        <!-- Right tall image — order 1 on mobile (shown first) -->
+        <div
+          class="col-span-12 md:col-span-6 md:pt-32 order-1 md:order-2 opacity-0 intersect:opacity-100 transition-opacity duration-1000 intersect-once"
+        >
+          <img
+            class="w-full h-[400px] md:h-[659px] object-cover"
+            src="https://placehold.co/612x880"
+          />
+        </div>
+
+        <!-- Caption — order 3 on mobile, sits below right image on desktop -->
+        <p
+          class="col-span-12 md:col-start-7 md:col-span-6 md:w-2/3 text-black text-sm font-normal font-['Neue_Montreal'] order-3
+                    opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-200 intersect-once"
+        >
+          Hos Tusindfryd siger vi nej, hvis du beder os ombetrække en sofa, der
+          ikke trænger til det. Det er en holdning, vi tillader os at have.<br
+          />
+          Godt håndværk og gode materialer er lavet til at holde — og det respekterer
+          vi. Når noget faktisk er slidt, reparerer vi det. Indtil da lader vi det
+          være, som det er.
+        </p>
+      </div>
+    </section>
+  </main>
+</MainLayout>
