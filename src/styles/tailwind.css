@@ -199,6 +199,19 @@
 }
 
 @layer base {
+  main > section:not(.OmHero):not(.IndexHero) {
+    padding-top: 4rem;
+    padding-inline: 1.25rem; /* 20px */
+    position: relative;
+    z-index: 10;
+    background-color: var(--color-white);
+  }
+
+  @media (min-width: 768px) {
+    main > section:not(.OmHero):not(.IndexHero) {
+      padding-top: 9.375rem; /* 150px */
+    }
+  }
 }
 
 @layer components {
