@@ -8,6 +8,7 @@ import { Image } from "astro:assets";
 import thumbsup from "../assets/images/thumbsup.png";
 import ArrowLink from "../components/ArrowLink.astro";
 import CTACard from "../components/CTACard.astro";
+import TeamCard from "../components/TeamCard.astro";
 ---
 
 <MainLayout title="Titel">
@@ -67,7 +68,8 @@ import CTACard from "../components/CTACard.astro";
       <Heading htmlheading="h2" size="medium">Links</Heading>
       <Text teksttype="brødtekst"
         ><Link href="#">Textlink (default): </Link>Default varianten bruges som
-        en del af en tekst, og fungerer som et <Link href="#">inline link</Link> i en paragraf.</Text
+        en del af en tekst, og fungerer som et <Link href="#">inline link</Link> i
+        en paragraf.</Text
       >
       <Text><Link href="#" variant="primary">Link variant: primary</Link></Text>
       <Text
@@ -86,9 +88,7 @@ import CTACard from "../components/CTACard.astro";
         ></Text
       >
       <Text
-        ><Link href="#" variant="secondary"
-          >Link variant: secondary</Link
-        ></Text
+        ><Link href="#" variant="secondary">Link variant: secondary</Link></Text
       >
       <Text
         ><Link href="#" variant="secondary" size="small"
@@ -170,5 +170,13 @@ import CTACard from "../components/CTACard.astro";
       label="Bliv medlem og få fordele"
     />
     <!-- Slut på CTACard komponent -->
+
+    <!-- Start på TeamCard komponent -->
+    <TeamCard
+      navn="John Doe"
+      jobbeskrivelse="Some job description here"
+      billede="https://placehold.co/364x497"
+    />
   </main>
+  <!-- Slut på TeamCard komponent -->
 </MainLayout>
