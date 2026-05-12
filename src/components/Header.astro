@@ -1,28 +1,340 @@
 ---
-const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.slice(1); // remove the first "/"
+
 ---
-<header x-data="{ showmenu: false }" class="" >
-    <div id="navbar" class="container mx-auto p-4 flex flex-row justify-between items-center">
-        <div id="logo" class="">
-            <a href="#" class="font-display text-4xl">Astro-Tailwind starter - udvidet udgave E25</a>
-        </div>
-        <nav id="desktopmenu" class="hidden lg:block">
-            <ul class="flex flex-row gap-4">
-                <li class=""><a href="/" class={currentPath === "" ? "italic font-bold" : "italic"}>Forside</a></li><!-- alternativt: lav et <a href="">Link</a>, hvis du ikke vil bruge Link.astro komponenten -->
-                <li class=""><a href="/komponentbibliotek/" class={currentPath === "komponentbibliotek/" ? "italic font-bold" : "italic"}>Komponentbibliotek</a></li>
-            </ul>
-        </nav>
-        <button id="burgermenu" class="lg:hidden" x-on:click="showmenu = ! showmenu"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-</svg>
-</button>
-    </div>
-    <nav id="mobilmenu" class="flex flex-col content-center" 
-    x-show="showmenu" x-transition x-on:click="showmenu = false" x-on:click.outside="showmenu = false">
-        <ul class="border-t-2 border-b-2 border-black">
-            <li class="text-center py-2"><a href="/" class={currentPath === "" ? "italic font-bold" : "italic"}>Forside</a></li>
-            <li class="text-center py-2"><a href="/komponentbibliotek/" class={currentPath === "komponentbibliotek/" ? "italic font-bold" : "italic"}>Komponentbibliotek</a></li>
-        </ul>
+
+<header
+  x-data="{ shopOpen: false, cartOpen: false, menuOpen: false }"
+  class="sticky top-0 z-50"
+>
+  <!-- Announcement bar -->
+  <div
+    class="bg-black text-white font-helv font-light text-xs py-2.5 flex items-center px-5"
+  >
+    Fragt og Levering er Gratis for alle medlemmer
+  </div>
+
+  <!-- Nav bar -->
+  <div
+    class="bg-white border-b border-neutral-200 relative flex items-center h-[72px] px-5"
+  >
+    <!-- Mobile: Menu button -->
+    <button
+      @click="menuOpen = true"
+      class="md:hidden font-helv font-light text-sm text-black"
+    >
+      Menu
+    </button>
+
+    <!-- Desktop: nav links -->
+    <nav class="hidden md:flex items-center gap-8">
+      <button
+        @click="shopOpen = !shopOpen"
+        class="flex items-center gap-1 font-helv font-light text-sm text-black"
+      >
+        Shop
+        <span
+          class="text-xs transition-transform duration-200"
+          :class="shopOpen ? 'rotate-180' : ''">∨</span
+        >
+      </button>
+      <a
+        href="/showroom"
+        class="font-helv font-light text-sm text-black hover:underline transition-all duration-150"
+        >Showroom</a
+      >
+      <a
+        href="/about"
+        class="font-helv font-light text-sm text-black hover:underline transition-all duration-150"
+        >Om os</a
+      >
     </nav>
+
+    <!-- Center: logo -->
+    <a href="/" class="absolute left-1/2 -translate-x-1/2">
+      <img
+        src="https://placehold.co/40x40"
+        alt="Tusindfryd"
+        class="h-8 w-auto"
+      />
+    </a>
+
+    <!-- Mobile: Søg + Kurv -->
+    <div class="md:hidden ml-auto flex items-center gap-5">
+      <button class="font-helv font-light text-sm text-black">Søg</button>
+      <button
+        @click="cartOpen = true"
+        class="font-helv font-light text-sm text-black"
+      >
+        Kurv (0)
+      </button>
+    </div>
+
+    <!-- Desktop: utility links -->
+    <nav class="hidden md:flex ml-auto items-center gap-6">
+      <button
+        class="font-helv font-light text-sm text-black hover:underline transition-all duration-150"
+        >Søg</button
+      >
+      <span class="font-helv text-sm text-black">
+        <strong class="font-medium">DA</strong><span class="font-light">
+          / EN</span
+        >
+      </span>
+      <a
+        href="/bliv-medlem"
+        class="font-helv font-light text-sm text-black hover:underline transition-all duration-150"
+        >Bliv Medlem</a
+      >
+      <button
+        @click="cartOpen = true"
+        class="font-helv font-light text-sm text-black hover:underline transition-all duration-150"
+        >Kurv (0)</button
+      >
+    </nav>
+  </div>
+
+  <!-- Mobile menu overlay -->
+  <div
+    x-show="menuOpen"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    class="fixed inset-0 bg-white z-50 flex flex-col md:hidden"
+    style="display: none"
+  >
+    <!-- Menu top bar -->
+    <div
+      class="bg-black text-white font-helv font-light text-xs py-2.5 px-5 flex-shrink-0"
+    >
+      Fragt og Levering er Gratis for alle medlemmer
+    </div>
+    <div
+      class="relative flex items-center h-[72px] px-5 border-b border-neutral-200 flex-shrink-0"
+    >
+      <a href="/" class="absolute left-1/2 -translate-x-1/2">
+        <img
+          src="https://placehold.co/40x40"
+          alt="Tusindfryd"
+          class="h-8 w-auto"
+        />
+      </a>
+      <button
+        @click="menuOpen = false"
+        class="ml-auto font-helv text-base text-black hover:opacity-60 transition-opacity duration-150"
+        >✕</button
+      >
+    </div>
+
+    <!-- Nav links -->
+    <div class="flex-1 overflow-y-auto px-5 pt-8 flex flex-col">
+      <p
+        class="font-helv font-light text-xs text-gray-500 uppercase tracking-widest mb-4"
+      >
+        Shop
+      </p>
+      <a
+        href="#"
+        class="font-mont font-medium text-sm text-black uppercase tracking-wide py-3 border-b border-neutral-100"
+        >Nyheder</a
+      >
+      <a
+        href="#"
+        class="font-mont font-medium text-sm text-black uppercase tracking-wide py-3 border-b border-neutral-100 mb-1"
+        >Shop alt</a
+      >
+      <a
+        href="#"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Sofaer</a
+      >
+      <a
+        href="#"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Stole</a
+      >
+      <a
+        href="#"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Borde</a
+      >
+      <a
+        href="#"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Lamper</a
+      >
+      <a
+        href="#"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Tæpper</a
+      >
+      <a
+        href="#"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Opbevaring</a
+      >
+      <a
+        href="#"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Tilbehør</a
+      >
+
+      <a
+        href="/showroom"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100 mt-6"
+        >Showroom</a
+      >
+      <a
+        href="/about"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Om os</a
+      >
+      <a
+        href="/bliv-medlem"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Bliv Medlem</a
+      >
+    </div>
+
+    <!-- Bottom: Søg + sprog -->
+    <div
+      class="px-5 py-6 flex items-center justify-between flex-shrink-0 border-t border-neutral-100"
+    >
+      <button class="font-helv font-light text-sm text-black">Søg</button>
+      <span class="font-helv text-sm text-black">
+        <strong class="font-medium">DA</strong><span class="font-light">
+          / EN</span
+        >
+      </span>
+    </div>
+  </div>
+
+  <!-- Backdrop (desktop: shop + cart / mobil: kun cart) -->
+  <div
+    x-show="shopOpen || cartOpen"
+    @click="shopOpen = false; cartOpen = false"
+    x-transition:enter="transition ease-out duration-200"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-150"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    class="fixed inset-0 top-[108px] bg-black/20 z-30"
+  >
+  </div>
+
+  <!-- Shop dropdown (desktop only) -->
+  <div
+    x-show="shopOpen"
+    x-transition:enter="transition ease-out duration-200"
+    x-transition:enter-start="opacity-0 -translate-y-1"
+    x-transition:enter-end="opacity-100 translate-y-0"
+    x-transition:leave="transition ease-in duration-150"
+    x-transition:leave-start="opacity-100 translate-y-0"
+    x-transition:leave-end="opacity-0 -translate-y-1"
+    class="fixed top-[108px] left-0 w-[430px] h-[calc(100vh-108px)] bg-white z-40 flex-col border-r border-neutral-200 hidden md:flex"
+  >
+    <!-- Links -->
+    <div class="flex flex-col flex-1 px-5 pt-6 overflow-y-auto">
+      <a
+        href="#"
+        class="font-mont font-medium text-sm text-black uppercase tracking-wide py-1 hover:underline transition-all duration-150"
+        >Nyheder</a
+      >
+      <a
+        href="#"
+        class="font-mont font-medium text-sm text-black uppercase tracking-wide py-1 hover:underline transition-all duration-150 mb-5"
+        >Shop alt</a
+      >
+
+      <a
+        href="#"
+        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
+        >Sofaer</a
+      >
+      <a
+        href="#"
+        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
+        >Stole</a
+      >
+      <a
+        href="#"
+        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
+        >Borde</a
+      >
+      <a
+        href="#"
+        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
+        >Lamper</a
+      >
+      <a
+        href="#"
+        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
+        >Tæpper</a
+      >
+      <a
+        href="#"
+        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
+        >Opbevaring</a
+      >
+      <a
+        href="#"
+        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
+        >Tilbehør</a
+      >
+    </div>
+
+    <!-- Featured image -->
+    <div class="relative h-[220px] flex-shrink-0 overflow-hidden">
+      <img
+        src="https://placehold.co/430x220"
+        alt="Featured kategori"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 flex justify-center items-center">
+        <span
+          class="py-0.5 border-b border-white text-white text-sm font-normal font-helv"
+          >Shop cutlery</span
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- Kurv panel -->
+  <div
+    x-show="cartOpen"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="translate-x-full"
+    x-transition:enter-end="translate-x-0"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="translate-x-0"
+    x-transition:leave-end="translate-x-full"
+    class="fixed top-0 right-0 w-full md:w-[420px] h-full bg-white z-50 flex flex-col border-l border-neutral-200"
+  >
+    <div
+      class="flex justify-between items-center px-5 h-[72px] border-b border-neutral-200 flex-shrink-0"
+    >
+      <span
+        class="font-helv font-light text-sm text-black uppercase tracking-wide"
+        >Din Kurv (0)</span
+      >
+      <button
+        @click="cartOpen = false"
+        class="font-helv text-base text-black hover:opacity-60 transition-opacity duration-150"
+        >✕</button
+      >
+    </div>
+    <div class="flex-1 flex items-center justify-center p-5">
+      <p class="font-helv font-light text-sm text-gray-500">Din kurv er tom.</p>
+    </div>
+    <div class="p-5 border-t border-neutral-200 flex-shrink-0">
+      <button
+        class="w-full bg-black text-white font-helv font-light text-sm py-4 hover:opacity-80 transition-opacity duration-150"
+      >
+        GÅ TIL KASSE
+      </button>
+    </div>
+  </div>
 </header>
