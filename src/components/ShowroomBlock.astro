@@ -1,0 +1,47 @@
+---
+import ArrowLink from "./ArrowLink.astro";
+import Text from "./Text.astro";
+
+const {
+  image,
+  imageAlt = "",
+  address = "Trindsøvej 10 st 8000 Aarhus C",
+  stylingclasses = "",
+} = Astro.props;
+
+const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+---
+
+<section
+  class:list={[
+    "relative left-1/2 w-screen -translate-x-1/2 grid grid-cols-1 md:grid-cols-2 gap-[2px] md:gap-[5px] px-0",
+    stylingclasses,
+  ]}
+>
+  <!-- Billede -->
+  <div class="w-full h-[550px] md:h-[720px]">
+    <img src={image} alt={imageAlt} class="w-full h-full object-cover" />
+  </div>
+
+  <!-- Sort boks -->
+  <div class="bg-black p-5 flex flex-col h-auto md:h-[720px]">
+    <Text
+      teksttype="statement_large"
+      color="text-white"
+      stylingclasses="leading-[1.08] tracking-[-0.03em] max-w-[700px]"
+    >
+      I vores showroom kan du opleve møblerne i virkeligheden, mærke
+      materialerne og tage dine favoritter med hjem samme dag. Vi har åbent
+      tirsdag og torsdag fra 10-17.
+    </Text>
+
+    <ArrowLink
+      href={mapsHref}
+      target="_blank"
+      color="white"
+      stylingclasses="mt-5 self-start"
+    >
+      Du finder os på {address}, find vej her
+    </ArrowLink>
+  </div>
+</section>

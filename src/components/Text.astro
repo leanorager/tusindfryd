@@ -1,7 +1,7 @@
 ---
-const { teksttype = "p_medium", stylingclasses = "" } = Astro.props;
+const { teksttype = "p_medium", stylingclasses = "", color = "text-black" } = Astro.props;
 
-const baseClasses = "text-black";
+const baseClasses = color;
 
 const textClasses = {
   p_xsmall: "font-helv font-normal text-[12px]",
