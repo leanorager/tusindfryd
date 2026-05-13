@@ -1,6 +1,7 @@
 ---
 import Link from "./Link.astro";
 import Text from "./Text.astro";
+import Button from "./Button.astro";
 ---
 
 <header
@@ -19,25 +20,23 @@ import Text from "./Text.astro";
     class="bg-white border-b border-neutral-200 relative flex items-center h-[72px] px-5"
   >
     <!-- Mobile: Menu button -->
-    <button
-      @click="menuOpen = true"
-      class="md:hidden font-helv font-light text-sm text-black"
-    >
+    <Button variant="plain" @click="menuOpen = true" stylingclasses="md:hidden">
       Menu
-    </button>
+    </Button>
 
     <!-- Desktop: nav links -->
     <nav class="hidden md:flex items-center gap-8">
-      <button
+      <Button
+        variant="plain"
         @click="shopOpen = !shopOpen"
-        class="flex items-center gap-1 font-helv font-light text-sm text-black"
+        stylingclasses="flex items-center gap-1"
       >
         Shop
         <span
           class="text-xs transition-transform duration-200"
           :class="shopOpen ? 'rotate-180' : ''">∨</span
         >
-      </button>
+      </Button>
       <Link href="/showroom">Showroom</Link>
       <Link href="/about">Om os</Link>
     </nav>
@@ -53,30 +52,18 @@ import Text from "./Text.astro";
 
     <!-- Mobile: Søg + Kurv -->
     <div class="md:hidden ml-auto flex items-center gap-5">
-      <button class="font-helv font-light text-sm text-black">Søg</button>
-      <button
-        @click="cartOpen = true"
-        class="font-helv font-light text-sm text-black"
-      >
-        Kurv (0)
-      </button>
+      <Button variant="plain">Søg</Button>
+      <Button variant="plain" @click="cartOpen = true">Kurv (0)</Button>
     </div>
 
     <!-- Desktop: utility links -->
     <nav class="hidden md:flex ml-auto items-center gap-6">
-      <button
-        class="font-helv font-light text-sm text-black hover:underline transition-all duration-150"
-        >Søg</button
-      >
+      <Button variant="textlink">Søg</Button>
       <Text teksttype="p_medium">
         <strong class="font-medium">DA</strong><span class="font-light"> / EN</span>
       </Text>
       <Link href="/bliv-medlem">Bliv Medlem</Link>
-      <button
-        @click="cartOpen = true"
-        class="font-helv font-light text-sm text-black hover:underline transition-all duration-150"
-        >Kurv (0)</button
-      >
+      <Button variant="textlink" @click="cartOpen = true">Kurv (0)</Button>
     </nav>
   </div>
 
@@ -108,10 +95,11 @@ import Text from "./Text.astro";
           class="h-8 w-auto"
         />
       </a>
-      <button
+      <Button
+        variant="plain"
         @click="menuOpen = false"
-        class="ml-auto font-helv text-base text-black hover:opacity-60 transition-opacity duration-150"
-        >✕</button
+        stylingclasses="ml-auto !text-base hover:opacity-60 transition-opacity duration-150"
+        >✕</Button
       >
     </div>
 
@@ -151,7 +139,7 @@ import Text from "./Text.astro";
     <div
       class="px-5 py-6 flex items-center justify-between flex-shrink-0 border-t border-neutral-100"
     >
-      <button class="font-helv font-light text-sm text-black">Søg</button>
+      <Button variant="plain">Søg</Button>
       <Text teksttype="p_medium">
         <strong class="font-medium">DA</strong><span class="font-light"> / EN</span>
       </Text>
@@ -239,21 +227,18 @@ import Text from "./Text.astro";
       class="flex justify-between items-center px-5 h-[72px] border-b border-neutral-200 flex-shrink-0"
     >
       <Text teksttype="p_large" stylingclasses="uppercase tracking-wide">Din Kurv (0)</Text>
-      <button
+      <Button
+        variant="plain"
         @click="cartOpen = false"
-        class="font-helv text-base text-black hover:opacity-60 transition-opacity duration-150"
-        >✕</button
+        stylingclasses="!text-base hover:opacity-60 transition-opacity duration-150"
+        >✕</Button
       >
     </div>
     <div class="flex-1 flex items-center justify-center p-5">
       <Text teksttype="p_large" color="text-gray-500">Din kurv er tom.</Text>
     </div>
     <div class="p-5 border-t border-neutral-200 flex-shrink-0">
-      <button
-        class="w-full bg-black text-white font-helv font-light text-sm py-4 hover:opacity-80 transition-opacity duration-150"
-      >
-        GÅ TIL KASSE
-      </button>
+      <Button variant="primary">GÅ TIL KASSE</Button>
     </div>
   </div>
 </header>

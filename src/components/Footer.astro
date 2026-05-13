@@ -1,6 +1,7 @@
 ---
 import Text from "./Text.astro";
 import Link from "./Link.astro";
+import Button from "./Button.astro";
 ---
 
 <footer class="bg-stone-50 border-t border-neutral-200">
@@ -19,13 +20,15 @@ import Link from "./Link.astro";
         </Text>
       </div>
 
-      <a
+      <Button
+        variant="secondary"
         href="/bliv-medlem"
-        class="w-80 h-11 px-5 py-3.5 border border-black flex justify-between items-center"
+        teksttype="p_xsmall"
+        stylingclasses="w-80 h-11 flex justify-between items-center"
       >
-        <span class="font-helv font-normal text-[12px] text-black">Bliv medlem</span>
-        <span class="font-helv text-sm text-black">→</span>
-      </a>
+        Bliv medlem
+        <span class="font-helv text-sm">→</span>
+      </Button>
     </div>
 
     <!-- Showroom -->
