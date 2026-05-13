@@ -17,6 +17,8 @@ const {
 
 const Tag = href ? "a" : "button";
 
+// Kopieret fra Text.astro — ideelt set delt via src/utils/teksttype.ts,
+// men Text.astro må ikke ændres, og <p> er ugyldig HTML inde i <button>.
 const teksttypeClasses = {
   p_xsmall: "font-helv font-normal text-[12px]",
   p_small: "font-helv font-normal text-[13px]",
