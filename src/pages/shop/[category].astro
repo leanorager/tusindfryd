@@ -1,0 +1,112 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Heading from "../../components/Heading.astro";
+import Text from "../../components/Text.astro";
+import ListProductCard from "../../components/ListProductCard.astro";
+import { CATEGORIES } from "../../lib/categories";
+import type { CategoryConfig } from "../../lib/categories";
+
+const SUPABASE_URL = "https://txfouhhxrpcyrsvjnnpd.supabase.co/rest/v1";
+const SUPABASE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4Zm91aGh4cnBjeXJzdmpubnBkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNjc2MTcsImV4cCI6MjA5Mzk0MzYxN30.SdHA98ZoF-4DMTXeZc59-jpHjD4rnFdqcuQw-MqmpQI";
+
+export async function getStaticPaths() {
+  return CATEGORIES.map((cat) => ({
+    params: { category: cat.slug },
+    props: { categoryConfig: cat },
+  }));
+}
+
+interface Props {
+  categoryConfig: CategoryConfig;
+}
+
+const { categoryConfig } = Astro.props;
+
+let url = `${SUPABASE_URL}/products?select=id,title,subtitle,regular_price,member_price,image1`;
+if (categoryConfig.filter) {
+  url += `&category=cs.${encodeURIComponent(`["${categoryConfig.filter}"]`)}`;
+}
+
+const response = await fetch(url, {
+  headers: {
+    apikey: SUPABASE_KEY,
+    Authorization: `Bearer ${SUPABASE_KEY}`,
+  },
+});
+
+type Product = {
+  id: number;
+  title: string;
+  subtitle: string;
+  regular_price: number;
+  member_price: number;
+  image1: string | null;
+};
+
+const products: Product[] = await response.json();
+---
+
+<MainLayout title={`${categoryConfig.title} – Tusindfryd`}>
+  <main class="px-4 md:px-10 pt-8 pb-16">
+    <!-- Page header -->
+    <div class="mb-6 md:mb-8 md:max-w-sm">
+      <Heading htmlheading="h2" type="h3" stylingclasses="uppercase mb-3">
+        {categoryConfig.title}
+      </Heading>
+      {
+        categoryConfig.description && (
+          <Text teksttype="statement_small">{categoryConfig.description}</Text>
+        )
+      }
+    </div>
+
+    <!-- Filter bar -->
+    <div class="flex justify-end mb-6">
+      <button
+        class="flex items-center gap-2 border border-black px-4 py-2.5 font-helv font-normal text-[13px]"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="4" y1="6" x2="20" y2="6"></line>
+          <line x1="8" y1="12" x2="16" y2="12"></line>
+          <line x1="11" y1="18" x2="13" y2="18"></line>
+        </svg>
+        Filtrer & sorter
+      </button>
+    </div>
+
+    <!-- Product grid -->
+    {
+      products.length > 0 ? (
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-8 md:gap-x-5 md:gap-y-10">
+          {products.map((product) => (
+            <ListProductCard
+              id={product.id}
+              title={product.title}
+              subtitle={product.subtitle}
+              regular_price={product.regular_price}
+              member_price={product.member_price}
+              image1={product.image1}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="flex items-center justify-center py-24">
+          <Text teksttype="p_medium" color="text-neutral-400">
+            Ingen produkter fundet i denne kategori.
+          </Text>
+        </div>
+      )
+    }
+  </main>
+</MainLayout>
