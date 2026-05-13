@@ -1,22 +1,47 @@
 ---
-// Henter parametrene fra Astro.props
-const { variant= "primary", size = "medium" } = Astro.props; 
- 
-//Definer den styling (Tailwind classes, der gør sig gældende for alle knapper)
-const buttonStyling = "border-2 px-16 py-4"; 
- 
-//Definer den styling (Tailwind classes), der gør sig gældende for de forskellige varianter 
-const variantClasses = {
-"primary": "border-black hover:bg-black hover:text-white hover:-skew-x-12 transition-all duration-700", /* border-primary-500 */
-"secondary": "border-blue-500 hover:bg-blue-500 hover:border-blue-200" /* border-secondary-500 */
+const {
+  variant = "primary",
+  href,
+  target = "_self",
+  teksttype = "p_large",
+  stylingclasses = "",
+  ...rest
+} = Astro.props as {
+  variant?: "primary" | "secondary" | "textlink" | "plain";
+  href?: string;
+  target?: string;
+  teksttype?: "p_xsmall" | "p_small" | "p_medium" | "p_large" | "statement_small" | "statement_medium" | "statement_large" | "price_small" | "price_large";
+  stylingclasses?: string;
+  [key: string]: unknown;
 };
- 
-//Definer den styling (Tailwind classes), der gør sig gældende for de forskelligeog størrelser.
-const sizeClasses = {
-"large": "text-4xl",
-"medium": "text-xl",
-"small": "text-large"
+
+const Tag = href ? "a" : "button";
+
+// Kopieret fra Text.astro — ideelt set delt via src/utils/teksttype.ts,
+// men Text.astro må ikke ændres, og <p> er ugyldig HTML inde i <button>.
+const teksttypeClasses = {
+  p_xsmall: "font-helv font-normal text-[12px]",
+  p_small: "font-helv font-normal text-[13px]",
+  p_medium: "font-helv font-normal text-[14px]",
+  p_large: "font-helv font-light text-[14px]",
+  statement_small: "font-mont font-normal text-[10px]",
+  statement_medium: "font-mont font-normal text-[14px]",
+  statement_large: "font-mont font-medium text-[30px]",
+  price_small: "font-ibm font-normal text-[12px]",
+  price_large: "font-ibm font-normal text-[14px]",
+};
+
+const variantClasses = {
+  primary: "w-full bg-black text-white hover:opacity-80 transition-opacity duration-150 py-4",
+  secondary: "border border-black text-black hover:bg-black hover:text-white transition-all duration-150 px-5 py-3.5",
+  textlink: "text-black hover:underline transition-all duration-150",
+  plain: "text-black",
 };
 ---
-<!--Sæt classes for den pågældende knap sammen ved hjælp af Astros class:list -->
-<button class:list={[buttonStyling, variantClasses[variant], sizeClasses[size]]}><slot /></button>
+
+<Tag
+  class:list={[variantClasses[variant], teksttypeClasses[teksttype], stylingclasses]}
+  href={href ?? undefined}
+  target={href ? target : undefined}
+  {...rest}
+><slot /></Tag>

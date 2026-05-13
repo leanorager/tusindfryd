@@ -1,5 +1,6 @@
 ---
 import Link from "./Link.astro";
+import Text from "./Text.astro";
 const {
   image = "https://placehold.co/1512x808",
   imageAlt = "Tusindfryd hero",
@@ -21,40 +22,40 @@ const {
   >
     <!-- Nav links -->
     <div class="flex justify-between items-center">
-      <Link
-        variant="plain"
-        stylingclasses="text-white text-sm font-medium font-mont"
+      <Link teksttype="statement_medium" stylingclasses="font-medium text-white"
         >NYESTE DROP</Link
       >
       <Link
-        variant="plain"
-        stylingclasses="hidden md:block text-white text-sm font-medium font-mont"
+        teksttype="statement_medium"
+        stylingclasses="hidden md:block font-medium text-white"
         >SHOP SOFAER</Link
       >
       <Link
-        variant="plain"
-        stylingclasses="hidden md:block text-white text-sm font-medium font-mont"
+        teksttype="statement_medium"
+        stylingclasses="hidden md:block font-medium text-white"
         >SHOP STOLE</Link
       >
-      <Link
-        variant="plain"
-        stylingclasses="text-white text-sm font-medium font-mont"
+      <Link teksttype="statement_medium" stylingclasses="font-medium text-white"
         >SE ALLE PRODUKTER</Link
       >
     </div>
 
     <!-- Bottom row -->
     <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-2">
-      <p
-        class="text-neutral-50 text-2xl md:text-3xl font-normal font-mont max-w-[540px]"
+      <Text
+        teksttype="statement_medium"
+        color="text-neutral-50"
+        stylingclasses="!text-2xl md:!text-3xl max-w-[540px]"
       >
         Shop design, kvalitet og unikke fund<br />
         fundet af eksperter. Vi finder vintage - og<br />
         designmøbler fra hele verden.
-      </p>
-      <span class="text-neutral-50 text-sm font-medium font-mont self-end md:self-auto"
-        >(SCROLL NED)</span
-      >
+      </Text>
+      <Text
+        teksttype="statement_medium"
+        color="text-neutral-50"
+        stylingclasses="font-medium self-end md:self-auto"
+      >(SCROLL NED)</Text>
     </div>
   </div>
 </section>

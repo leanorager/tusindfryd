@@ -3,8 +3,29 @@ const {
   href = "#",
   color = "black",
   target = "_self",
+  teksttype = "p_medium",
   stylingclasses = "w-fit max-w-full",
-} = Astro.props;
+} = Astro.props as {
+  href?: string;
+  color?: "black" | "white";
+  target?: string;
+  teksttype?: "p_xsmall" | "p_small" | "p_medium" | "p_large" | "statement_small" | "statement_medium" | "statement_large" | "price_small" | "price_large";
+  stylingclasses?: string;
+};
+
+// Kopieret fra Text.astro — ideelt set delt via src/utils/teksttype.ts,
+// men Text.astro må ikke ændres, og <p> er ugyldig HTML inde i <a>.
+const teksttypeClasses = {
+  p_xsmall: "font-helv font-normal text-[12px]",
+  p_small: "font-helv font-normal text-[13px]",
+  p_medium: "font-helv font-normal text-[14px]",
+  p_large: "font-helv font-light text-[14px]",
+  statement_small: "font-mont font-normal text-[10px]",
+  statement_medium: "font-mont font-normal text-[14px]",
+  statement_large: "font-mont font-medium text-[30px]",
+  price_small: "font-ibm font-normal text-[12px]",
+  price_large: "font-ibm font-normal text-[14px]",
+};
 ---
 
 <a
@@ -17,7 +38,7 @@ const {
     stylingclasses,
   ]}
 >
-  <span class="min-w-0 text-sm font-[var(--font-helv)] leading-relaxed">
+  <span class:list={[teksttypeClasses[teksttype], "leading-relaxed min-w-0"]}>
     <slot />
   </span>
 
