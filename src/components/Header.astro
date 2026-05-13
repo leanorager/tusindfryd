@@ -1,5 +1,6 @@
 ---
-
+import Link from "./Link.astro";
+import Text from "./Text.astro";
 ---
 
 <header
@@ -7,10 +8,10 @@
   class="sticky top-0 z-50"
 >
   <!-- Announcement bar -->
-  <div
-    class="bg-black text-white font-helv font-light text-xs py-2.5 flex items-center px-5"
-  >
-    Fragt og Levering er Gratis for alle medlemmer
+  <div class="bg-black py-2.5 flex items-center px-5">
+    <Text teksttype="p_xsmall" color="text-white" stylingclasses="font-light">
+      Fragt og Levering er Gratis for alle medlemmer
+    </Text>
   </div>
 
   <!-- Nav bar -->
@@ -37,16 +38,8 @@
           :class="shopOpen ? 'rotate-180' : ''">∨</span
         >
       </button>
-      <a
-        href="/showroom"
-        class="font-helv font-light text-sm text-black hover:underline transition-all duration-150"
-        >Showroom</a
-      >
-      <a
-        href="/about"
-        class="font-helv font-light text-sm text-black hover:underline transition-all duration-150"
-        >Om os</a
-      >
+      <Link href="/showroom">Showroom</Link>
+      <Link href="/about">Om os</Link>
     </nav>
 
     <!-- Center: logo -->
@@ -75,16 +68,10 @@
         class="font-helv font-light text-sm text-black hover:underline transition-all duration-150"
         >Søg</button
       >
-      <span class="font-helv text-sm text-black">
-        <strong class="font-medium">DA</strong><span class="font-light">
-          / EN</span
-        >
-      </span>
-      <a
-        href="/bliv-medlem"
-        class="font-helv font-light text-sm text-black hover:underline transition-all duration-150"
-        >Bliv Medlem</a
-      >
+      <Text teksttype="p_medium">
+        <strong class="font-medium">DA</strong><span class="font-light"> / EN</span>
+      </Text>
+      <Link href="/bliv-medlem">Bliv Medlem</Link>
       <button
         @click="cartOpen = true"
         class="font-helv font-light text-sm text-black hover:underline transition-all duration-150"
@@ -106,10 +93,10 @@
     style="display: none"
   >
     <!-- Menu top bar -->
-    <div
-      class="bg-black text-white font-helv font-light text-xs py-2.5 px-5 flex-shrink-0"
-    >
-      Fragt og Levering er Gratis for alle medlemmer
+    <div class="bg-black py-2.5 px-5 flex-shrink-0">
+      <Text teksttype="p_xsmall" color="text-white" stylingclasses="font-light">
+        Fragt og Levering er Gratis for alle medlemmer
+      </Text>
     </div>
     <div
       class="relative flex items-center h-[72px] px-5 border-b border-neutral-200 flex-shrink-0"
@@ -130,72 +117,34 @@
 
     <!-- Nav links -->
     <div class="flex-1 overflow-y-auto px-5 pt-8 flex flex-col">
-      <p
-        class="font-helv font-light text-xs text-gray-500 uppercase tracking-widest mb-4"
-      >
-        Shop
-      </p>
-      <a
+      <Text
+        teksttype="p_xsmall"
+        color="text-gray-500"
+        stylingclasses="font-light uppercase tracking-widest mb-4"
+      >Shop</Text>
+      <Link
         href="#"
-        class="font-mont font-medium text-sm text-black uppercase tracking-wide py-3 border-b border-neutral-100"
-        >Nyheder</a
+        teksttype="statement_medium"
+        stylingclasses="font-medium text-black uppercase tracking-wide py-3 border-b border-neutral-100"
+        >Nyheder</Link
       >
-      <a
+      <Link
         href="#"
-        class="font-mont font-medium text-sm text-black uppercase tracking-wide py-3 border-b border-neutral-100 mb-1"
-        >Shop alt</a
+        teksttype="statement_medium"
+        stylingclasses="font-medium text-black uppercase tracking-wide py-3 border-b border-neutral-100 mb-1"
+        >Shop alt</Link
       >
-      <a
-        href="#"
-        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
-        >Sofaer</a
-      >
-      <a
-        href="#"
-        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
-        >Stole</a
-      >
-      <a
-        href="#"
-        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
-        >Borde</a
-      >
-      <a
-        href="#"
-        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
-        >Lamper</a
-      >
-      <a
-        href="#"
-        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
-        >Tæpper</a
-      >
-      <a
-        href="#"
-        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
-        >Opbevaring</a
-      >
-      <a
-        href="#"
-        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
-        >Tilbehør</a
-      >
+      <Link href="#" stylingclasses="py-3 border-b border-neutral-100">Sofaer</Link>
+      <Link href="#" stylingclasses="py-3 border-b border-neutral-100">Stole</Link>
+      <Link href="#" stylingclasses="py-3 border-b border-neutral-100">Borde</Link>
+      <Link href="#" stylingclasses="py-3 border-b border-neutral-100">Lamper</Link>
+      <Link href="#" stylingclasses="py-3 border-b border-neutral-100">Tæpper</Link>
+      <Link href="#" stylingclasses="py-3 border-b border-neutral-100">Opbevaring</Link>
+      <Link href="#" stylingclasses="py-3 border-b border-neutral-100">Tilbehør</Link>
 
-      <a
-        href="/showroom"
-        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100 mt-6"
-        >Showroom</a
-      >
-      <a
-        href="/about"
-        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
-        >Om os</a
-      >
-      <a
-        href="/bliv-medlem"
-        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
-        >Bliv Medlem</a
-      >
+      <Link href="/showroom" stylingclasses="py-3 border-b border-neutral-100 mt-6">Showroom</Link>
+      <Link href="/about" stylingclasses="py-3 border-b border-neutral-100">Om os</Link>
+      <Link href="/bliv-medlem" stylingclasses="py-3 border-b border-neutral-100">Bliv Medlem</Link>
     </div>
 
     <!-- Bottom: Søg + sprog -->
@@ -203,11 +152,9 @@
       class="px-5 py-6 flex items-center justify-between flex-shrink-0 border-t border-neutral-100"
     >
       <button class="font-helv font-light text-sm text-black">Søg</button>
-      <span class="font-helv text-sm text-black">
-        <strong class="font-medium">DA</strong><span class="font-light">
-          / EN</span
-        >
-      </span>
+      <Text teksttype="p_medium">
+        <strong class="font-medium">DA</strong><span class="font-light"> / EN</span>
+      </Text>
     </div>
   </div>
 
@@ -238,52 +185,25 @@
   >
     <!-- Links -->
     <div class="flex flex-col flex-1 px-5 pt-6 overflow-y-auto">
-      <a
+      <Link
         href="#"
-        class="font-mont font-medium text-sm text-black uppercase tracking-wide py-1 hover:underline transition-all duration-150"
-        >Nyheder</a
+        teksttype="statement_medium"
+        stylingclasses="font-medium text-black uppercase tracking-wide py-1"
+        >Nyheder</Link
       >
-      <a
+      <Link
         href="#"
-        class="font-mont font-medium text-sm text-black uppercase tracking-wide py-1 hover:underline transition-all duration-150 mb-5"
-        >Shop alt</a
+        teksttype="statement_medium"
+        stylingclasses="font-medium text-black uppercase tracking-wide py-1 mb-5"
+        >Shop alt</Link
       >
-
-      <a
-        href="#"
-        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
-        >Sofaer</a
-      >
-      <a
-        href="#"
-        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
-        >Stole</a
-      >
-      <a
-        href="#"
-        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
-        >Borde</a
-      >
-      <a
-        href="#"
-        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
-        >Lamper</a
-      >
-      <a
-        href="#"
-        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
-        >Tæpper</a
-      >
-      <a
-        href="#"
-        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
-        >Opbevaring</a
-      >
-      <a
-        href="#"
-        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
-        >Tilbehør</a
-      >
+      <Link href="#" stylingclasses="py-1">Sofaer</Link>
+      <Link href="#" stylingclasses="py-1">Stole</Link>
+      <Link href="#" stylingclasses="py-1">Borde</Link>
+      <Link href="#" stylingclasses="py-1">Lamper</Link>
+      <Link href="#" stylingclasses="py-1">Tæpper</Link>
+      <Link href="#" stylingclasses="py-1">Opbevaring</Link>
+      <Link href="#" stylingclasses="py-1">Tilbehør</Link>
     </div>
 
     <!-- Featured image -->
@@ -294,9 +214,11 @@
         class="w-full h-full object-cover"
       />
       <div class="absolute inset-0 flex justify-center items-center">
-        <span
-          class="py-0.5 border-b border-white text-white text-sm font-normal font-helv"
-          >Shop cutlery</span
+        <Text
+          teksttype="p_medium"
+          color="text-white"
+          stylingclasses="py-0.5 border-b border-white"
+          >Shop cutlery</Text
         >
       </div>
     </div>
@@ -316,10 +238,7 @@
     <div
       class="flex justify-between items-center px-5 h-[72px] border-b border-neutral-200 flex-shrink-0"
     >
-      <span
-        class="font-helv font-light text-sm text-black uppercase tracking-wide"
-        >Din Kurv (0)</span
-      >
+      <Text teksttype="p_large" stylingclasses="uppercase tracking-wide">Din Kurv (0)</Text>
       <button
         @click="cartOpen = false"
         class="font-helv text-base text-black hover:opacity-60 transition-opacity duration-150"
@@ -327,7 +246,7 @@
       >
     </div>
     <div class="flex-1 flex items-center justify-center p-5">
-      <p class="font-helv font-light text-sm text-gray-500">Din kurv er tom.</p>
+      <Text teksttype="p_large" color="text-gray-500">Din kurv er tom.</Text>
     </div>
     <div class="p-5 border-t border-neutral-200 flex-shrink-0">
       <button
