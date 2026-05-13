@@ -45,35 +45,32 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
             class="absolute left-[25px] top-0 w-80 flex flex-col gap-6
                       md:static md:w-full md:gap-16"
           >
-            <p
-              class="text-black text-3xl font-normal font-['Neue_Montreal']
-                      md:max-w-[505px]"
-            >
+            <Text teksttype="statement_medium" stylingclasses="!text-3xl md:max-w-[505px]">
               Tusindfryd er defineret af stil, design og interiør – udvalgt af
               eksperter. <br />Her er historien bag.
-            </p>
+            </Text>
 
-            <div class="text-black text-8xl font-medium font-['Neue_Montreal']">
+            <Text teksttype="statement_large" stylingclasses="!text-8xl">
               Om os
-            </div>
+            </Text>
           </div>
         </div>
 
         <!-- SCROLL NED: mobile=right-aligned flow, desktop=absolute bottom-right -->
-        <div
-          class="text-right px-5 text-black text-sm font-normal font-['Neue_Montreal']
-                    md:absolute md:bottom-5 md:right-5 md:px-0 md:font-medium"
+        <Text
+          teksttype="statement_medium"
+          stylingclasses="text-right px-5 md:absolute md:bottom-5 md:right-5 md:px-0 md:font-medium"
         >
           (SCROLL NED)
-        </div>
+        </Text>
       </div>
     </section>
 
     <section class="OmText">
       <div>
-        <div
-          class="w-full max-w-[734px] mx-auto text-black text-sm font-normal font-['Neue_Montreal']
-                    opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 intersect-once"
+        <Text
+          teksttype="statement_medium"
+          stylingclasses="w-full max-w-[734px] mx-auto opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 intersect-once"
         >
           Tusindfryd er et møbel- og interiørstudie i Aarhus med fokus på brugte
           møbler med kvalitet, karakter og historie. Vi håndplukker hvert eneste
@@ -96,7 +93,7 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
           hverdagsfund og møbler til folk, der lige er flyttet hjemmefra.<br
           /><br />Vi arbejder med unikke fund, skiftende udvalg og møbler, der
           sjældent findes i din lokale genbrugsbutik.
-        </div>
+        </Text>
       </div>
     </section>
 
@@ -152,20 +149,20 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
 
     <section class="TeamText">
       <div class="grid grid-cols-12 gap-y-2 md:gap-0 items-start">
-        <span
-          class="col-span-12 md:col-start-3 md:col-span-1 self-center font-mont font-normal text-[12px] text-black uppercase tracking-widest
-                    opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-500 intersect-once"
-          >Teamet</span
+        <Text
+          teksttype="statement_small"
+          stylingclasses="col-span-12 md:col-start-3 md:col-span-1 self-center !text-[12px] uppercase tracking-widest opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-500 intersect-once"
+          >Teamet</Text
         >
-        <p
-          class="col-span-12 md:col-start-4 md:col-end-12 font-mont font-medium text-[30px] text-black
-                    opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-100 intersect-once"
+        <Text
+          teksttype="statement_large"
+          stylingclasses="col-span-12 md:col-start-4 md:col-end-12 opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-100 intersect-once"
         >
           Bag Tusindfryd står et lille team med store kompetencer.
-        </p>
-        <p
-          class="col-span-12 md:col-start-3 md:col-end-12 font-mont font-medium text-[30px] text-black
-                    opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-200 intersect-once"
+        </Text>
+        <Text
+          teksttype="statement_large"
+          stylingclasses="col-span-12 md:col-start-3 md:col-end-12 opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-200 intersect-once"
         >
           Sara finder møblerne — med et skarpt øje for stil, form og det der
           særlige, som er svært at sætte ord på. Eik bygger og vedligeholder de
@@ -174,7 +171,7 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
           fremstår præcist som det skal. Og Stine er kvinden i værkstedet, der
           med passion for håndværk reparerer, restaurerer og sørger for at hvert
           møbel er istandsat og optimeret.
-        </p>
+        </Text>
       </div>
     </section>
 
@@ -204,12 +201,12 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
               src="https://placehold.co/402x604"
             />
           </div>
-          <p
-            class="w-full text-black text-5xl md:text-7xl font-medium font-['Neue_Montreal'] md:pl-[calc(100%/6)] mt-8 md:mt-16
-                      opacity-0 translate-y-8 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-150 intersect-once"
+          <Text
+            teksttype="statement_large"
+            stylingclasses="!text-5xl md:!text-7xl w-full md:pl-[calc(100%/6)] mt-8 md:mt-16 opacity-0 translate-y-8 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-150 intersect-once"
           >
             Princip:<br />Ting skal bruges<br />til de er færdige.
-          </p>
+          </Text>
         </div>
 
         <!-- Right tall image (desktop only) — order 1 on mobile -->
@@ -223,9 +220,9 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
         </div>
 
         <!-- Caption — order 3 on mobile, sits below right image on desktop -->
-        <p
-          class="col-span-12 md:col-start-7 md:col-span-6 md:w-2/3 text-black text-sm font-normal font-['Neue_Montreal'] order-3
-                    opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-200 intersect-once"
+        <Text
+          teksttype="statement_medium"
+          stylingclasses="col-span-12 md:col-start-7 md:col-span-6 md:w-2/3 order-3 opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-200 intersect-once"
         >
           Hos Tusindfryd siger vi nej, hvis du beder os ombetrække en sofa, der
           ikke trænger til det. Det er en holdning, vi tillader os at have.<br
@@ -233,7 +230,7 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
           Godt håndværk og gode materialer er lavet til at holde — og det respekterer
           vi. Når noget faktisk er slidt, reparerer vi det. Indtil da lader vi det
           være, som det er.
-        </p>
+        </Text>
       </div>
     </section>
 

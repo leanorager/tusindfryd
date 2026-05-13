@@ -1,4 +1,6 @@
 ---
+import Text from "./Text.astro";
+
 interface Props {
   navn: string;
   jobbeskrivelse: string;
@@ -15,9 +17,9 @@ const { navn, jobbeskrivelse, billede } = Astro.props;
     class="w-full object-cover object-top aspect-[3/4] md:aspect-auto md:flex-1 md:min-h-0"
   />
   <div class="flex flex-col gap-0.5">
-    <span class="font-mont font-normal text-[14px] text-black">{navn}</span>
-    <span class="font-mont font-normal text-[12px] text-black opacity-60"
-      >{jobbeskrivelse}</span
+    <Text teksttype="statement_medium">{navn}</Text>
+    <Text teksttype="statement_medium" stylingclasses="!text-[12px] opacity-60"
+      >{jobbeskrivelse}</Text
     >
   </div>
 </div>
