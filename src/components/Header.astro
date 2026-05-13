@@ -9,10 +9,10 @@ import Button from "./Button.astro";
   class="sticky top-0 z-50"
 >
   <!-- Announcement bar -->
-  <div class="bg-black py-2.5 flex items-center px-5">
-    <Text teksttype="p_xsmall" color="text-white" stylingclasses="font-light">
-      Fragt og Levering er Gratis for alle medlemmer
-    </Text>
+  <div
+    class="bg-black text-white font-helv font-light text-xs py-2.5 flex items-center px-5"
+  >
+    Gratis fragt og levering for alle medlemmer
   </div>
 
   <!-- Nav bar -->
@@ -105,34 +105,72 @@ import Button from "./Button.astro";
 
     <!-- Nav links -->
     <div class="flex-1 overflow-y-auto px-5 pt-8 flex flex-col">
-      <Text
-        teksttype="p_xsmall"
-        color="text-gray-500"
-        stylingclasses="font-light uppercase tracking-widest mb-4"
-      >Shop</Text>
-      <Link
-        href="#"
-        teksttype="statement_medium"
-        stylingclasses="font-medium text-black uppercase tracking-wide py-3 border-b border-neutral-100"
-        >Nyheder</Link
+      <p
+        class="font-helv font-light text-xs text-gray-500 uppercase tracking-widest mb-4"
       >
-      <Link
-        href="#"
-        teksttype="statement_medium"
-        stylingclasses="font-medium text-black uppercase tracking-wide py-3 border-b border-neutral-100 mb-1"
-        >Shop alt</Link
+        Shop
+      </p>
+      <a
+        href="/shop/nyheder"
+        class="font-mont font-medium text-sm text-black uppercase tracking-wide py-3 border-b border-neutral-100"
+        >Nyheder</a
       >
-      <Link href="#" stylingclasses="py-3 border-b border-neutral-100">Sofaer</Link>
-      <Link href="#" stylingclasses="py-3 border-b border-neutral-100">Stole</Link>
-      <Link href="#" stylingclasses="py-3 border-b border-neutral-100">Borde</Link>
-      <Link href="#" stylingclasses="py-3 border-b border-neutral-100">Lamper</Link>
-      <Link href="#" stylingclasses="py-3 border-b border-neutral-100">Tæpper</Link>
-      <Link href="#" stylingclasses="py-3 border-b border-neutral-100">Opbevaring</Link>
-      <Link href="#" stylingclasses="py-3 border-b border-neutral-100">Tilbehør</Link>
+      <a
+        href="/shop/alt"
+        class="font-mont font-medium text-sm text-black uppercase tracking-wide py-3 border-b border-neutral-100 mb-1"
+        >Shop alt</a
+      >
+      <a
+        href="/shop/sofaer"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Sofaer</a
+      >
+      <a
+        href="/shop/stole"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Stole</a
+      >
+      <a
+        href="/shop/borde"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Borde</a
+      >
+      <a
+        href="/shop/lamper"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Lamper</a
+      >
+      <a
+        href="/shop/taeppe"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Tæpper</a
+      >
+      <a
+        href="/shop/opbevaring"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Opbevaring</a
+      >
+      <a
+        href="/shop/andet"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Andet</a
+      >
 
-      <Link href="/showroom" stylingclasses="py-3 border-b border-neutral-100 mt-6">Showroom</Link>
-      <Link href="/about" stylingclasses="py-3 border-b border-neutral-100">Om os</Link>
-      <Link href="/bliv-medlem" stylingclasses="py-3 border-b border-neutral-100">Bliv Medlem</Link>
+      <a
+        href="/showroom"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100 mt-6"
+        >Showroom</a
+      >
+      <a
+        href="/about"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Om os</a
+      >
+      <a
+        href="/bliv-medlem"
+        class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
+        >Bliv Medlem</a
+      >
     </div>
 
     <!-- Bottom: Søg + sprog -->
@@ -173,17 +211,51 @@ import Button from "./Button.astro";
   >
     <!-- Links -->
     <div class="flex flex-col flex-1 px-5 pt-6 overflow-y-auto">
-      <Link
-        href="#"
-        teksttype="statement_medium"
-        stylingclasses="font-medium text-black uppercase tracking-wide py-1"
-        >Nyheder</Link
+      <a
+        href="/shop/nyheder"
+        class="font-mont font-medium text-sm text-black uppercase tracking-wide py-1 hover:underline transition-all duration-150"
+        >Nyheder</a
       >
-      <Link
-        href="#"
-        teksttype="statement_medium"
-        stylingclasses="font-medium text-black uppercase tracking-wide py-1 mb-5"
-        >Shop alt</Link
+      <a
+        href="/shop/alt"
+        class="font-mont font-medium text-sm text-black uppercase tracking-wide py-1 hover:underline transition-all duration-150 mb-5"
+        >Shop alt</a
+      >
+
+      <a
+        href="/shop/sofaer"
+        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
+        >Sofaer</a
+      >
+      <a
+        href="/shop/stole"
+        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
+        >Stole</a
+      >
+      <a
+        href="/shop/borde"
+        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
+        >Borde</a
+      >
+      <a
+        href="/shop/lamper"
+        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
+        >Lamper</a
+      >
+      <a
+        href="/shop/taeppe"
+        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
+        >Tæpper</a
+      >
+      <a
+        href="/shop/opbevaring"
+        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
+        >Opbevaring</a
+      >
+      <a
+        href="/shop/andet"
+        class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
+        >Andet</a
       >
       <Link href="#" stylingclasses="py-1">Sofaer</Link>
       <Link href="#" stylingclasses="py-1">Stole</Link>

@@ -1,0 +1,61 @@
+---
+import Heading from "./Heading.astro";
+import Text from "./Text.astro";
+
+interface Props {
+  id: number;
+  title: string;
+  subtitle: string;
+  regular_price: number;
+  member_price: number;
+  image1: string | null;
+  image2?: string | null;
+}
+
+const { id, title, subtitle, regular_price, member_price, image1, image2 } =
+  Astro.props;
+
+function formatPrice(price: number) {
+  return price.toLocaleString("da-DK") + " DKK";
+}
+---
+
+<a href={`/product/${id}`} class="block group">
+  <div class="relative overflow-hidden">
+    <img
+      src={image1 ?? "https://placehold.co/600x750/f5f5f5/999999"}
+      alt={title}
+      class="w-full aspect-[4/5] object-cover"
+    />
+    {
+      image2 && (
+        <img
+          src={image2}
+          alt=""
+          aria-hidden="true"
+          class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        />
+      )
+    }
+    {
+      member_price && (
+        <div class="absolute bottom-0 right-0 bg-gray-100 px-2 py-1.5">
+          <Text teksttype="price_small">
+            MEDLEMSPRIS {formatPrice(member_price)}
+          </Text>
+        </div>
+      )
+    }
+  </div>
+  <div class="mt-1 px-[4px]">
+    <div class="flex justify-between items-baseline gap-2">
+      <Heading htmlheading="h3" type="h3" stylingclasses="uppercase">
+        {title}
+      </Heading>
+      <Text teksttype="price_small" stylingclasses="shrink-0">
+        {formatPrice(regular_price)}
+      </Text>
+    </div>
+    <Text teksttype="p_medium">{subtitle}</Text>
+  </div>
+</a>

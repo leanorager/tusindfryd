@@ -1,0 +1,243 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Heading from "../../components/Heading.astro";
+import Text from "../../components/Text.astro";
+import ListProductCard from "../../components/ListProductCard.astro";
+import { CATEGORIES } from "../../lib/categories";
+import type { CategoryConfig } from "../../lib/categories";
+
+const SUPABASE_URL = "https://txfouhhxrpcyrsvjnnpd.supabase.co/rest/v1";
+const SUPABASE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4Zm91aGh4cnBjeXJzdmpubnBkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNjc2MTcsImV4cCI6MjA5Mzk0MzYxN30.SdHA98ZoF-4DMTXeZc59-jpHjD4rnFdqcuQw-MqmpQI";
+
+export async function getStaticPaths() {
+  return CATEGORIES.map((cat) => ({
+    params: { category: cat.slug },
+    props: { categoryConfig: cat },
+  }));
+}
+
+interface Props {
+  categoryConfig: CategoryConfig;
+}
+
+const { categoryConfig } = Astro.props;
+
+let baseUrl = `${SUPABASE_URL}/products?select=id,title,subtitle,regular_price,member_price,image1,image2`;
+if (categoryConfig.filter) {
+  baseUrl += `&category=cs.${encodeURIComponent(`["${categoryConfig.filter}"]`)}`;
+}
+
+const response = await fetch(baseUrl, {
+  headers: {
+    apikey: SUPABASE_KEY,
+    Authorization: `Bearer ${SUPABASE_KEY}`,
+    Prefer: "count=exact",
+    Range: "0-23",
+  },
+});
+
+const contentRange = response.headers.get("content-range");
+const totalCount = contentRange ? parseInt(contentRange.split("/")[1]) : 0;
+
+type Product = {
+  id: number;
+  title: string;
+  subtitle: string;
+  regular_price: number;
+  member_price: number;
+  image1: string | null;
+  image2: string | null;
+};
+
+const products: Product[] = await response.json();
+const initialShown = products.length;
+---
+
+<MainLayout title={`${categoryConfig.title} – Tusindfryd`}>
+  <main class="px-[10px] md:px-[20px] pt-8 pb-16">
+    <!-- Page header -->
+    <div class="mb-6 md:mb-8 md:max-w-sm">
+      <Heading htmlheading="h2" type="h3" stylingclasses="uppercase mb-3">
+        {categoryConfig.title}
+      </Heading>
+      {
+        categoryConfig.description && (
+          <Text teksttype="statement_small">{categoryConfig.description}</Text>
+        )
+      }
+    </div>
+
+    <!-- Filter bar -->
+    <div class="flex justify-end mb-6">
+      <button
+        class="flex items-center gap-2 border border-black px-4 py-2.5 font-helv font-normal text-[13px]"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="4" y1="6" x2="20" y2="6"></line>
+          <line x1="8" y1="12" x2="16" y2="12"></line>
+          <line x1="11" y1="18" x2="13" y2="18"></line>
+        </svg>
+        Filtrer & sorter
+      </button>
+    </div>
+
+    <!-- Product grid -->
+    {
+      products.length > 0 ? (
+        <div
+          id="product-grid"
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[5px]"
+        >
+          {products.map((product) => (
+            <ListProductCard
+              id={product.id}
+              title={product.title}
+              subtitle={product.subtitle}
+              regular_price={product.regular_price}
+              member_price={product.member_price}
+              image1={product.image1}
+              image2={product.image2}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="flex items-center justify-center py-24">
+          <Text teksttype="p_medium" color="text-neutral-400">
+            Ingen produkter fundet i denne kategori.
+          </Text>
+        </div>
+      )
+    }
+
+    <!-- Pagination footer -->
+    {
+      totalCount > 0 && (
+        <div class="mt-12 flex flex-col items-center gap-3">
+          {initialShown < totalCount && (
+            <button
+              id="load-more-btn"
+              class="inline-flex items-end gap-[5px] pb-[5px] border-b border-black text-black transition-opacity duration-100 hover:opacity-90"
+            >
+              <span class="min-w-0 text-sm font-[var(--font-helv)] leading-relaxed">
+                Se flere
+              </span>
+            </button>
+          )}
+
+          <p
+            id="product-count"
+            class="font-helv font-normal text-[12px] text-neutral-400"
+          >
+            Viser 1-{initialShown} ud af {totalCount} produkter
+          </p>
+
+          <div class="w-full max-w-xs h-[1px] bg-neutral-200 relative">
+            <div
+              id="progress-bar"
+              class="absolute left-0 top-0 h-full bg-black transition-all duration-500"
+              style={`width: ${(initialShown / totalCount) * 100}%`}
+            />
+          </div>
+        </div>
+      )
+    }
+  </main>
+</MainLayout>
+
+<script
+  define:vars={{
+    SUPABASE_URL,
+    SUPABASE_KEY,
+    totalCount,
+    initialShown,
+    categoryFilter: categoryConfig.filter ?? null,
+  }}
+>
+  let offset = initialShown;
+  const btn = document.getElementById("load-more-btn");
+  const grid = document.getElementById("product-grid");
+  const countEl = document.getElementById("product-count");
+  const progressBar = document.getElementById("progress-bar");
+
+  function formatPrice(price) {
+    return new Intl.NumberFormat("da-DK").format(price) + " DKK";
+  }
+
+  function renderCard(product) {
+    const imageSrc =
+      product.image1 ?? "https://placehold.co/600x750/f5f5f5/999999";
+    const image2Src = product.image2 ?? null;
+    const memberBadge = product.member_price
+      ? `<div class="absolute bottom-0 right-0 bg-gray-100 px-2 py-1.5">
+         <p class="font-ibm font-normal text-[12px]">MEDLEMSPRIS ${formatPrice(product.member_price)}</p>
+       </div>`
+      : "";
+    const hoverImg = image2Src
+      ? `<img src="${image2Src}" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300" />`
+      : "";
+
+    return `<a href="/product/${product.id}" class="block group">
+    <div class="relative overflow-hidden">
+      <img src="${imageSrc}" alt="${product.title}" class="w-full aspect-[4/5] object-cover" />
+      ${hoverImg}
+      ${memberBadge}
+    </div>
+    <div class="mt-1 px-[4px]">
+      <div class="flex justify-between items-baseline gap-2">
+        <h3 class="font-helv font-medium text-[12px] uppercase">${product.title}</h3>
+        <p class="font-ibm font-normal text-[12px] shrink-0">${formatPrice(product.regular_price)}</p>
+      </div>
+      <p class="font-helv font-normal text-[14px]">${product.subtitle}</p>
+    </div>
+  </a>`;
+  }
+
+  btn?.addEventListener("click", async () => {
+    btn.style.visibility = "hidden";
+
+    let url = `${SUPABASE_URL}/products?select=id,title,subtitle,regular_price,member_price,image1,image2`;
+    if (categoryFilter) {
+      url += `&category=cs.${encodeURIComponent(`["${categoryFilter}"]`)}`;
+    }
+
+    const from = offset;
+    const to = offset + 23;
+
+    const res = await fetch(url, {
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+        Range: `${from}-${to}`,
+      },
+    });
+
+    const newProducts = await res.json();
+
+    newProducts.forEach((product) => {
+      grid.insertAdjacentHTML("beforeend", renderCard(product));
+    });
+
+    offset += newProducts.length;
+
+    const shown = Math.min(offset, totalCount);
+    countEl.textContent = `Viser 1-${shown} ud af ${totalCount} produkter`;
+    progressBar.style.width = `${(shown / totalCount) * 100}%`;
+
+    if (offset >= totalCount) {
+      btn.classList.add("hidden");
+    } else {
+      btn.style.visibility = "visible";
+    }
+  });
+</script>
