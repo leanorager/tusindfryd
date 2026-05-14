@@ -29,7 +29,7 @@ import Button from "./Button.astro";
       <Button
         variant="plain"
         @click="shopOpen = !shopOpen"
-        stylingclasses="flex items-center gap-1"
+        stylingclasses="flex items-center gap-1 cursor-pointer"
       >
         Shop
         <span
@@ -58,12 +58,18 @@ import Button from "./Button.astro";
 
     <!-- Desktop: utility links -->
     <nav class="hidden md:flex ml-auto items-center gap-6">
-      <Button variant="textlink">Søg</Button>
+      <Button variant="textlink" stylingclasses="cursor-pointer">Søg</Button>
       <Text teksttype="p_medium">
-        <strong class="font-medium">DA</strong><span class="font-light"> / EN</span>
+        <strong class="font-medium">DA</strong><span class="font-light">
+          / EN</span
+        >
       </Text>
       <Link href="/bliv-medlem">Bliv Medlem</Link>
-      <Button variant="textlink" @click="cartOpen = true">Kurv (0)</Button>
+      <Button
+        variant="textlink"
+        @click="cartOpen = true"
+        stylingclasses="cursor-pointer">Kurv (0)</Button
+      >
     </nav>
   </div>
 
@@ -179,7 +185,9 @@ import Button from "./Button.astro";
     >
       <Button variant="plain">Søg</Button>
       <Text teksttype="p_medium">
-        <strong class="font-medium">DA</strong><span class="font-light"> / EN</span>
+        <strong class="font-medium">DA</strong><span class="font-light">
+          / EN</span
+        >
       </Text>
     </div>
   </div>
@@ -277,8 +285,7 @@ import Button from "./Button.astro";
         <Text
           teksttype="p_medium"
           color="text-white"
-          stylingclasses="py-0.5 border-b border-white"
-          >Shop cutlery</Text
+          stylingclasses="py-0.5 border-b border-white">Shop cutlery</Text
         >
       </div>
     </div>
@@ -298,7 +305,9 @@ import Button from "./Button.astro";
     <div
       class="flex justify-between items-center px-5 h-[72px] border-b border-neutral-200 flex-shrink-0"
     >
-      <Text teksttype="p_large" stylingclasses="uppercase tracking-wide">Din Kurv (0)</Text>
+      <Text teksttype="p_large" stylingclasses="uppercase tracking-wide"
+        >Din Kurv (0)</Text
+      >
       <Button
         variant="plain"
         @click="cartOpen = false"
