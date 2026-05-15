@@ -1,0 +1,221 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Heading from "../../components/Heading.astro";
+import Text from "../../components/Text.astro";
+import Button from "../../components/Button.astro";
+
+const SUPABASE_URL = "https://txfouhhxrpcyrsvjnnpd.supabase.co/rest/v1";
+const SUPABASE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4Zm91aGh4cnBjeXJzdmpubnBkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNjc2MTcsImV4cCI6MjA5Mzk0MzYxN30.SdHA98ZoF-4DMTXeZc59-jpHjD4rnFdqcuQw-MqmpQI";
+
+export async function getStaticPaths() {
+  const res = await fetch(
+    "https://txfouhhxrpcyrsvjnnpd.supabase.co/rest/v1/products?select=id",
+    {
+      headers: {
+        apikey:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4Zm91aGh4cnBjeXJzdmpubnBkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNjc2MTcsImV4cCI6MjA5Mzk0MzYxN30.SdHA98ZoF-4DMTXeZc59-jpHjD4rnFdqcuQw-MqmpQI",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4Zm91aGh4cnBjeXJzdmpubnBkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNjc2MTcsImV4cCI6MjA5Mzk0MzYxN30.SdHA98ZoF-4DMTXeZc59-jpHjD4rnFdqcuQw-MqmpQI",
+      },
+    },
+  );
+  const products: { id: number }[] = await res.json();
+  return products.map((p) => ({ params: { id: String(p.id) } }));
+}
+
+const { id } = Astro.params;
+
+const res = await fetch(`${SUPABASE_URL}/products?id=eq.${id}&select=*`, {
+  headers: {
+    apikey: SUPABASE_KEY,
+    Authorization: `Bearer ${SUPABASE_KEY}`,
+  },
+});
+
+type Product = {
+  id: number;
+  title: string;
+  subtitle: string;
+  regular_price: number;
+  member_price: number | null;
+  description: string | null;
+  measurement: string | null;
+  materials: string | null;
+  signs_of_use: string | null;
+  image1: string | null;
+  image2: string | null;
+  image3: string | null;
+  image4: string | null;
+  image5: string | null;
+  image6: string | null;
+};
+
+const [product]: Product[] = await res.json();
+
+function formatPrice(price: number) {
+  return new Intl.NumberFormat("da-DK").format(price) + " DKK";
+}
+
+const images = [
+  product.image1,
+  product.image2,
+  product.image3,
+  product.image4,
+  product.image5,
+  product.image6,
+].filter(Boolean) as string[];
+---
+
+<MainLayout title={`${product.title} – Tusindfryd`}>
+  <main>
+    <!-- Billedscroll (mobil) -->
+    <div class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
+      {
+        images.map((img) => (
+          <div class="w-full flex-shrink-0 snap-start">
+            <img
+              src={img}
+              alt={product.title}
+              class="w-full aspect-[4/5] object-cover"
+            />
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Produktinfo -->
+    <!-- Produktinfo -->
+    <div class="px-[10px] pt-[16px]">
+      <Heading htmlheading="h1" type="h1_small" stylingclasses=" mb-[8px]">
+        {product.title}
+      </Heading>
+      <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-[16px]">
+        {product.subtitle}
+      </Heading>
+
+      <!-- Priser -->
+      {
+        product.member_price && (
+          <div class="inline-block mb-1 -ml-[10px]">
+            <Text
+              teksttype="price_large"
+              stylingclasses="bg-gray-100 px-2 py-1.5"
+            >
+              Medlemspris {formatPrice(product.member_price)}
+            </Text>
+          </div>
+        )
+      }
+      <Text teksttype="price_large" stylingclasses="mb-6">
+        {formatPrice(product.regular_price)}
+      </Text>
+
+      <!-- Accordion -->
+      <div x-data="{ open: null }" class="border-t border-neutral-200">
+        <div class="border-b border-neutral-200">
+          <button
+            @click="open = open === 'om' ? null : 'om'"
+            class="w-full flex justify-between items-center py-4 cursor-pointer"
+          >
+            <Heading htmlheading="h3" type="h3">Om produktet</Heading>
+            <span
+              class="text-xs transition-transform duration-200"
+              :class="open === 'om' ? 'rotate-180' : ''">∨</span
+            >
+          </button>
+          <div x-show="open === 'om'" x-transition style="display:none">
+            <Text teksttype="p_xsmall" stylingclasses="pb-5"
+              >{product.description}</Text
+            >
+          </div>
+        </div>
+
+        <div class="border-b border-neutral-200">
+          <button
+            @click="open = open === 'maal' ? null : 'maal'"
+            class="w-full flex justify-between items-center py-4 cursor-pointer"
+          >
+            <Heading htmlheading="h3" type="h3">Mål & Materialer</Heading>
+            <span
+              class="text-xs transition-transform duration-200"
+              :class="open === 'maal' ? 'rotate-180' : ''">∨</span
+            >
+          </button>
+          <div x-show="open === 'maal'" x-transition style="display:none">
+            <Text teksttype="p_xsmall" stylingclasses="pb-2 whitespace-pre-line"
+              >{product.measurement}</Text
+            >
+            <Text teksttype="p_xsmall" stylingclasses="pb-5"
+              >{product.materials}</Text
+            >
+          </div>
+        </div>
+
+        <div class="border-b border-neutral-200">
+          <button
+            @click="open = open === 'brug' ? null : 'brug'"
+            class="w-full flex justify-between items-center py-4 cursor-pointer"
+          >
+            <Heading htmlheading="h3" type="h3">Brugsspor</Heading>
+            <span
+              class="text-xs transition-transform duration-200"
+              :class="open === 'brug' ? 'rotate-180' : ''">∨</span
+            >
+          </button>
+          <div x-show="open === 'brug'" x-transition style="display:none">
+            <Text teksttype="p_xsmall" stylingclasses="pb-5"
+              >{product.signs_of_use}</Text
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Medlemsfordele -->
+      <div class="mt-8 mb-4">
+        <Heading htmlheading="h3" type="h3" stylingclasses="mb-3">
+          Medlemsfordele
+        </Heading>
+
+        <Text teksttype="p_xsmall" stylingclasses="mb-1 text-gray-500">
+          10% rabat på alle varer
+        </Text>
+        <Text teksttype="p_xsmall" stylingclasses="mb-1 text-gray-500">
+          Gratis fragt og levering
+        </Text>
+        <Text teksttype="p_xsmall" stylingclasses="mb-1 text-gray-500">
+          Pre-access til de nyeste drops
+        </Text>
+        <Text teksttype="p_xsmall" stylingclasses="mb-1 text-gray-500">
+          Levering indenfor 1–3 dage*
+        </Text>
+        <Text teksttype="p_xsmall" stylingclasses="text-gray-500">
+          <a href="/bliv-medlem" class="underline cursor-pointer">
+            For virksomheder
+          </a>
+        </Text>
+      </div>
+
+      <!-- Mobil CTA -->
+      <div
+        class="sticky bottom-0 z-40 -mx-[10px] bg-white px-[10px] pb-6 pt-3 border-t border-neutral-100 md:static md:mx-0 md:px-0"
+      >
+        <Button
+          variant="secondary"
+          href="/bliv-medlem"
+          stylingclasses="block w-full text-center mb-3"
+        >
+          Bliv Medlem
+        </Button>
+
+        <Button
+          variant="primary"
+          stylingclasses="flex justify-between items-center px-5"
+        >
+          <span>Tilføj til kurv</span>
+          <span>{formatPrice(product.regular_price)}</span>
+        </Button>
+      </div>
+    </div>
+  </main>
+</MainLayout>
