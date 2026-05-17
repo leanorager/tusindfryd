@@ -5,7 +5,7 @@ import Button from "./Button.astro";
 ---
 
 <header
-  x-data="{ shopOpen: false, cartOpen: false, menuOpen: false }"
+  x-data="{ shopOpen: false, cartOpen: false, menuOpen: false, searchOpen: false }"
   class="sticky top-0 z-50"
 >
   <!-- Announcement bar -->
@@ -19,12 +19,10 @@ import Button from "./Button.astro";
   <div
     class="bg-white border-b border-neutral-200 relative flex items-center h-[72px] px-5"
   >
-    <!-- Mobile: Menu button -->
     <Button variant="plain" @click="menuOpen = true" stylingclasses="md:hidden">
       Menu
     </Button>
 
-    <!-- Desktop: nav links -->
     <nav class="hidden md:flex items-center gap-8">
       <Button
         variant="plain"
@@ -41,7 +39,6 @@ import Button from "./Button.astro";
       <Link href="/about">Om os</Link>
     </nav>
 
-    <!-- Center: logo -->
     <a href="/" class="absolute left-1/2 -translate-x-1/2">
       <img
         src="https://placehold.co/40x40"
@@ -52,13 +49,22 @@ import Button from "./Button.astro";
 
     <!-- Mobile: Søg + Kurv -->
     <div class="md:hidden ml-auto flex items-center gap-5">
-      <Button variant="plain">Søg</Button>
+      <Button
+        variant="plain"
+        @click="searchOpen = true; $nextTick(() => document.getElementById('search-input')?.focus())"
+        >Søg</Button
+      >
       <Button variant="plain" @click="cartOpen = true">Kurv (0)</Button>
     </div>
 
     <!-- Desktop: utility links -->
     <nav class="hidden md:flex ml-auto items-center gap-6">
-      <Button variant="textlink" stylingclasses="cursor-pointer">Søg</Button>
+      <Button
+        variant="textlink"
+        stylingclasses="cursor-pointer"
+        @click="searchOpen = true; $nextTick(() => document.getElementById('search-input')?.focus())"
+        >Søg</Button
+      >
       <Text teksttype="p_medium">
         <strong class="font-medium">DA</strong><span class="font-light">
           / EN</span
@@ -85,7 +91,6 @@ import Button from "./Button.astro";
     class="fixed inset-0 bg-white z-50 flex flex-col md:hidden"
     style="display: none"
   >
-    <!-- Menu top bar -->
     <div class="bg-black py-2.5 px-5 flex-shrink-0">
       <Text teksttype="p_xsmall" color="text-white" stylingclasses="font-light">
         Fragt og Levering er Gratis for alle medlemmer
@@ -109,7 +114,6 @@ import Button from "./Button.astro";
       >
     </div>
 
-    <!-- Nav links -->
     <div class="flex-1 overflow-y-auto px-5 pt-8 flex flex-col">
       <p
         class="font-helv font-light text-xs text-gray-500 uppercase tracking-widest mb-4"
@@ -161,7 +165,6 @@ import Button from "./Button.astro";
         class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100"
         >Andet</a
       >
-
       <a
         href="/showroom"
         class="font-helv font-light text-sm text-black py-3 border-b border-neutral-100 mt-6"
@@ -179,7 +182,6 @@ import Button from "./Button.astro";
       >
     </div>
 
-    <!-- Bottom: Søg + sprog -->
     <div
       class="px-5 py-6 flex items-center justify-between flex-shrink-0 border-t border-neutral-100"
     >
@@ -192,7 +194,7 @@ import Button from "./Button.astro";
     </div>
   </div>
 
-  <!-- Backdrop (desktop: shop + cart / mobil: kun cart) -->
+  <!-- Backdrop -->
   <div
     x-show="shopOpen || cartOpen"
     @click="shopOpen = false; cartOpen = false"
@@ -206,7 +208,7 @@ import Button from "./Button.astro";
   >
   </div>
 
-  <!-- Shop dropdown (desktop only) -->
+  <!-- Shop dropdown -->
   <div
     x-show="shopOpen"
     x-transition:enter="transition ease-out duration-200"
@@ -217,7 +219,6 @@ import Button from "./Button.astro";
     x-transition:leave-end="opacity-0 -translate-y-1"
     class="fixed top-[108px] left-0 w-[430px] h-[calc(100vh-108px)] bg-white z-40 flex-col border-r border-neutral-200 hidden md:flex"
   >
-    <!-- Links -->
     <div class="flex flex-col flex-1 px-5 pt-6 overflow-y-auto">
       <a
         href="/shop/nyheder"
@@ -229,7 +230,6 @@ import Button from "./Button.astro";
         class="font-mont font-medium text-sm text-black uppercase tracking-wide py-1 hover:underline transition-all duration-150 mb-5"
         >Shop alt</a
       >
-
       <a
         href="/shop/sofaer"
         class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
@@ -265,16 +265,7 @@ import Button from "./Button.astro";
         class="font-helv font-light text-sm text-black py-1 hover:underline transition-all duration-150"
         >Andet</a
       >
-      <Link href="#" stylingclasses="py-1">Sofaer</Link>
-      <Link href="#" stylingclasses="py-1">Stole</Link>
-      <Link href="#" stylingclasses="py-1">Borde</Link>
-      <Link href="#" stylingclasses="py-1">Lamper</Link>
-      <Link href="#" stylingclasses="py-1">Tæpper</Link>
-      <Link href="#" stylingclasses="py-1">Opbevaring</Link>
-      <Link href="#" stylingclasses="py-1">Tilbehør</Link>
     </div>
-
-    <!-- Featured image -->
     <div class="relative h-[220px] flex-shrink-0 overflow-hidden">
       <img
         src="https://placehold.co/430x220"
@@ -311,7 +302,7 @@ import Button from "./Button.astro";
       <Button
         variant="plain"
         @click="cartOpen = false"
-        stylingclasses="!text-base hover:opacity-60 transition-opacity duration-150"
+        stylingclasses="!text-base hover:opacity-60 transition-opacity duration-150 cursor-pointer"
         >✕</Button
       >
     </div>
@@ -322,4 +313,137 @@ import Button from "./Button.astro";
       <Button variant="primary">GÅ TIL KASSE</Button>
     </div>
   </div>
+
+  <!-- Søg panel -->
+  <div
+    x-show="searchOpen"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="translate-x-full"
+    x-transition:enter-end="translate-x-0"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="translate-x-0"
+    x-transition:leave-end="translate-x-full"
+    class="fixed top-0 right-0 w-full md:w-[420px] h-full bg-white z-50 flex flex-col border-l border-neutral-200"
+    @keydown.escape.window="searchOpen = false"
+  >
+    <div
+      class="flex justify-between items-center px-5 h-[72px] border-b border-neutral-200 flex-shrink-0"
+    >
+      <Text teksttype="p_large" stylingclasses="uppercase tracking-wide"
+        >Søg</Text
+      >
+      <Button
+        variant="plain"
+        @click="searchOpen = false"
+        stylingclasses="!text-base hover:opacity-60 transition-opacity duration-150 cursor-pointer"
+        >✕</Button
+      >
+    </div>
+
+    <div class="px-5 pt-6 flex-shrink-0">
+      <input
+        id="search-input"
+        type="text"
+        placeholder="Søg efter produkt eller designer..."
+        class="w-full border-b border-neutral-300 pb-3 font-helv font-light text-sm outline-none placeholder:text-gray-400 focus:border-black transition-colors duration-150"
+      />
+    </div>
+
+    <div id="search-results" class="flex-1 overflow-y-auto px-5 pt-4"></div>
+  </div>
 </header>
+
+<script>
+  const SUPABASE_URL = "https://txfouhhxrpcyrsvjnnpd.supabase.co/rest/v1";
+  const SUPABASE_KEY =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4Zm91aGh4cnBjeXJzdmpubnBkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNjc2MTcsImV4cCI6MjA5Mzk0MzYxN30.SdHA98ZoF-4DMTXeZc59-jpHjD4rnFdqcuQw-MqmpQI";
+
+  type SearchProduct = {
+    id: number;
+    title: string;
+    subtitle: string;
+    regular_price: number;
+    image1: string | null;
+  };
+
+  let cachedProducts: SearchProduct[] | null = null;
+
+  async function getProducts(): Promise<SearchProduct[]> {
+    if (cachedProducts) return cachedProducts;
+    const res = await fetch(
+      `${SUPABASE_URL}/products?select=id,title,subtitle,regular_price,image1`,
+      {
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`,
+        },
+      },
+    );
+    cachedProducts = await res.json();
+    return cachedProducts!;
+  }
+
+  function formatPrice(price: number) {
+    return new Intl.NumberFormat("da-DK").format(price) + " DKK";
+  }
+
+  let debounceTimer: ReturnType<typeof setTimeout>;
+
+  async function runSearch(query: string) {
+    const resultsEl = document.getElementById("search-results");
+    if (!resultsEl) return;
+
+    if (!query) {
+      resultsEl.innerHTML = "";
+      return;
+    }
+
+    const q = query.toLowerCase();
+    const products = await getProducts();
+    const matches = products
+      .filter(
+        (p) =>
+          p.title?.toLowerCase().includes(q) ||
+          p.subtitle?.toLowerCase().includes(q),
+      )
+      .slice(0, 8);
+
+    if (matches.length === 0) {
+      resultsEl.innerHTML = `<p class="font-helv font-light text-sm text-gray-400 pt-2">Ingen resultater for "${query}"</p>`;
+      return;
+    }
+
+    resultsEl.innerHTML = matches
+      .map(
+        (p) => `
+        <a href="/product/${p.id}" class="flex items-center gap-4 py-4 border-b border-neutral-100 hover:opacity-60 transition-opacity duration-150">
+          <img
+            src="${p.image1 ?? "https://placehold.co/56x56"}"
+            alt="${p.title}"
+            class="w-14 h-14 object-cover flex-shrink-0"
+          />
+          <div class="flex-1 min-w-0">
+            <p class="font-helv font-medium text-sm text-black truncate">${p.title}</p>
+            <p class="font-helv font-light text-xs text-gray-500 truncate">${p.subtitle}</p>
+          </div>
+          <p class="font-ibm font-normal text-sm text-black flex-shrink-0">${formatPrice(p.regular_price)}</p>
+        </a>
+      `,
+      )
+      .join("");
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById(
+      "search-input",
+    ) as HTMLInputElement | null;
+    if (!input) return;
+
+    input.addEventListener("input", (e) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        runSearch((e.target as HTMLInputElement).value.trim());
+      }, 250);
+    });
+  });
+</script>
