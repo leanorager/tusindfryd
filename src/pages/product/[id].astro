@@ -69,137 +69,331 @@ const images = [
 
 <MainLayout title={`${product.title} – Tusindfryd`}>
   <main>
-    <!-- Billedscroll (mobil) -->
-    <div class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
-      {
-        images.map((img) => (
-          <div class="w-full flex-shrink-0 snap-start">
+    <!-- MOBIL: skjult på desktop -->
+    <div class="md:hidden">
+      <div class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
+        {
+          images.map((img) => (
+            <div class="w-full flex-shrink-0 snap-start">
+              <img
+                src={img}
+                alt={product.title}
+                class="w-full aspect-[4/5] object-cover"
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="px-[10px] pt-4">
+        <Heading htmlheading="h1" type="h1_small" stylingclasses="mb-[8px]">
+          {product.title}
+        </Heading>
+        <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-[16px]">
+          {product.subtitle}
+        </Heading>
+
+        {
+          product.member_price && (
+            <div class="inline-block mb-1 -ml-[10px]">
+              <Text
+                teksttype="price_large"
+                stylingclasses="bg-gray-100 px-2 py-1.5"
+              >
+                Medlemspris {formatPrice(product.member_price)}
+              </Text>
+            </div>
+          )
+        }
+        <Text teksttype="price_large" stylingclasses="mb-6">
+          {formatPrice(product.regular_price)}
+        </Text>
+
+        <div x-data="{ open: null }" class="border-t border-neutral-200">
+          <div class="border-b border-neutral-200">
+            <button
+              @click="open = open === 'om' ? null : 'om'"
+              class="w-full flex justify-between items-center py-4 cursor-pointer"
+            >
+              <Heading htmlheading="h3" type="h3">Om produktet</Heading>
+              <span
+                class="text-xs transition-transform duration-200"
+                :class="open === 'om' ? 'rotate-180' : ''">∨</span
+              >
+            </button>
+            <div x-show="open === 'om'" x-transition style="display:none">
+              <Text teksttype="p_xsmall" stylingclasses="pb-5"
+                >{product.description}</Text
+              >
+            </div>
+          </div>
+          <div class="border-b border-neutral-200">
+            <button
+              @click="open = open === 'maal' ? null : 'maal'"
+              class="w-full flex justify-between items-center py-4 cursor-pointer"
+            >
+              <Heading htmlheading="h3" type="h3">Mål & Materialer</Heading>
+              <span
+                class="text-xs transition-transform duration-200"
+                :class="open === 'maal' ? 'rotate-180' : ''">∨</span
+              >
+            </button>
+            <div x-show="open === 'maal'" x-transition style="display:none">
+              <Text
+                teksttype="p_xsmall"
+                stylingclasses="pb-2 whitespace-pre-line"
+                >{product.measurement}</Text
+              >
+              <Text teksttype="p_xsmall" stylingclasses="pb-5"
+                >{product.materials}</Text
+              >
+            </div>
+          </div>
+          <div class="border-b border-neutral-200">
+            <button
+              @click="open = open === 'brug' ? null : 'brug'"
+              class="w-full flex justify-between items-center py-4 cursor-pointer"
+            >
+              <Heading htmlheading="h3" type="h3">Brugsspor</Heading>
+              <span
+                class="text-xs transition-transform duration-200"
+                :class="open === 'brug' ? 'rotate-180' : ''">∨</span
+              >
+            </button>
+            <div x-show="open === 'brug'" x-transition style="display:none">
+              <Text teksttype="p_xsmall" stylingclasses="pb-5"
+                >{product.signs_of_use}</Text
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 mb-4">
+          <Heading htmlheading="h3" type="h3" stylingclasses="mb-3"
+            >Medlemsfordele</Heading
+          >
+          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
+            >10% rabat på alle varer</Text
+          >
+          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
+            >Gratis fragt og levering</Text
+          >
+          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
+            >Pre-access til de nyeste drops</Text
+          >
+          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
+            >Levering indenfor 1–3 dage*</Text
+          >
+          <Text teksttype="p_xsmall" color="text-gray-500">
+            <a href="/bliv-medlem" class="underline cursor-pointer"
+              >For virksomheder</a
+            >
+          </Text>
+        </div>
+
+        <div
+          class="sticky bottom-0 z-40 -mx-[10px] bg-white px-[10px] pb-6 pt-3 border-t border-neutral-100"
+        >
+          <Button
+            variant="secondary"
+            href="/bliv-medlem"
+            stylingclasses="block w-full text-center mb-3"
+          >
+            Bliv Medlem
+          </Button>
+          <Button
+            variant="primary"
+            stylingclasses="flex justify-between items-center px-5"
+          >
+            <span>Tilføj til kurv</span>
+            <span>{formatPrice(product.regular_price)}</span>
+          </Button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESKTOP: skjult på mobil -->
+    <!-- DESKTOP / TABLET -->
+    <div
+      class="hidden md:grid md:grid-cols-2 lg:grid-cols-12 gap-[5px] mx-[20px]"
+    >
+      <!-- Venstre kolonne: KUN på desktop (lg+) -->
+      <div
+        class="hidden lg:block lg:col-span-3 sticky top-[108px] self-start pr-6 lg:pt-[100px]"
+      >
+        <nav class="flex items-center gap-3 mb-5">
+          <Text teksttype="p_medium" color="text-gray-400">
+            <a href="/shop/alt" class="hover:text-gray-600 transition-colors"
+              >Shop Alt</a
+            >
+          </Text>
+          <span class="bc-sep hidden h-[13px] w-px bg-gray-300 self-center"
+          ></span>
+          <a
+            class="bc-cat hidden font-helv font-normal text-[14px] text-gray-400 hover:text-gray-600 transition-colors"
+            href="#"></a>
+        </nav>
+        <Heading htmlheading="h1" type="h1_small" stylingclasses="mb-[8px]"
+          >{product.title}</Heading
+        >
+        <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-[16px]"
+          >{product.subtitle}</Heading
+        >
+        {
+          product.member_price && (
+            <div class="inline-block mb-1 -ml-[20px]">
+              <Text
+                teksttype="price_large"
+                stylingclasses="bg-gray-100 px-[20px] py-1.5"
+              >
+                Medlemspris {formatPrice(product.member_price)}
+              </Text>
+            </div>
+          )
+        }
+        <Text teksttype="price_large">{formatPrice(product.regular_price)}</Text
+        >
+      </div>
+
+      <!-- Billeder: halv bredde på tablet, 6 col på desktop -->
+      <div class="md:col-span-1 lg:col-span-6 flex flex-col gap-[5px]">
+        {
+          images.map((img) => (
             <img
               src={img}
               alt={product.title}
-              class="w-full aspect-[4/5] object-cover"
+              class="w-full h-[calc(100vh-108px)] object-cover"
             />
-          </div>
-        ))
-      }
-    </div>
-
-    <!-- Produktinfo -->
-    <!-- Produktinfo -->
-    <div class="px-[10px] pt-[16px]">
-      <Heading htmlheading="h1" type="h1_small" stylingclasses=" mb-[8px]">
-        {product.title}
-      </Heading>
-      <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-[16px]">
-        {product.subtitle}
-      </Heading>
-
-      <!-- Priser -->
-      {
-        product.member_price && (
-          <div class="inline-block mb-1 -ml-[10px]">
-            <Text
-              teksttype="price_large"
-              stylingclasses="bg-gray-100 px-2 py-1.5"
-            >
-              Medlemspris {formatPrice(product.member_price)}
-            </Text>
-          </div>
-        )
-      }
-      <Text teksttype="price_large" stylingclasses="mb-6">
-        {formatPrice(product.regular_price)}
-      </Text>
-
-      <!-- Accordion -->
-      <div x-data="{ open: null }" class="border-t border-neutral-200">
-        <div class="border-b border-neutral-200">
-          <button
-            @click="open = open === 'om' ? null : 'om'"
-            class="w-full flex justify-between items-center py-4 cursor-pointer"
-          >
-            <Heading htmlheading="h3" type="h3">Om produktet</Heading>
-            <span
-              class="text-xs transition-transform duration-200"
-              :class="open === 'om' ? 'rotate-180' : ''">∨</span
-            >
-          </button>
-          <div x-show="open === 'om'" x-transition style="display:none">
-            <Text teksttype="p_xsmall" stylingclasses="pb-5"
-              >{product.description}</Text
-            >
-          </div>
-        </div>
-
-        <div class="border-b border-neutral-200">
-          <button
-            @click="open = open === 'maal' ? null : 'maal'"
-            class="w-full flex justify-between items-center py-4 cursor-pointer"
-          >
-            <Heading htmlheading="h3" type="h3">Mål & Materialer</Heading>
-            <span
-              class="text-xs transition-transform duration-200"
-              :class="open === 'maal' ? 'rotate-180' : ''">∨</span
-            >
-          </button>
-          <div x-show="open === 'maal'" x-transition style="display:none">
-            <Text teksttype="p_xsmall" stylingclasses="pb-2 whitespace-pre-line"
-              >{product.measurement}</Text
-            >
-            <Text teksttype="p_xsmall" stylingclasses="pb-5"
-              >{product.materials}</Text
-            >
-          </div>
-        </div>
-
-        <div class="border-b border-neutral-200">
-          <button
-            @click="open = open === 'brug' ? null : 'brug'"
-            class="w-full flex justify-between items-center py-4 cursor-pointer"
-          >
-            <Heading htmlheading="h3" type="h3">Brugsspor</Heading>
-            <span
-              class="text-xs transition-transform duration-200"
-              :class="open === 'brug' ? 'rotate-180' : ''">∨</span
-            >
-          </button>
-          <div x-show="open === 'brug'" x-transition style="display:none">
-            <Text teksttype="p_xsmall" stylingclasses="pb-5"
-              >{product.signs_of_use}</Text
-            >
-          </div>
-        </div>
+          ))
+        }
       </div>
 
-      <!-- Medlemsfordele -->
-      <div class="mt-8 mb-4">
-        <Heading htmlheading="h3" type="h3" stylingclasses="mb-3">
-          Medlemsfordele
-        </Heading>
-
-        <Text teksttype="p_xsmall" stylingclasses="mb-1 text-gray-500">
-          10% rabat på alle varer
-        </Text>
-        <Text teksttype="p_xsmall" stylingclasses="mb-1 text-gray-500">
-          Gratis fragt og levering
-        </Text>
-        <Text teksttype="p_xsmall" stylingclasses="mb-1 text-gray-500">
-          Pre-access til de nyeste drops
-        </Text>
-        <Text teksttype="p_xsmall" stylingclasses="mb-1 text-gray-500">
-          Levering indenfor 1–3 dage*
-        </Text>
-        <Text teksttype="p_xsmall" stylingclasses="text-gray-500">
-          <a href="/bliv-medlem" class="underline cursor-pointer">
-            For virksomheder
-          </a>
-        </Text>
-      </div>
-
-      <!-- Mobil CTA -->
+      <!-- Højre kolonne: al info på tablet / kun accordion+knapper på desktop -->
       <div
-        class="sticky bottom-0 z-40 -mx-[10px] bg-white px-[10px] pb-6 pt-3 border-t border-neutral-100 md:static md:mx-0 md:px-0"
+        class="md:col-span-1 lg:col-span-3 sticky top-[108px] self-start md:pl-[20px] lg:pl-6 lg:pr-0 md:pt-[20px] lg:pt-[100px]"
       >
+        <!-- Kun på tablet: breadcrumb + titel + pris -->
+        <div class="lg:hidden mb-8">
+          <nav class="flex items-center gap-3 mb-5">
+            <Text teksttype="p_medium" color="text-gray-400">
+              <a href="/shop/alt" class="hover:text-gray-600 transition-colors"
+                >Shop Alt</a
+              >
+            </Text>
+            <span class="bc-sep hidden h-[13px] w-px bg-gray-300 self-center"
+            ></span>
+            <a
+              class="bc-cat hidden font-helv font-normal text-[14px] text-gray-400 hover:text-gray-600 transition-colors"
+              href="#"></a>
+          </nav>
+          <Heading htmlheading="h1" type="h1_small" stylingclasses="mb-[8px]"
+            >{product.title}</Heading
+          >
+          <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-[16px]"
+            >{product.subtitle}</Heading
+          >
+          {
+            product.member_price && (
+              <div class="inline-block mb-1">
+                <Text
+                  teksttype="price_large"
+                  stylingclasses="bg-gray-100 px-2 py-1.5"
+                >
+                  Medlemspris {formatPrice(product.member_price)}
+                </Text>
+              </div>
+            )
+          }
+          <Text teksttype="price_large" stylingclasses="mb-0"
+            >{formatPrice(product.regular_price)}</Text
+          >
+        </div>
+
+        <!-- Altid: accordion -->
+        <div x-data="{ open: null }" class="border-t border-neutral-200">
+          <div class="border-b border-neutral-200">
+            <button
+              @click="open = open === 'om' ? null : 'om'"
+              class="w-full flex justify-between items-center py-4 cursor-pointer"
+            >
+              <Heading htmlheading="h3" type="h3">Om produktet</Heading>
+              <span
+                class="text-xs transition-transform duration-200"
+                :class="open === 'om' ? 'rotate-180' : ''">∨</span
+              >
+            </button>
+            <div x-show="open === 'om'" x-transition style="display:none">
+              <Text teksttype="p_xsmall" stylingclasses="pb-5"
+                >{product.description}</Text
+              >
+            </div>
+          </div>
+          <div class="border-b border-neutral-200">
+            <button
+              @click="open = open === 'maal' ? null : 'maal'"
+              class="w-full flex justify-between items-center py-4 cursor-pointer"
+            >
+              <Heading htmlheading="h3" type="h3">Mål & Materialer</Heading>
+              <span
+                class="text-xs transition-transform duration-200"
+                :class="open === 'maal' ? 'rotate-180' : ''">∨</span
+              >
+            </button>
+            <div x-show="open === 'maal'" x-transition style="display:none">
+              <Text
+                teksttype="p_xsmall"
+                stylingclasses="pb-2 whitespace-pre-line"
+                >{product.measurement}</Text
+              >
+              <Text teksttype="p_xsmall" stylingclasses="pb-5"
+                >{product.materials}</Text
+              >
+            </div>
+          </div>
+          <div class="border-b border-neutral-200">
+            <button
+              @click="open = open === 'brug' ? null : 'brug'"
+              class="w-full flex justify-between items-center py-4 cursor-pointer"
+            >
+              <Heading htmlheading="h3" type="h3">Brugsspor</Heading>
+              <span
+                class="text-xs transition-transform duration-200"
+                :class="open === 'brug' ? 'rotate-180' : ''">∨</span
+              >
+            </button>
+            <div x-show="open === 'brug'" x-transition style="display:none">
+              <Text teksttype="p_xsmall" stylingclasses="pb-5"
+                >{product.signs_of_use}</Text
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Altid: Medlemsfordele -->
+        <div class="mt-8 mb-6">
+          <Heading htmlheading="h3" type="h3" stylingclasses="mb-3"
+            >Medlemsfordele</Heading
+          >
+          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
+            >10% rabat på alle varer</Text
+          >
+          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
+            >Gratis fragt og levering</Text
+          >
+          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
+            >Pre-access til de nyeste drops</Text
+          >
+          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
+            >Levering indenfor 1–3 dage*</Text
+          >
+          <Text teksttype="p_xsmall" color="text-gray-500">
+            <a href="/bliv-medlem" class="underline cursor-pointer"
+              >For virksomheder</a
+            >
+          </Text>
+        </div>
+
+        <!-- Altid: knapper -->
         <Button
           variant="secondary"
           href="/bliv-medlem"
@@ -207,7 +401,6 @@ const images = [
         >
           Bliv Medlem
         </Button>
-
         <Button
           variant="primary"
           stylingclasses="flex justify-between items-center px-5"
@@ -218,4 +411,35 @@ const images = [
       </div>
     </div>
   </main>
+  <script>
+    try {
+      const ref = document.referrer;
+      if (ref) {
+        const parts = new URL(ref).pathname.split("/").filter(Boolean);
+        if (parts[0] === "shop" && parts[1] && parts[1] !== "alt") {
+          const slug = parts[1];
+          const names: { [key: string]: string } = {
+            stole: "Stole",
+            sofaer: "Sofaer",
+            borde: "Borde",
+            lamper: "Lamper",
+            taeppe: "Tæpper",
+            opbevaring: "Opbevaring",
+            andet: "Andet",
+            nyheder: "Nyheder",
+          };
+          const name =
+            names[slug] ?? slug.charAt(0).toUpperCase() + slug.slice(1);
+          document
+            .querySelectorAll(".bc-sep")
+            .forEach((el) => el.classList.remove("hidden"));
+          document.querySelectorAll(".bc-cat").forEach((el) => {
+            (el as HTMLAnchorElement).href = `/shop/${slug}`;
+            el.textContent = name;
+            el.classList.remove("hidden");
+          });
+        }
+      }
+    } catch (e) {}
+  </script>
 </MainLayout>
