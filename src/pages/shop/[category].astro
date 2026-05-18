@@ -41,7 +41,7 @@ const response = await fetch(baseUrl, {
 });
 
 const contentRange = response.headers.get("content-range");
-const totalCount = contentRange ? parseInt(contentRange.split("/")[1]) : 0;
+const totalCount = contentRange ? parseInt(contentRange.split("/")[1]) || 0 : 0;
 
 type Product = {
   id: number;
@@ -591,12 +591,13 @@ const initialCategories =
       <!-- Pagination footer -->
       <div
         id="pagination-footer"
-        class={`mt-12 flex flex-col items-center gap-3 ${totalCount === 0 ? "hidden" : ""}`}
+        class={`mt-12 flex flex-col items-center gap-3 ${products.length === 0 ? "hidden" : ""}`}
       >
         <button
           id="load-more-btn"
           @click="loadMore()"
-          class={`inline-flex items-end gap-[5px] pb-[5px] border-b border-black text-black transition-opacity duration-100 hover:opacity-90 cursor-pointer ${initialShown >= totalCount ? "hidden" : ""}`}
+          class="inline-flex items-end gap-[5px] pb-[5px] border-b border-black text-black transition-opacity duration-100 hover:opacity-90 cursor-pointer"
+          style={totalCount > PAGE_SIZE ? "" : "display:none"}
         >
           <Text teksttype="p_xsmall">Se flere</Text>
         </button>
@@ -969,8 +970,7 @@ const initialCategories =
             if (paginationFooter)
               paginationFooter.classList.toggle("hidden", total === 0);
             if (loadMoreBtn) {
-              if (shown >= total) loadMoreBtn.classList.add("hidden");
-              else loadMoreBtn.classList.remove("hidden");
+              loadMoreBtn.style.display = shown >= total ? "none" : "";
             }
           } catch (e) {
             console.error("Filter fetch error:", e);
@@ -1028,13 +1028,19 @@ const initialCategories =
             if (progressBar)
               progressBar.style.width = `${this.resultCount ? (shown / this.resultCount) * 100 : 100}%`;
             if (loadMoreBtn) {
-              if (this.offset >= this.resultCount)
-                loadMoreBtn.classList.add("hidden");
-              else loadMoreBtn.style.visibility = "visible";
+              if (this.offset >= this.resultCount) {
+                loadMoreBtn.style.display = "none";
+              } else {
+                loadMoreBtn.style.display = "";
+                loadMoreBtn.style.visibility = "visible";
+              }
             }
           } catch (e) {
             console.error("Load more error:", e);
-            if (loadMoreBtn) loadMoreBtn.style.visibility = "visible";
+            if (loadMoreBtn) {
+              loadMoreBtn.style.display = "";
+              loadMoreBtn.style.visibility = "visible";
+            }
           }
 
           this.loading = false;
