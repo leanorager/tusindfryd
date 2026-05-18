@@ -1,0 +1,80 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Text from "../components/Text.astro";
+import ArrowLink from "../components/ArrowLink.astro";
+
+const fadeIn = "opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 intersect-once";
+---
+
+<MainLayout title="Showroom – Tusindfryd">
+  <main>
+    <section class="ShowroomEditorial md:!pt-12 !pb-16 md:!pb-24 !bg-gray-100 md:relative">
+
+      <div class="mb-10 md:mb-14 md:pr-[26%]">
+        <Text teksttype="statement_large" stylingclasses={`!text-4xl md:!text-5xl max-w-[520px] ${fadeIn}`}>
+          Kom forbi og oplev møblerne i virkeligheden.
+        </Text>
+      </div>
+
+      <!-- Mobil: åbningstider + adresse -->
+      <div class="flex flex-col gap-6 mb-10 md:hidden bg-gray-300 -mx-5 px-5 py-6">
+        <div class="flex flex-col gap-2">
+          <Text teksttype="p_xsmall" stylingclasses="uppercase tracking-widest text-black">Åbningstider</Text>
+          <div class="border-t border-black pt-3 flex flex-col gap-1">
+            <Text teksttype="statement_medium">Tirsdag kl. 11–15</Text>
+            <Text teksttype="statement_medium">Torsdag kl. 14–18</Text>
+            <Text teksttype="statement_medium">Lørdag kl. 10–15</Text>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <Text teksttype="p_xsmall" stylingclasses="uppercase tracking-widest text-black">Adresse</Text>
+          <div class="border-t border-black pt-3 flex flex-col gap-2">
+            <Text teksttype="statement_medium">Trindsøvej 10, Aarhus C</Text>
+            <ArrowLink href="https://maps.google.com/?q=Trindsøvej+10,+8000+Aarhus+C" target="_blank">Find vej her</ArrowLink>
+          </div>
+        </div>
+      </div>
+
+      <!-- Billeder -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5 items-start md:pr-[26%]">
+        <div class={`flex flex-col gap-2.5 ${fadeIn}`}>
+          <img src="img/showroom_1.png" alt="Showroom" class="w-full h-44 md:h-[calc(100vh-480px)] object-cover" />
+          <Text teksttype="p_xsmall" stylingclasses="font-medium">Mærk det selv</Text>
+          <Text teksttype="p_xsmall" color="text-gray-500">Billeder kan meget, men ikke alt. Kom forbi og sid i sofaen, mærk stolens træ og se farverne i det rigtige lys.</Text>
+        </div>
+
+        <div class={`flex flex-col gap-2.5 delay-100 ${fadeIn}`}>
+          <img src="img/showroom_2.png" alt="Værksted" class="w-full h-60 md:h-[calc(100vh-390px)] object-cover" />
+          <Text teksttype="p_xsmall" stylingclasses="font-medium">Lad dig inspirere af et levende univers</Text>
+          <Text teksttype="p_xsmall" color="text-gray-500">Find ud af, hvad der passer til dit hjem.</Text>
+        </div>
+
+        <div class={`flex flex-col gap-2.5 delay-200 ${fadeIn}`}>
+          <img src="img/showroom_3.png" alt="Udvalget" class="w-full h-52 md:h-[calc(100vh-450px)] object-cover" />
+          <Text teksttype="p_xsmall" stylingclasses="font-medium">Nye fund, hele tiden</Text>
+          <Text teksttype="p_xsmall" color="text-gray-500">Sortimentet skifter løbende. Det, du ser i dag, er måske væk i morgen — det er altid værd at kigge forbi.</Text>
+        </div>
+      </div>
+
+      <!-- Desktop sidebar -->
+      <div class="hidden md:flex absolute top-0 right-0 bottom-0 w-1/4 flex-col gap-6 bg-gray-300 p-8 pt-[200px]">
+        <div class="flex flex-col gap-2">
+          <Text teksttype="p_xsmall" stylingclasses="uppercase tracking-widest text-black">Åbningstider</Text>
+          <div class="border-t border-black pt-3 flex flex-col gap-1">
+            <Text teksttype="statement_medium">Tirsdag kl. 11–15</Text>
+            <Text teksttype="statement_medium">Torsdag kl. 14–18</Text>
+            <Text teksttype="statement_medium">Lørdag kl. 10–15</Text>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <Text teksttype="p_xsmall" stylingclasses="uppercase tracking-widest text-black">Adresse</Text>
+          <div class="border-t border-black pt-3 flex flex-col gap-2">
+            <Text teksttype="statement_medium">Trindsøvej 10, Aarhus C</Text>
+            <ArrowLink href="https://maps.google.com/?q=Trindsøvej+10,+8000+Aarhus+C" target="_blank">Find vej her</ArrowLink>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+</MainLayout>

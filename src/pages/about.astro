@@ -20,19 +20,13 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
       >
         <!-- Image strip -->
         <div
-          class="bg-gray-200 overflow-hidden
+          class="bg-gray-300 overflow-hidden
                     px-5 pt-5 pb-4 flex justify-center items-center gap-3
                     md:absolute md:left-0 md:top-0 md:w-full md:h-80
                     md:px-0 md:pt-0 md:pb-0 md:pr-5 md:justify-end md:items-center md:gap-4"
         >
-          <img
-            class="w-40 h-56 md:w-52 md:h-72"
-            src="https://placehold.co/204x294"
-          />
-          <img
-            class="w-40 h-56 md:w-52 md:h-72"
-            src="https://placehold.co/205x294"
-          />
+          <img class="w-40 h-56 md:w-52 md:h-72" src="img/about_left.png" />
+          <img class="w-40 h-56 md:w-52 md:h-72" src="img/about_right.png" />
         </div>
 
         <!-- Text section -->
@@ -45,7 +39,10 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
             class="absolute left-[25px] top-0 w-80 flex flex-col gap-6
                       md:static md:w-full md:gap-16"
           >
-            <Text teksttype="statement_medium" stylingclasses="!text-3xl md:max-w-[505px]">
+            <Text
+              teksttype="statement_medium"
+              stylingclasses="!text-3xl md:max-w-[505px]"
+            >
               Tusindfryd er defineret af stil, design og interiør – udvalgt af
               eksperter. <br />Her er historien bag.
             </Text>
@@ -113,7 +110,7 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
             <TeamCard
               navn="Sara Tusindfryd Moen"
               jobbeskrivelse="Stylist,Founder & CEO"
-              billede="https://placehold.co/364x497"
+              billede="img/sara.png"
             />
           </div>
           <div
@@ -122,7 +119,7 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
             <TeamCard
               navn="Stine Askefrø"
               jobbeskrivelse="Værkstedsansvarlig & Logistik"
-              billede="https://placehold.co/364x497"
+              billede="img/stine.png"
             />
           </div>
           <div
@@ -131,7 +128,7 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
             <TeamCard
               navn="Signe Sjøstrand"
               jobbeskrivelse="Stylist, SoMe & Showroom"
-              billede="https://placehold.co/364x497"
+              billede="img/signe.png"
             />
           </div>
           <div
@@ -140,7 +137,7 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
             <TeamCard
               navn="Eik Moen"
               jobbeskrivelse="Co-founder & IT"
-              billede="https://placehold.co/364x497"
+              billede="img/eik.png"
             />
           </div>
         </div>
@@ -181,11 +178,11 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
         <div class="col-span-12 flex gap-2 order-1 md:hidden">
           <img
             class="w-[40%] h-[200px] object-cover self-center opacity-0 intersect:opacity-100 transition-opacity duration-1000 intersect-once"
-            src="https://placehold.co/402x604"
+            src="img/princip_small.png"
           />
           <img
             class="w-[60%] h-[250px] object-cover opacity-0 intersect:opacity-100 transition-opacity duration-1000 intersect-once"
-            src="https://placehold.co/612x880"
+            src="img/princip_big.png"
           />
         </div>
 
@@ -198,7 +195,7 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
           >
             <img
               class="w-full h-full object-cover object-center"
-              src="https://placehold.co/402x604"
+              src="img/princip_small.png"
             />
           </div>
           <Text
@@ -215,7 +212,7 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
         >
           <img
             class="w-full h-[659px] object-cover"
-            src="https://placehold.co/612x880"
+            src="img/princip_big.png"
           />
         </div>
 
@@ -236,7 +233,7 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
 
     <section>
       <ShowroomBlock
-        image="https://placehold.co/1512x808"
+        image="img/showroomblock.png"
         imageAlt="Billede af Tusindfryds showroom"
         address="Trindsøvej 10 st 8000 Aarhus C"
       />

@@ -199,7 +199,7 @@
 }
 
 @layer base {
-  main > section:not(.OmHero):not(.IndexHero) {
+  main > section:not(.OmHero):not(.IndexHero):not(.ShowroomHero) {
     padding-top: 4rem;
     padding-inline: 1.25rem; /* 20px */
     position: relative;
@@ -208,7 +208,7 @@
   }
 
   @media (min-width: 768px) {
-    main > section:not(.OmHero):not(.IndexHero) {
+    main > section:not(.OmHero):not(.IndexHero):not(.ShowroomHero) {
       padding-top: 9.375rem; /* 150px */
     }
   }

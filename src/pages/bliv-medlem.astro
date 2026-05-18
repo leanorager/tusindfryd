@@ -39,11 +39,11 @@ import Button from "../components/Button.astro";
   >
     <!-- Baggrundsbillede -->
     <img
-      src="/medlem-bg.png"
+      src="img/member_cta.png"
       alt=""
       class="absolute inset-0 w-full h-full object-cover z-0"
     />
-    <div class="absolute inset-0 bg-white/85 z-0"></div>
+    <div class="absolute inset-0 bg-white/90 z-0"></div>
 
     <!-- Bekræftelse -->
     <div
@@ -374,7 +374,9 @@ import Button from "../components/Button.astro";
           <Text teksttype="statement_large" stylingclasses="mb-8 leading-tight">
             Næsten der, <span x-text="navn.split(' ')[0]"></span>.
           </Text>
-          <div class="flex flex-col gap-3 border-t border-b border-gray-400 py-5 mb-6">
+          <div
+            class="flex flex-col gap-3 border-t border-b border-gray-400 py-5 mb-6"
+          >
             <Text teksttype="p_large" stylingclasses="flex justify-between">
               <span>Tusindfryd Medlemsskab</span>
               <span x-text="planLabel()"></span>
@@ -391,11 +393,22 @@ import Button from "../components/Button.astro";
               x-model="samtykke"
               class="mt-0.5 w-3.5 h-3.5 border border-gray-500 accent-black flex-shrink-0"
             />
-            <label for="samtykke" class="font-helv font-light text-xs text-gray-500 leading-relaxed">
+            <label
+              for="samtykke"
+              class="font-helv font-light text-xs text-gray-500 leading-relaxed"
+            >
               Jeg accepterer Tusindfryd's
-              <a href="/juridisk#handelsbetingelser" class="underline hover:text-black transition-colors duration-150">handelsbetingelser</a>
+              <a
+                href="/juridisk#handelsbetingelser"
+                class="underline hover:text-black transition-colors duration-150"
+                >handelsbetingelser</a
+              >
               og
-              <a href="/juridisk#privatlivspolitik" class="underline hover:text-black transition-colors duration-150">privatlivspolitik</a>
+              <a
+                href="/juridisk#privatlivspolitik"
+                class="underline hover:text-black transition-colors duration-150"
+                >privatlivspolitik</a
+              >
             </label>
           </div>
           <Button
@@ -404,7 +417,11 @@ import Button from "../components/Button.astro";
             :disabled="!samtykke"
             stylingclasses="flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            Gå til betaling <img src="/svg/ArrowBlack.svg" alt="" class="w-[25px] h-[10px]" />
+            Gå til betaling <img
+              src="/svg/ArrowBlack.svg"
+              alt=""
+              class="w-[25px] h-[10px]"
+            />
           </Button>
         </div>
 
@@ -429,7 +446,11 @@ import Button from "../components/Button.astro";
           <div class="flex flex-col gap-6 mb-8">
             <div>
               <!-- <label> kan ikke indeholde <p> (Text renderer) — bruges raw -->
-              <label for="kortnummer" class="font-helv font-normal text-[12px] text-gray-500 uppercase tracking-widest block mb-2">Kortnummer</label>
+              <label
+                for="kortnummer"
+                class="font-helv font-normal text-[12px] text-gray-500 uppercase tracking-widest block mb-2"
+                >Kortnummer</label
+              >
               <input
                 type="text"
                 id="kortnummer"
@@ -441,7 +462,11 @@ import Button from "../components/Button.astro";
             </div>
             <div class="grid grid-cols-2 gap-6">
               <div>
-                <label for="udloeb" class="font-helv font-normal text-[12px] text-gray-500 uppercase tracking-widest block mb-2">Udløbsdato</label>
+                <label
+                  for="udloeb"
+                  class="font-helv font-normal text-[12px] text-gray-500 uppercase tracking-widest block mb-2"
+                  >Udløbsdato</label
+                >
                 <input
                   type="text"
                   id="udloeb"
@@ -452,7 +477,11 @@ import Button from "../components/Button.astro";
                 />
               </div>
               <div>
-                <label for="cvv" class="font-helv font-normal text-[12px] text-gray-500 uppercase tracking-widest block mb-2">CVV</label>
+                <label
+                  for="cvv"
+                  class="font-helv font-normal text-[12px] text-gray-500 uppercase tracking-widest block mb-2"
+                  >CVV</label
+                >
                 <input
                   type="text"
                   id="cvv"
