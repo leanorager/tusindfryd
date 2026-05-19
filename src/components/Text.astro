@@ -1,5 +1,10 @@
 ---
-const { teksttype = "p_medium", stylingclasses = "", color = "text-black" } = Astro.props;
+const {
+  teksttype = "p_medium",
+  stylingclasses = "",
+  color = "text-black",
+  id,
+} = Astro.props;
 
 const baseClasses = color;
 
@@ -21,6 +26,6 @@ const selectedClasses =
   textClasses[teksttype as keyof typeof textClasses] ?? textClasses.p_medium;
 ---
 
-<p class:list={[baseClasses, selectedClasses, stylingclasses]}>
+<p id={id} class:list={[baseClasses, selectedClasses, stylingclasses]}>
   <slot />
 </p>

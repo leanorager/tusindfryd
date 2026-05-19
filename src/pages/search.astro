@@ -1,0 +1,199 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Heading from "../components/Heading.astro";
+import Text from "../components/Text.astro";
+---
+
+<MainLayout title="Søgeresultater – Tusindfryd">
+  <main class="px-[10px] md:px-[20px] pt-8 pb-16">
+    <!-- Page header -->
+    <div class="mb-6 md:mb-8 md:max-w-sm">
+      <Heading htmlheading="h3" type="h3" stylingclasses="uppercase mb-3">
+        Søgeresultater
+      </Heading>
+      <p
+        id="search-subtitle"
+        class="font-mont font-normal text-[10px] text-neutral-400"
+      >
+        Søger...
+      </p>
+    </div>
+
+    <!-- Product grid -->
+    <div
+      id="product-grid"
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[5px] lg:gap-y-[64px]"
+    >
+    </div>
+
+    <!-- Empty state -->
+    <div
+      id="empty-state"
+      style="display:none"
+      class="flex items-center justify-center py-24"
+    >
+      <p class="font-helv font-normal text-[14px] text-neutral-400">
+        Ingen resultater fundet.
+      </p>
+    </div>
+
+    <!-- Pagination footer -->
+    <div
+      id="pagination-footer"
+      style="display:none"
+      class="mt-12 flex flex-col items-center gap-3"
+    >
+      <button
+        id="load-more-btn"
+        class="inline-flex items-end gap-[5px] pb-[5px] border-b border-black text-black transition-opacity duration-100 hover:opacity-90 cursor-pointer"
+        style="display:none"
+      >
+        <p class="font-helv font-normal text-[12px]">Se flere</p>
+      </button>
+
+      <p
+        id="product-count"
+        class="font-helv font-normal text-[12px] text-neutral-400"
+      >
+      </p>
+
+      <div class="w-full max-w-xs h-[1px] bg-neutral-200 relative">
+        <div
+          id="progress-bar"
+          class="absolute left-0 top-0 h-full bg-black transition-all duration-500"
+          style="width: 0%"
+        >
+        </div>
+      </div>
+    </div>
+  </main>
+</MainLayout>
+
+<script>
+  const SUPABASE_URL = "https://txfouhhxrpcyrsvjnnpd.supabase.co/rest/v1";
+  const SUPABASE_KEY =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4Zm91aGh4cnBjeXJzdmpubnBkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNjc2MTcsImV4cCI6MjA5Mzk0MzYxN30.SdHA98ZoF-4DMTXeZc59-jpHjD4rnFdqcuQw-MqmpQI";
+  const PAGE_SIZE = 24;
+
+  type Product = {
+    id: number;
+    title: string;
+    subtitle: string;
+    regular_price: number;
+    member_price: number | null;
+    image1: string | null;
+    image2: string | null;
+  };
+
+  function formatPrice(n: number) {
+    return new Intl.NumberFormat("da-DK").format(n) + " DKK";
+  }
+
+  function renderCard(product: Product) {
+    const imageSrc =
+      product.image1 ?? "https://placehold.co/600x750/f5f5f5/999999";
+    const hoverImg = product.image2
+      ? `<img src="${product.image2}" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300" />`
+      : "";
+    const memberBadge = product.member_price
+      ? `<div class="absolute bottom-0 right-0 bg-gray-100 px-2 py-1.5"><p class="font-ibm font-normal text-[12px]">MEDLEMSPRIS ${formatPrice(product.member_price)}</p></div>`
+      : "";
+
+    return `<a href="/product/${product.id}" class="block group">
+  <div class="relative overflow-hidden">
+    <img src="${imageSrc}" alt="${product.title}" class="w-full aspect-[4/5] object-cover" />
+    ${hoverImg}
+    ${memberBadge}
+  </div>
+  <div class="mt-1 px-[4px]">
+    <div class="flex justify-between items-baseline gap-2">
+      <h3 class="font-helv font-medium text-[12px] uppercase">${product.title}</h3>
+      <p class="font-ibm font-normal text-[12px] shrink-0">${formatPrice(product.regular_price)}</p>
+    </div>
+    <p class="font-helv font-normal text-[14px]">${product.subtitle}</p>
+  </div>
+</a>`;
+  }
+
+  let allMatches: Product[] = [];
+  let offset = 0;
+
+  function updatePagination(shown: number, total: number) {
+    const countEl = document.getElementById("product-count");
+    const progressBar = document.getElementById("progress-bar");
+    const loadMoreBtn = document.getElementById("load-more-btn");
+    const footer = document.getElementById("pagination-footer");
+
+    if (countEl)
+      countEl.textContent = `Viser 1-${shown} ud af ${total} produkter`;
+    if (progressBar)
+      progressBar.style.width = `${total ? (shown / total) * 100 : 0}%`;
+    if (footer) footer.style.display = "";
+    if (loadMoreBtn) loadMoreBtn.style.display = shown >= total ? "none" : "";
+  }
+
+  async function init() {
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get("q") || "";
+
+    const subtitle = document.getElementById("search-subtitle");
+    const grid = document.getElementById("product-grid");
+    const emptyState = document.getElementById("empty-state");
+    const loadMoreBtn = document.getElementById("load-more-btn");
+
+    if (!query) {
+      if (subtitle)
+        subtitle.textContent = "Skriv noget i søgefeltet for at se resultater.";
+      return;
+    }
+
+    const res = await fetch(
+      `${SUPABASE_URL}/products?select=id,title,subtitle,regular_price,member_price,image1,image2`,
+      {
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`,
+        },
+      },
+    );
+    const products: Product[] = await res.json();
+
+    const q = query.toLowerCase();
+    allMatches = products.filter(
+      (p) =>
+        p.title?.toLowerCase().includes(q) ||
+        p.subtitle?.toLowerCase().includes(q),
+    );
+
+    const total = allMatches.length;
+    const plural = total === 1 ? "resultat" : "resultater";
+
+    if (subtitle)
+      subtitle.textContent = `${total} ${plural} fundet for ordet "${query}"`;
+
+    if (total === 0) {
+      if (emptyState) emptyState.style.display = "";
+      return;
+    }
+
+    const firstBatch = allMatches.slice(0, PAGE_SIZE);
+    offset = firstBatch.length;
+
+    if (grid) grid.innerHTML = firstBatch.map(renderCard).join("");
+
+    updatePagination(offset, total);
+
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener("click", () => {
+        const nextBatch = allMatches.slice(offset, offset + PAGE_SIZE);
+        nextBatch.forEach((p) => {
+          grid?.insertAdjacentHTML("beforeend", renderCard(p));
+        });
+        offset += nextBatch.length;
+        updatePagination(offset, total);
+      });
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+</script>
