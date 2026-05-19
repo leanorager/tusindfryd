@@ -73,10 +73,10 @@ const images = [
   <main>
     <!-- MOBIL: skjult på desktop -->
     <div class="md:hidden">
-      <div class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
+      <div id="mobile-scroll" class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
         {
-          images.map((img) => (
-            <div class="w-full flex-shrink-0 snap-start">
+          images.map((img, i) => (
+            <div id={`mobile-img-${i}`} class="w-full flex-shrink-0 snap-start">
               <img
                 src={img}
                 alt={product.title}
@@ -107,9 +107,23 @@ const images = [
             </div>
           )
         }
-        <Text teksttype="price_large" stylingclasses="mb-6">
+        <Text teksttype="price_large" stylingclasses="mb-3">
           {formatPrice(product.regular_price)}
         </Text>
+
+        {images.length > 1 && (
+          <div class="flex flex-wrap gap-[4px] mb-6">
+            {images.map((img, i) => (
+              <button
+                class="mobile-thumb relative w-[70px] h-[100px] overflow-hidden flex-shrink-0 cursor-pointer"
+                data-index={i}
+              >
+                <img src={img} alt={`${product.title} billede ${i + 1}`} class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-black/20 pointer-events-none"></div>
+              </button>
+            ))}
+          </div>
+        )}
 
         <div x-data="{ open: null }" class="border-t border-neutral-200">
           <div class="border-b border-neutral-200">
@@ -255,16 +269,31 @@ const images = [
         }
         <Text teksttype="price_large">{formatPrice(product.regular_price)}</Text
         >
+
+        {images.length > 1 && (
+          <div class="flex flex-wrap gap-[4px] mt-4">
+            {images.map((img, i) => (
+              <button
+                class="desktop-thumb relative w-[70px] h-[100px] overflow-hidden flex-shrink-0 cursor-pointer"
+                data-index={i}
+              >
+                <img src={img} alt={`${product.title} billede ${i + 1}`} class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-black/20 pointer-events-none"></div>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <!-- Billeder: halv bredde på tablet, 6 col på desktop -->
       <div class="md:col-span-1 lg:col-span-6 flex flex-col gap-[5px]">
         {
-          images.map((img) => (
+          images.map((img, i) => (
             <img
+              id={`desktop-img-${i}`}
               src={img}
               alt={product.title}
-              class="w-full h-[calc(100vh-108px)] object-cover"
+              class="w-full aspect-[4/5] object-cover xl:aspect-auto xl:h-[calc(100vh-108px)]"
             />
           ))
         }
@@ -420,6 +449,27 @@ const images = [
     excludeId={product.id}
     limit={8}
   />
+
+  <script>
+    document.querySelectorAll<HTMLButtonElement>(".desktop-thumb").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const index = btn.dataset.index;
+        const img = document.getElementById(`desktop-img-${index}`);
+        if (img) {
+          const top = img.getBoundingClientRect().top + window.scrollY - 108;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      });
+    });
+
+    document.querySelectorAll<HTMLButtonElement>(".mobile-thumb").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const index = parseInt(btn.dataset.index ?? "0");
+        const scroll = document.getElementById("mobile-scroll");
+        if (scroll) scroll.scrollTo({ left: scroll.offsetWidth * index, behavior: "smooth" });
+      });
+    });
+  </script>
 
   <script>
     try {
