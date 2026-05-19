@@ -395,6 +395,24 @@ import Button from "./Button.astro";
 
   let debounceTimer: ReturnType<typeof setTimeout>;
 
+  const POPULAR_SEARCHES = ["Sofa", "Stol", "Lampe", "Bord"];
+
+  function showPopularSearches(
+    resultsEl: HTMLElement,
+    footer: HTMLElement | null,
+  ) {
+    resultsEl.innerHTML = `
+      <h3 class="font-helv font-medium text-[12px] uppercase mb-4">Populære søgninger</h3>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        ${POPULAR_SEARCHES.map(
+          (term) => `<a href="/shop/search?q=${encodeURIComponent(term)}"
+            class="hover:underline transition-all duration-150 font-helv font-light text-sm text-gray-700">${term}</a>`,
+        ).join("")}
+      </div>
+    `;
+    if (footer) footer.style.display = "none";
+  }
+
   async function runSearch(query: string) {
     const resultsEl = document.getElementById("search-results");
     const footer = document.getElementById("search-footer");
@@ -404,8 +422,7 @@ import Button from "./Button.astro";
     if (!resultsEl) return;
 
     if (!query) {
-      resultsEl.innerHTML = "";
-      if (footer) footer.style.display = "none";
+      showPopularSearches(resultsEl, footer);
       return;
     }
 
@@ -454,6 +471,9 @@ import Button from "./Button.astro";
       "search-input",
     ) as HTMLInputElement | null;
     if (!input) return;
+
+    // Show popular searches on load so they're ready when the panel opens
+    runSearch("");
 
     input.addEventListener("input", (e) => {
       clearTimeout(debounceTimer);
