@@ -84,6 +84,8 @@ import Text from "../../components/Text.astro";
     member_price: number | null;
     image1: string | null;
     image2: string | null;
+    category: string[] | null;
+    material_tag: string[] | null;
   };
 
   function formatPrice(n: number) {
@@ -149,7 +151,7 @@ import Text from "../../components/Text.astro";
     }
 
     const res = await fetch(
-      `${SUPABASE_URL}/products?select=id,title,subtitle,regular_price,member_price,image1,image2`,
+      `${SUPABASE_URL}/products?select=id,title,subtitle,regular_price,member_price,image1,image2,category,material_tag`,
       {
         headers: {
           apikey: SUPABASE_KEY,
@@ -163,7 +165,9 @@ import Text from "../../components/Text.astro";
     allMatches = products.filter(
       (p) =>
         p.title?.toLowerCase().includes(q) ||
-        p.subtitle?.toLowerCase().includes(q),
+        p.subtitle?.toLowerCase().includes(q) ||
+        p.category?.some((c) => c.toLowerCase().includes(q)) ||
+        p.material_tag?.some((m) => m.toLowerCase().includes(q)),
     );
 
     const total = allMatches.length;

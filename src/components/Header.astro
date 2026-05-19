@@ -370,6 +370,8 @@ import Button from "./Button.astro";
     subtitle: string;
     regular_price: number;
     image1: string | null;
+    category: string[] | null;
+    material_tag: string[] | null;
   };
 
   let cachedProducts: SearchProduct[] | null = null;
@@ -377,7 +379,7 @@ import Button from "./Button.astro";
   async function getProducts(): Promise<SearchProduct[]> {
     if (cachedProducts) return cachedProducts;
     const res = await fetch(
-      `${SUPABASE_URL}/products?select=id,title,subtitle,regular_price,image1`,
+      `${SUPABASE_URL}/products?select=id,title,subtitle,regular_price,image1,category,material_tag`,
       {
         headers: {
           apikey: SUPABASE_KEY,
@@ -432,7 +434,9 @@ import Button from "./Button.astro";
       .filter(
         (p) =>
           p.title?.toLowerCase().includes(q) ||
-          p.subtitle?.toLowerCase().includes(q),
+          p.subtitle?.toLowerCase().includes(q) ||
+          p.category?.some((c) => c.toLowerCase().includes(q)) ||
+          p.material_tag?.some((m) => m.toLowerCase().includes(q)),
       )
       .slice(0, 8);
 
