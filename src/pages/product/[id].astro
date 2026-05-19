@@ -3,6 +3,7 @@ import MainLayout from "../../layouts/MainLayout.astro";
 import Heading from "../../components/Heading.astro";
 import Text from "../../components/Text.astro";
 import Button from "../../components/Button.astro";
+import ProductCardCarousel from "../../components/ProductCardCarousel.astro";
 
 const SUPABASE_URL = "https://txfouhhxrpcyrsvjnnpd.supabase.co/rest/v1";
 const SUPABASE_KEY =
@@ -49,6 +50,7 @@ type Product = {
   image4: string | null;
   image5: string | null;
   image6: string | null;
+  category: string[] | null;
 };
 
 const [product]: Product[] = await res.json();
@@ -411,6 +413,14 @@ const images = [
       </div>
     </div>
   </main>
+
+  <ProductCardCarousel
+    title="Relaterede produkter"
+    category={product.category?.find((c) => c !== "Ny") ?? product.category?.[0]}
+    excludeId={product.id}
+    limit={8}
+  />
+
   <script>
     try {
       const ref = document.referrer;

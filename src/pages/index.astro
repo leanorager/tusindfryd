@@ -3,6 +3,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 import IndexHero from "../components/IndexHero.astro";
 import CTACard from "../components/CTACard.astro";
 import ShowroomBlock from "../components/ShowroomBlock.astro";
+import ProductCardCarousel from "../components/ProductCardCarousel.astro";
 ---
 
 <MainLayout title="Tusindfryd – Design, kvalitet og unikke fund">
@@ -18,6 +19,13 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
         />
       </div>
     </section>
+
+    <ProductCardCarousel
+      title="Nyeste drop"
+      category="Ny"
+      arrowLinkHref="/shop/nyheder"
+      limit={8}
+    />
 
     <section class="pb-[2px] md:pb-[5px] bg-white">
       <ShowroomBlock
