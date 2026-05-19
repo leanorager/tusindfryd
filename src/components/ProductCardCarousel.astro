@@ -1,0 +1,213 @@
+---
+import Heading from "./Heading.astro";
+import ArrowLink from "./ArrowLink.astro";
+import ListProductCard from "./ListProductCard.astro";
+
+const SUPABASE_URL = "https://txfouhhxrpcyrsvjnnpd.supabase.co/rest/v1";
+const SUPABASE_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4Zm91aGh4cnBjeXJzdmpubnBkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzNjc2MTcsImV4cCI6MjA5Mzk0MzYxN30.SdHA98ZoF-4DMTXeZc59-jpHjD4rnFdqcuQw-MqmpQI";
+
+interface Props {
+  title: string;
+  arrowLinkHref?: string;
+  arrowLinkLabel?: string;
+  category?: string;
+  excludeId?: number;
+  limit?: number;
+}
+
+const {
+  title,
+  arrowLinkHref,
+  arrowLinkLabel = "Se alle",
+  category,
+  excludeId,
+  limit = 8,
+} = Astro.props;
+
+type CarouselProduct = {
+  id: number;
+  title: string;
+  subtitle: string;
+  regular_price: number;
+  member_price: number | null;
+  image1: string | null;
+  image2: string | null;
+};
+
+const SELECT = "id,title,subtitle,regular_price,member_price,image1,image2";
+
+let products: CarouselProduct[] = [];
+try {
+  // Primary fetch: filter by category if given
+  const fetchLimit = excludeId ? limit + 5 : limit;
+  let url = `${SUPABASE_URL}/products?select=${SELECT}`;
+  if (category) {
+    url += `&category=cs.${encodeURIComponent(`["${category}"]`)}`;
+  }
+
+  const res = await fetch(url, {
+    headers: {
+      apikey: SUPABASE_KEY,
+      Authorization: `Bearer ${SUPABASE_KEY}`,
+      Range: `0-${fetchLimit - 1}`,
+    },
+  });
+  let data: CarouselProduct[] = await res.json();
+  if (excludeId) data = data.filter((p) => p.id !== excludeId);
+  products = data.slice(0, limit);
+
+  // Fallback: if category gave fewer than limit, supplement with general products
+  if (products.length < limit && category) {
+    const needed = limit - products.length;
+    const excludeIds = [
+      ...(excludeId != null ? [excludeId] : []),
+      ...products.map((p) => p.id),
+    ];
+    let fallbackUrl = `${SUPABASE_URL}/products?select=${SELECT}`;
+    if (excludeIds.length > 0) {
+      fallbackUrl += `&id=not.in.(${excludeIds.join(",")})`;
+    }
+    const fallbackRes = await fetch(fallbackUrl, {
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+        Range: `0-${needed - 1}`,
+      },
+    });
+    const fallbackData: CarouselProduct[] = await fallbackRes.json();
+    products = [...products, ...fallbackData];
+  }
+} catch (_) {}
+---
+
+{
+  products.length > 0 && (
+    <section class="Carousel relative z-10 bg-white py-10 md:py-16 px-[10px] md:px-[20px]" data-carousel>
+      <div class="flex justify-between items-baseline mb-4">
+        <Heading htmlheading="h2" type="h2_small">
+          {title}
+        </Heading>
+        {arrowLinkHref && (
+          <ArrowLink href={arrowLinkHref} teksttype="p_xsmall">
+            {arrowLinkLabel}
+          </ArrowLink>
+        )}
+      </div>
+
+      <div
+        data-carousel-track
+        class="-mx-[10px] md:-mx-[20px] scroll-pl-[10px] md:scroll-pl-[20px] overflow-x-auto overflow-y-hidden scrollbar-hide flex gap-[5px] snap-x snap-mandatory"
+      >
+        {products.map((product, i) => (
+          <div class:list={[
+            "flex-shrink-0 w-[calc(46.5vw-7px)] lg:w-[calc(24vw-9px)] snap-start",
+            i === 0 && "ml-[10px] md:ml-[20px]",
+            i === products.length - 1 && "mr-[10px] md:mr-[20px]",
+          ]}>
+            <ListProductCard
+              id={product.id}
+              title={product.title}
+              subtitle={product.subtitle}
+              regular_price={product.regular_price}
+              member_price={product.member_price}
+              image1={product.image1}
+              image2={product.image2}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div data-carousel-dots class="flex gap-[3px] mt-4">
+        {products.map((_, i) => (
+          <button
+            data-index={String(i)}
+            aria-label={`Gå til produkt ${i + 1}`}
+            class={`w-[9px] h-[9px] flex-shrink-0 cursor-pointer transition-colors ${
+              i === 0 ? "bg-black" : "border border-black"
+            }`}
+          />
+        ))}
+      </div>
+    </section>
+  )
+}
+
+<script>
+  document
+    .querySelectorAll<HTMLElement>("[data-carousel]")
+    .forEach((carousel) => {
+      const track =
+        carousel.querySelector<HTMLElement>("[data-carousel-track]");
+      const dotsContainer = carousel.querySelector<HTMLElement>(
+        "[data-carousel-dots]",
+      );
+      if (!track || !dotsContainer) return;
+
+      const cards = Array.from(
+        track.querySelectorAll<HTMLElement>(":scope > *"),
+      );
+      const dots = Array.from(
+        dotsContainer.querySelectorAll<HTMLButtonElement>("button"),
+      );
+      if (!cards.length || !dots.length) return;
+
+      function getActiveIndex(): number {
+        // At the scroll end: show the last dot
+        if (
+          track!.scrollLeft + track!.clientWidth >=
+          track!.scrollWidth - 2
+        ) {
+          return cards.length - 1;
+        }
+        // Find the card whose left edge is closest to the track's visible left edge
+        const trackLeft = track!.getBoundingClientRect().left;
+        let activeIdx = 0;
+        let minDist = Infinity;
+        cards.forEach((card, i) => {
+          const dist = Math.abs(
+            card.getBoundingClientRect().left - trackLeft,
+          );
+          if (dist < minDist) {
+            minDist = dist;
+            activeIdx = i;
+          }
+        });
+        return activeIdx;
+      }
+
+      function updateDots(activeIdx: number): void {
+        dots.forEach((dot, i) => {
+          if (i === activeIdx) {
+            dot.classList.add("bg-black");
+            dot.classList.remove("border", "border-black");
+          } else {
+            dot.classList.remove("bg-black");
+            dot.classList.add("border", "border-black");
+          }
+        });
+      }
+
+      let scrollTimer: ReturnType<typeof setTimeout>;
+      track.addEventListener(
+        "scroll",
+        () => {
+          clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(() => updateDots(getActiveIndex()), 50);
+        },
+        { passive: true },
+      );
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener("click", () => {
+          const card = cards[i];
+          if (!card) return;
+          const cardOffset =
+            card.getBoundingClientRect().left -
+            track!.getBoundingClientRect().left +
+            track!.scrollLeft;
+          track!.scrollTo({ left: cardOffset, behavior: "smooth" });
+        });
+      });
+    });
+</script>
