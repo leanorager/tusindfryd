@@ -398,7 +398,9 @@ import Button from "./Button.astro";
   async function runSearch(query: string) {
     const resultsEl = document.getElementById("search-results");
     const footer = document.getElementById("search-footer");
-    const seeAllLink = document.getElementById("search-see-all") as HTMLAnchorElement | null;
+    const seeAllLink = document.getElementById(
+      "search-see-all",
+    ) as HTMLAnchorElement | null;
     if (!resultsEl) return;
 
     if (!query) {
@@ -442,7 +444,8 @@ import Button from "./Button.astro";
       )
       .join("");
 
-    if (seeAllLink) seeAllLink.href = `/shop/search?q=${encodeURIComponent(query)}`;
+    if (seeAllLink)
+      seeAllLink.href = `/shop/search?q=${encodeURIComponent(query)}`;
     if (footer) footer.style.display = "";
   }
 
