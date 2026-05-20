@@ -3,14 +3,23 @@ const {
   variant = "primary",
   href,
   target = "_self",
-  teksttype = "p_large",
+  teksttype = "p_medium",
   stylingclasses = "",
   ...rest
 } = Astro.props as {
   variant?: "primary" | "secondary" | "textlink" | "plain";
   href?: string;
   target?: string;
-  teksttype?: "p_xsmall" | "p_small" | "p_medium" | "p_large" | "statement_small" | "statement_medium" | "statement_large" | "price_small" | "price_large";
+  teksttype?:
+    | "p_xsmall"
+    | "p_small"
+    | "p_medium"
+    | "p_large"
+    | "statement_small"
+    | "statement_medium"
+    | "statement_large"
+    | "price_small"
+    | "price_large";
   stylingclasses?: string;
   [key: string]: unknown;
 };
@@ -32,16 +41,22 @@ const teksttypeClasses = {
 };
 
 const variantClasses = {
-  primary: "w-full bg-black text-white hover:opacity-80 transition-opacity duration-150 py-4",
-  secondary: "border border-black text-black hover:bg-black hover:text-white transition-all duration-150 px-5 py-3.5",
-  textlink: "text-black hover:underline transition-all duration-150",
+  primary:
+    "w-full bg-black text-white hover:opacity-80 transition-opacity duration-150 py-4",
+  secondary:
+    "border border-black text-black hover:bg-black hover:text-white transition-all duration-150 px-5 py-3.5",
+  textlink: "text-gray-700 hover:underline transition-all duration-150",
   plain: "text-black",
 };
 ---
 
 <Tag
-  class:list={[variantClasses[variant], teksttypeClasses[teksttype], stylingclasses]}
+  class:list={[
+    variantClasses[variant],
+    teksttypeClasses[teksttype],
+    stylingclasses,
+  ]}
   href={href ?? undefined}
   target={href ? target : undefined}
-  {...rest}
-><slot /></Tag>
+  {...rest}><slot /></Tag
+>
