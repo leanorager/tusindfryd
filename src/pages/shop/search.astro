@@ -23,7 +23,7 @@ import Text from "../../components/Text.astro";
     <!-- Product grid -->
     <div
       id="product-grid"
-      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[5px] lg:gap-y-[64px]"
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-[5px] gap-y-[40px] lg:gap-y-[64px]"
     >
     </div>
 
@@ -104,7 +104,7 @@ import Text from "../../components/Text.astro";
 
     return `<a href="/product/${product.id}" class="block group">
   <div class="relative overflow-hidden">
-    <img src="${imageSrc}" alt="${product.title}" class="w-full aspect-[4/5] object-cover" />
+    <img src="${imageSrc}" alt="${product.title}" class="w-full aspect-[52/75] object-cover" />
     ${hoverImg}
     ${memberBadge}
   </div>
