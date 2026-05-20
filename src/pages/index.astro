@@ -9,6 +9,13 @@ import ProductCardCarousel from "../components/ProductCardCarousel.astro";
 <MainLayout title="Tusindfryd – Design, kvalitet og unikke fund">
   <main>
     <IndexHero image="img/index_hero.webp" />
+    <ProductCardCarousel
+      title="Nyeste drop"
+      category="Ny"
+      arrowLinkHref="/shop/nyheder"
+      limit={8}
+    />
+
     <section class="CTACards">
       <div class="flex flex-col md:flex-row md:justify-center gap-4 md:gap-5">
         <CTACard
@@ -25,9 +32,9 @@ import ProductCardCarousel from "../components/ProductCardCarousel.astro";
     </section>
 
     <ProductCardCarousel
-      title="Nyeste drop"
-      category="Ny"
-      arrowLinkHref="/shop/nyheder"
+      title="Vores favoritter"
+      category="Favorit"
+      arrowLinkHref="/shop/alt"
       limit={8}
     />
 

@@ -83,15 +83,16 @@ try {
 
 {
   products.length > 0 && (
-    <section class="Carousel relative z-10 bg-white py-10 md:py-16 px-[10px] md:px-[20px]" data-carousel>
+    <section
+      class="Carousel relative z-10 bg-white py-[64px] md:py-16 px-[10px] md:px-[20px]"
+      data-carousel
+    >
       <div class="flex justify-between items-baseline mb-4">
         <Heading htmlheading="h2" type="h2_small">
           {title}
         </Heading>
         {arrowLinkHref && (
-          <ArrowLink href={arrowLinkHref}>
-            {arrowLinkLabel}
-          </ArrowLink>
+          <ArrowLink href={arrowLinkHref}>{arrowLinkLabel}</ArrowLink>
         )}
       </div>
 
@@ -100,11 +101,13 @@ try {
         class="-mx-[10px] md:-mx-[20px] scroll-pl-[10px] md:scroll-pl-[20px] overflow-x-auto overflow-y-hidden scrollbar-hide flex gap-[5px] snap-x snap-mandatory"
       >
         {products.map((product, i) => (
-          <div class:list={[
-            "flex-shrink-0 w-[calc(46.5vw-7px)] lg:w-[calc(24vw-9px)] snap-start",
-            i === 0 && "ml-[10px] md:ml-[20px]",
-            i === products.length - 1 && "mr-[10px] md:mr-[20px]",
-          ]}>
+          <div
+            class:list={[
+              "flex-shrink-0 w-[calc(46.5vw-7px)] lg:w-[calc(24vw-9px)] snap-start",
+              i === 0 && "ml-[10px] md:ml-[20px]",
+              i === products.length - 1 && "mr-[10px] md:mr-[20px]",
+            ]}
+          >
             <ListProductCard
               id={product.id}
               title={product.title}
@@ -137,8 +140,9 @@ try {
   document
     .querySelectorAll<HTMLElement>("[data-carousel]")
     .forEach((carousel) => {
-      const track =
-        carousel.querySelector<HTMLElement>("[data-carousel-track]");
+      const track = carousel.querySelector<HTMLElement>(
+        "[data-carousel-track]",
+      );
       const dotsContainer = carousel.querySelector<HTMLElement>(
         "[data-carousel-dots]",
       );
@@ -154,10 +158,7 @@ try {
 
       function getActiveIndex(): number {
         // At the scroll end: show the last dot
-        if (
-          track!.scrollLeft + track!.clientWidth >=
-          track!.scrollWidth - 2
-        ) {
+        if (track!.scrollLeft + track!.clientWidth >= track!.scrollWidth - 2) {
           return cards.length - 1;
         }
         // Find the card whose left edge is closest to the track's visible left edge
@@ -165,9 +166,7 @@ try {
         let activeIdx = 0;
         let minDist = Infinity;
         cards.forEach((card, i) => {
-          const dist = Math.abs(
-            card.getBoundingClientRect().left - trackLeft,
-          );
+          const dist = Math.abs(card.getBoundingClientRect().left - trackLeft);
           if (dist < minDist) {
             minDist = dist;
             activeIdx = i;
