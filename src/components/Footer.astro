@@ -7,12 +7,18 @@ import Button from "./Button.astro";
 <footer class="bg-white border-t border-gray-200">
   <div class="grid grid-cols-12">
     <!-- Left: logo + membership CTA -->
-    <div class="col-span-12 md:col-span-4 px-5 py-12 flex flex-col gap-7">
+    <div
+      class="col-span-12 lg:col-span-4 px-[10px] py-[50px] flex flex-col gap-[24px] lg:pl-[20px] lg:pr-[24px]"
+    >
       <a href="/">
-        <img src="img/logo_word.png" alt="Tusindfryd" class="h-5 w-auto" />
+        <img
+          src="/img/logo_word.png"
+          alt="Tusindfryd"
+          class="h-[12px] w-auto"
+        />
       </a>
 
-      <div class="flex flex-col gap-2.5">
+      <div class="flex flex-col gap-[4px]">
         <!-- 18px light Helvetica — ingen teksttype matcher (h2_small er medium, ikke light) -->
         <p class="font-helv font-light text-lg text-gray-700 max-w-xs">
           Bliv medlem og spar 10% på ALT
@@ -27,7 +33,7 @@ import Button from "./Button.astro";
         variant="secondary"
         href="/bliv-medlem"
         teksttype="p_xsmall"
-        stylingclasses="w-80 h-11 flex justify-between items-center"
+        stylingclasses="h-11 flex justify-between items-center"
       >
         Bliv medlem
         <span class="font-helv text-sm">→</span>
@@ -36,12 +42,13 @@ import Button from "./Button.astro";
 
     <!-- Showroom -->
     <div
-      class="col-span-12 md:col-span-2 px-6 py-12 border-t border-gray-200 md:border-t-0 md:border-l flex flex-col gap-5"
+      class="col-span-12 lg:col-span-2 px-[10px] py-[50px] border-t border-gray-200 lg:border-t-0 lg:border-l flex flex-col gap-5 lg:px-[24px]"
     >
       <Text teksttype="p_large" color="text-gray-700">Showroom</Text>
-      <div class="flex flex-col gap-[5px]">
-        <Text teksttype="p_large" color="text-gray-700"
-          >Trindsøvej 10,<br />8000 Århus C</Text
+      <div class="flex flex-col gap-[4px]">
+        <Link
+          href="https://www.google.com/maps/dir/?api=1&destination=Trindsøvej+10,+8000+Århus+C"
+          >Trindsøvej 10,<br />8000 Århus C</Link
         >
         <Text teksttype="p_large" color="text-gray-700">Tirsdag kl 11-15</Text>
         <Text teksttype="p_large" color="text-gray-700">Torsdag kl 14-18</Text>
@@ -51,10 +58,10 @@ import Button from "./Button.astro";
 
     <!-- Kontakt os -->
     <div
-      class="col-span-12 md:col-span-2 px-6 py-12 border-t border-gray-200 md:border-t-0 md:border-l flex flex-col gap-5"
+      class="col-span-12 lg:col-span-2 px-[10px] py-[50px] border-t border-gray-200 lg:border-t-0 lg:border-l flex flex-col gap-5 lg:px-[24px]"
     >
       <Text teksttype="p_large" color="text-gray-700">Kontakt os</Text>
-      <div class="flex flex-col gap-[5px]">
+      <div class="flex flex-col gap-[4px]">
         <Link href="mailto:info@tusindfryd.io">E-mail: info@tusindfryd.io</Link>
         <Text teksttype="p_large" color="text-gray-700">
           Alle henvendelser bliver besvaret indenfor 24 timer.
@@ -64,12 +71,12 @@ import Button from "./Button.astro";
 
     <!-- Juridisk -->
     <div
-      class="col-span-12 md:col-span-2 px-6 py-12 border-t border-gray-200 md:border-t-0 md:border-l flex flex-col gap-5"
+      class="col-span-12 lg:col-span-2 px-[10px] py-[50px] border-t border-gray-200 lg:border-t-0 lg:border-l flex flex-col gap-5 lg:px-[24px]"
     >
       <Text teksttype="p_large" color="text-gray-700">Juridisk</Text>
-      <div class="flex flex-col gap-[5px]">
-        <Link href="/om">Om Tusindfryd</Link>
-        <Link href="/juridisk#ombytning">Ombytnings- & returportal</Link>
+      <div class="flex flex-col gap-[4px]">
+        <Link href="/about">Om Tusindfryd</Link>
+        <Link href="/juridisk#ombytning">Ombytnings- & returret</Link>
         <Link href="/juridisk#returpolitik">Returpolitik</Link>
         <Link href="/juridisk#privatlivspolitik">Privatlivspolitik</Link>
         <Link href="/juridisk#handelsbetingelser">Handelsbetingelser</Link>
@@ -78,11 +85,11 @@ import Button from "./Button.astro";
 
     <!-- Sociale medier -->
     <div
-      class="col-span-12 md:col-span-2 px-6 py-12 border-t border-gray-200 md:border-t-0 md:border-l flex flex-col gap-5"
+      class="col-span-12 lg:col-span-2 px-[10px] py-[50px] border-t border-gray-200 lg:border-t-0 lg:border-l flex flex-col gap-5 lg:px-[24px]"
     >
       <Text teksttype="p_large" color="text-gray-700">Sociale medier</Text>
-      <div class="flex flex-col gap-[5px]">
-        <Link href="#">Instagram</Link>
+      <div class="flex flex-col gap-[4px]">
+        <Link href="https://www.instagram.com/tusindfryds_/">Instagram</Link>
         <Link href="#">Facebook</Link>
         <Link href="#">Tiktok</Link>
         <Link href="#">Pinterest</Link>
