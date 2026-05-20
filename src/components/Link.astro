@@ -1,60 +1,46 @@
 ---
 const {
   href = "#",
-  target = "_self",
-  variant = "textlink",
-  size = "default",
-  teksttype,
+  target,
+  teksttype = "p_medium",
   stylingclasses = "",
 } = Astro.props as {
   href?: string;
   target?: string;
-  variant?: "textlink" | "primary" | "secondary" | "plain";
-  size?: "default" | "large" | "medium" | "small";
-  teksttype?: "p_xsmall" | "p_small" | "p_medium" | "p_large" | "statement_small" | "statement_medium" | "statement_large" | "price_small" | "price_large";
+  teksttype?:
+    | "p_xsmall"
+    | "p_small"
+    | "p_medium"
+    | "p_large"
+    | "statement_small"
+    | "statement_medium"
+    | "statement_bolder"
+    | "statement_large"
+    | "price_small"
+    | "price_large";
   stylingclasses?: string;
 };
 
-const linkStyling = "hover:underline transition-all duration-150";
-
-const variantClasses = {
-  textlink: "font-helv font-light text-sm text-gray-700",
-  primary: "font-helv font-normal text-xs text-black",
-  secondary: "font-helv font-normal text-xs text-gray-500",
-  plain: "",
-};
-
-const sizeClasses = {
-  default: "",
-  large: "text-4xl",
-  medium: "text-xl",
-  small: "text-sm",
-};
-
-// Kopieret fra Text.astro — ideelt set delt via src/utils/teksttype.ts,
-// men Text.astro må ikke ændres, og <p> er ugyldig HTML inde i <a>.
 const teksttypeClasses = {
   p_xsmall: "font-helv font-normal text-[12px]",
   p_small: "font-helv font-normal text-[13px]",
   p_medium: "font-helv font-normal text-[14px]",
   p_large: "font-helv font-light text-[14px]",
-  statement_small: "font-mont font-normal text-[10px]",
+  statement_small: "font-mont font-normal text-[12px]",
   statement_medium: "font-mont font-normal text-[14px]",
-  statement_large: "font-mont font-medium text-[30px]",
+  statement_bolder: "font-mont font-medium text-[14px]",
+  statement_large: "font-mont font-normal text-[30px]",
   price_small: "font-ibm font-normal text-[12px]",
   price_large: "font-ibm font-normal text-[14px]",
 };
-
-const fontClasses = teksttype ? teksttypeClasses[teksttype] : variantClasses[variant];
 ---
 
 <a
   href={href}
   target={target}
   class:list={[
-    linkStyling,
-    fontClasses,
-    !teksttype && sizeClasses[size],
+    "hover:underline transition-all duration-150",
+    teksttypeClasses[teksttype],
     stylingclasses,
   ]}><slot /></a
 >
