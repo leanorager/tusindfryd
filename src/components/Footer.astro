@@ -1,5 +1,6 @@
 ---
 import Text from "./Text.astro";
+import Heading from "./Heading.astro";
 import Link from "./Link.astro";
 import Button from "./Button.astro";
 ---
@@ -19,10 +20,9 @@ import Button from "./Button.astro";
       </a>
 
       <div class="flex flex-col gap-[4px]">
-        <!-- 18px light Helvetica — ingen teksttype matcher (h2_small er medium, ikke light) -->
-        <p class="font-helv font-light text-lg text-gray-700 max-w-xs">
+        <Text teksttype="p_medium" color="text-gray-700">
           Bliv medlem og spar 10% på ALT
-        </p>
+        </Text>
         <Text teksttype="p_large" color="text-gray-700">
           Køb medlemsskab for kun 279 DKK årligt og få altid 10% på alle ordrer
           og mange andre fordele.
@@ -44,9 +44,13 @@ import Button from "./Button.astro";
     <div
       class="col-span-12 lg:col-span-2 px-[10px] py-[50px] border-t border-gray-200 lg:border-t-0 lg:border-l flex flex-col gap-5 lg:px-[24px]"
     >
-      <Text teksttype="p_large" color="text-gray-700">Showroom</Text>
+      <Heading type="h4" htmlheading="h4" stylingclasses="text-gray-700"
+        >Showroom</Heading
+      >
       <div class="flex flex-col gap-[4px]">
         <Link
+          teksttype="p_large"
+          color="text-gray-700"
           href="https://www.google.com/maps/dir/?api=1&destination=Trindsøvej+10,+8000+Århus+C"
           >Trindsøvej 10,<br />8000 Århus C</Link
         >
@@ -60,9 +64,17 @@ import Button from "./Button.astro";
     <div
       class="col-span-12 lg:col-span-2 px-[10px] py-[50px] border-t border-gray-200 lg:border-t-0 lg:border-l flex flex-col gap-5 lg:px-[24px]"
     >
-      <Text teksttype="p_large" color="text-gray-700">Kontakt os</Text>
+      <Heading type="h4" htmlheading="h4" stylingclasses="text-gray-700"
+        >Kontakt os</Heading
+      >
       <div class="flex flex-col gap-[4px]">
-        <Link href="mailto:info@tusindfryd.io">E-mail: info@tusindfryd.io</Link>
+        <Link
+          teksttype="p_large"
+          color="text-gray-700"
+          href="mailto:info@tusindfryd.io"
+        >
+          E-mail: info@tusindfryd.io
+        </Link>
         <Text teksttype="p_large" color="text-gray-700">
           Alle henvendelser bliver besvaret indenfor 24 timer.
         </Text>
@@ -73,13 +85,41 @@ import Button from "./Button.astro";
     <div
       class="col-span-12 lg:col-span-2 px-[10px] py-[50px] border-t border-gray-200 lg:border-t-0 lg:border-l flex flex-col gap-5 lg:px-[24px]"
     >
-      <Text teksttype="p_large" color="text-gray-700">Juridisk</Text>
+      <Heading type="h4" htmlheading="h4" stylingclasses="text-gray-700"
+        >Juridisk</Heading
+      >
       <div class="flex flex-col gap-[4px]">
-        <Link href="/about">Om Tusindfryd</Link>
-        <Link href="/juridisk#ombytning">Ombytnings- & returret</Link>
-        <Link href="/juridisk#returpolitik">Returpolitik</Link>
-        <Link href="/juridisk#privatlivspolitik">Privatlivspolitik</Link>
-        <Link href="/juridisk#handelsbetingelser">Handelsbetingelser</Link>
+        <Link teksttype="p_large" color="text-gray-700" href="/about">
+          Om Tusindfryd
+        </Link>
+        <Link
+          teksttype="p_large"
+          color="text-gray-700"
+          href="/juridisk#ombytning"
+        >
+          Ombytnings- & returret
+        </Link>
+        <Link
+          teksttype="p_large"
+          color="text-gray-700"
+          href="/juridisk#returpolitik"
+        >
+          Returpolitik
+        </Link>
+        <Link
+          teksttype="p_large"
+          color="text-gray-700"
+          href="/juridisk#privatlivspolitik"
+        >
+          Privatlivspolitik
+        </Link>
+        <Link
+          teksttype="p_large"
+          color="text-gray-700"
+          href="/juridisk#handelsbetingelser"
+        >
+          Handelsbetingelser
+        </Link>
       </div>
     </div>
 
@@ -87,12 +127,20 @@ import Button from "./Button.astro";
     <div
       class="col-span-12 lg:col-span-2 px-[10px] py-[50px] border-t border-gray-200 lg:border-t-0 lg:border-l flex flex-col gap-5 lg:px-[24px]"
     >
-      <Text teksttype="p_large" color="text-gray-700">Sociale medier</Text>
+      <Heading type="h4" htmlheading="h4" stylingclasses="text-gray-700"
+        >Sociale medier</Heading
+      >
       <div class="flex flex-col gap-[4px]">
-        <Link href="https://www.instagram.com/tusindfryds_/">Instagram</Link>
-        <Link href="#">Facebook</Link>
-        <Link href="#">Tiktok</Link>
-        <Link href="#">Pinterest</Link>
+        <Link
+          teksttype="p_large"
+          color="text-gray-700"
+          href="https://www.instagram.com/tusindfryds_/"
+          target="_blank">Instagram</Link
+        >
+        <Link teksttype="p_large" color="text-gray-700" href="#">Facebook</Link>
+        <Link teksttype="p_large" color="text-gray-700" href="#">Tiktok</Link>
+        <Link teksttype="p_large" color="text-gray-700" href="#">Pinterest</Link
+        >
       </div>
     </div>
   </div>
