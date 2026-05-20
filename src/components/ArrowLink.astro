@@ -2,29 +2,20 @@
 const {
   href = "#",
   color = "black",
-  target = "_self",
+  target,
   teksttype = "p_medium",
   stylingclasses = "w-fit max-w-full",
 } = Astro.props as {
   href?: string;
   color?: "black" | "white";
   target?: string;
-  teksttype?: "p_xsmall" | "p_small" | "p_medium" | "p_large" | "statement_small" | "statement_medium" | "statement_large" | "price_small" | "price_large";
+  teksttype?: "p_medium" | "p_large";
   stylingclasses?: string;
 };
 
-// Kopieret fra Text.astro — ideelt set delt via src/utils/teksttype.ts,
-// men Text.astro må ikke ændres, og <p> er ugyldig HTML inde i <a>.
 const teksttypeClasses = {
-  p_xsmall: "font-helv font-normal text-[12px]",
-  p_small: "font-helv font-normal text-[13px]",
   p_medium: "font-helv font-normal text-[14px]",
   p_large: "font-helv font-light text-[14px]",
-  statement_small: "font-mont font-normal text-[10px]",
-  statement_medium: "font-mont font-normal text-[14px]",
-  statement_large: "font-mont font-medium text-[30px]",
-  price_small: "font-ibm font-normal text-[12px]",
-  price_large: "font-ibm font-normal text-[14px]",
 };
 ---
 
@@ -33,15 +24,12 @@ const teksttypeClasses = {
   target={target}
   rel={target === "_blank" ? "noopener noreferrer" : undefined}
   class:list={[
-    "inline-flex items-end gap-[5px] pb-[5px] border-b transition-opacity duration-100 hover:opacity-90",
+    "inline-flex items-end gap-[5px] pb-[1px] border-b transition-opacity duration-100 hover:opacity-90",
     color === "white" ? "border-white text-white" : "border-black text-black",
     stylingclasses,
   ]}
 >
-  <span class:list={[teksttypeClasses[teksttype], "leading-relaxed min-w-0"]}>
-    <slot />
-  </span>
-
+  <span class:list={[teksttypeClasses[teksttype], "min-w-0"]}><slot /></span>
   <img
     src={color === "white" ? "/svg/ArrowWhite.svg" : "/svg/ArrowBlack.svg"}
     alt=""
