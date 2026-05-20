@@ -177,7 +177,11 @@ import Button from "./Button.astro";
     <div
       class="px-5 py-6 flex items-center justify-between flex-shrink-0 border-t border-neutral-100"
     >
-      <Button variant="plain">Søg</Button>
+      <Button
+        variant="plain"
+        @click="searchOpen = true; $nextTick(() => document.getElementById('search-input')?.focus())"
+        >Søg</Button
+      >
       <Text teksttype="p_medium">
         <strong class="font-medium">DA</strong><span class="font-light">
           / EN</span
