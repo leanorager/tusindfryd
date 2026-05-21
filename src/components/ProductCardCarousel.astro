@@ -84,10 +84,10 @@ try {
 {
   products.length > 0 && (
     <section
-      class="Carousel relative z-10 bg-white py-[64px] md:py-16 px-[10px] md:px-[20px]"
+      class="Carousel relative z-10 bg-white pt-l md:py-3xl px-container-mobile md:px-container"
       data-carousel
     >
-      <div class="flex justify-between items-baseline mb-4">
+      <div class="flex justify-between items-baseline mb-s">
         <Heading htmlheading="h2" type="h2_small">
           {title}
         </Heading>
@@ -98,7 +98,7 @@ try {
 
       <div
         data-carousel-track
-        class="-mx-[10px] md:-mx-[20px] scroll-pl-[10px] md:scroll-pl-[20px] overflow-x-auto overflow-y-hidden scrollbar-hide flex gap-[5px] snap-x snap-mandatory"
+        class="-mx-container-mobile md:-mx-container scroll-pl-container-mobile md:scroll-pl-container overflow-x-auto overflow-y-hidden scrollbar-hide flex gap-2xs snap-x snap-mandatory"
       >
         {products.map((product, i) => (
           <div
@@ -121,7 +121,7 @@ try {
         ))}
       </div>
 
-      <div data-carousel-dots class="flex gap-[3px] mt-4">
+      <div data-carousel-dots class="flex gap-2xs mt-s">
         {products.map((_, i) => (
           <button
             data-index={String(i)}

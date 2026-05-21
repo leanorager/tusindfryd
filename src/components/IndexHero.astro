@@ -18,7 +18,9 @@ const {
   />
   <div class="absolute inset-0 bg-black/10"></div>
 
-  <div class="absolute inset-0 flex items-center px-5">
+  <div
+    class="absolute inset-0 flex items-center px-container-mobile md:px-container"
+  >
     <div class="flex justify-between items-center w-full">
       <Link
         teksttype="statement_bolder"
@@ -43,7 +45,9 @@ const {
     </div>
   </div>
 
-  <div class="absolute bottom-5 left-5 right-5 flex flex-col md:flex-row md:justify-between md:items-end gap-2">
+  <div
+    class="absolute bottom-l left-container-mobile right-container-mobile flex flex-col md:flex-row md:justify-between md:items-end gap-s md:left-container md:right-container"
+  >
     <Text
       teksttype="statement_large"
       color="text-white"
@@ -63,9 +67,9 @@ const {
 
 <script>
   function setHeaderHeight() {
-    const h = document.querySelector('header')?.offsetHeight ?? 78;
-    document.documentElement.style.setProperty('--header-h', `${h}px`);
+    const h = document.querySelector("header")?.offsetHeight ?? 78;
+    document.documentElement.style.setProperty("--header-h", `${h}px`);
   }
   setHeaderHeight();
-  window.addEventListener('resize', setHeaderHeight);
+  window.addEventListener("resize", setHeaderHeight);
 </script>
