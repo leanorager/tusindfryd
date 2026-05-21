@@ -73,7 +73,10 @@ const images = [
   <main>
     <!-- MOBIL: skjult på desktop -->
     <div class="md:hidden">
-      <div id="mobile-scroll" class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide">
+      <div
+        id="mobile-scroll"
+        class="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+      >
         {
           images.map((img, i) => (
             <div id={`mobile-img-${i}`} class="w-full flex-shrink-0 snap-start">
@@ -87,17 +90,17 @@ const images = [
         }
       </div>
 
-      <div class="px-[10px] pt-4">
-        <Heading htmlheading="h1" type="h1_small" stylingclasses="mb-[8px]">
+      <div class="px-container-mobile pt-s">
+        <Heading htmlheading="h1" type="h1_small" stylingclasses="mb-xs">
           {product.title}
         </Heading>
-        <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-[16px]">
+        <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-s">
           {product.subtitle}
         </Heading>
 
         {
           product.member_price && (
-            <div class="inline-block mb-1 -ml-[10px]">
+            <div class="inline-block mb-3xs -ml-[10px]">
               <Text
                 teksttype="price_large"
                 stylingclasses="bg-gray-100 px-2 py-1.5"
@@ -107,29 +110,35 @@ const images = [
             </div>
           )
         }
-        <Text teksttype="price_large" stylingclasses="mb-3">
+        <Text teksttype="price_large" stylingclasses="mb-l">
           {formatPrice(product.regular_price)}
         </Text>
 
-        {images.length > 1 && (
-          <div class="flex flex-wrap gap-[4px] mb-6">
-            {images.map((img, i) => (
-              <button
-                class="mobile-thumb relative w-[70px] h-[100px] overflow-hidden flex-shrink-0 cursor-pointer"
-                data-index={i}
-              >
-                <img src={img} alt={`${product.title} billede ${i + 1}`} class="w-full h-full object-cover" />
-                <div class="absolute inset-0 bg-black/20 pointer-events-none"></div>
-              </button>
-            ))}
-          </div>
-        )}
+        {
+          images.length > 1 && (
+            <div class="flex flex-wrap gap-2xs mb-2xl">
+              {images.map((img, i) => (
+                <button
+                  class="mobile-thumb relative w-[70px] h-[100px] overflow-hidden flex-shrink-0 cursor-pointer"
+                  data-index={i}
+                >
+                  <img
+                    src={img}
+                    alt={`${product.title} billede ${i + 1}`}
+                    class="w-full h-full object-cover"
+                  />
+                  <div class="absolute inset-0 bg-black/20 pointer-events-none" />
+                </button>
+              ))}
+            </div>
+          )
+        }
 
         <div x-data="{ open: null }" class="border-t border-neutral-200">
           <div class="border-b border-neutral-200">
             <button
               @click="open = open === 'om' ? null : 'om'"
-              class="w-full flex justify-between items-center py-4 cursor-pointer"
+              class="w-full flex justify-between items-center py-s cursor-pointer"
             >
               <Heading htmlheading="h3" type="h3">Om produktet</Heading>
               <span
@@ -138,7 +147,7 @@ const images = [
               >
             </button>
             <div x-show="open === 'om'" x-transition style="display:none">
-              <Text teksttype="p_xsmall" stylingclasses="pb-5"
+              <Text teksttype="p_xsmall" stylingclasses="pb-container"
                 >{product.description}</Text
               >
             </div>
@@ -146,7 +155,7 @@ const images = [
           <div class="border-b border-neutral-200">
             <button
               @click="open = open === 'maal' ? null : 'maal'"
-              class="w-full flex justify-between items-center py-4 cursor-pointer"
+              class="w-full flex justify-between items-center py-s cursor-pointer"
             >
               <Heading htmlheading="h3" type="h3">Mål & Materialer</Heading>
               <span
@@ -160,7 +169,7 @@ const images = [
                 stylingclasses="pb-2 whitespace-pre-line"
                 >{product.measurement}</Text
               >
-              <Text teksttype="p_xsmall" stylingclasses="pb-5"
+              <Text teksttype="p_xsmall" stylingclasses="pb-container"
                 >{product.materials}</Text
               >
             </div>
@@ -168,7 +177,7 @@ const images = [
           <div class="border-b border-neutral-200">
             <button
               @click="open = open === 'brug' ? null : 'brug'"
-              class="w-full flex justify-between items-center py-4 cursor-pointer"
+              class="w-full flex justify-between items-center py-s cursor-pointer"
             >
               <Heading htmlheading="h3" type="h3">Brugsspor</Heading>
               <span
@@ -177,49 +186,55 @@ const images = [
               >
             </button>
             <div x-show="open === 'brug'" x-transition style="display:none">
-              <Text teksttype="p_xsmall" stylingclasses="pb-5"
+              <Text teksttype="p_xsmall" stylingclasses="pb-container"
                 >{product.signs_of_use}</Text
               >
             </div>
           </div>
         </div>
 
-        <div class="mt-8 mb-4">
-          <Heading htmlheading="h3" type="h3" stylingclasses="mb-3"
+        <div class="mt-xl mb-s">
+          <Heading htmlheading="h3" type="h3" stylingclasses="mb-xs"
             >Medlemsfordele</Heading
           >
-          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
-            >10% rabat på alle varer</Text
+          <Text
+            teksttype="p_xsmall"
+            color="text-gray-500"
+            stylingclasses="mb-2xs">10% rabat på alle varer</Text
           >
-          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
-            >Gratis fragt og levering</Text
+          <Text
+            teksttype="p_xsmall"
+            color="text-gray-500"
+            stylingclasses="mb-2xs">Gratis fragt og levering</Text
           >
-          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
-            >Pre-access til de nyeste drops</Text
+          <Text
+            teksttype="p_xsmall"
+            color="text-gray-500"
+            stylingclasses="mb-2xs">Pre-access til de nyeste drops</Text
           >
-          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
-            >Levering indenfor 1–3 dage*</Text
+          <Text
+            teksttype="p_xsmall"
+            color="text-gray-500"
+            stylingclasses="mb-2xs">Levering indenfor 1–3 dage*</Text
           >
           <Text teksttype="p_xsmall" color="text-gray-500">
-            <a href="/bliv-medlem" class="underline cursor-pointer"
-              >For virksomheder</a
-            >
+            <a href="/#" class="underline cursor-pointer">For virksomheder</a>
           </Text>
         </div>
 
         <div
-          class="sticky bottom-0 z-40 -mx-[10px] bg-white px-[10px] pb-6 pt-3 border-t border-neutral-100"
+          class="sticky bottom-0 z-40 -mx-[10px] bg-white px-container-mobile pb-container-mobile pt-container-mobile border-t border-neutral-100"
         >
           <Button
             variant="secondary"
             href="/bliv-medlem"
-            stylingclasses="block w-full text-center mb-3"
+            stylingclasses="block w-full text-center mb-xs"
           >
             Bliv Medlem
           </Button>
           <Button
             variant="primary"
-            stylingclasses="flex justify-between items-center px-5"
+            stylingclasses="flex justify-between items-center px-container"
           >
             <span>Tilføj til kurv</span>
             <span>{formatPrice(product.regular_price)}</span>
@@ -231,13 +246,14 @@ const images = [
     <!-- DESKTOP: skjult på mobil -->
     <!-- DESKTOP / TABLET -->
     <div
-      class="hidden md:grid md:grid-cols-2 lg:grid-cols-12 gap-[5px] mx-[20px]"
+      class="hidden md:grid md:grid-cols-2 lg:grid-cols-12 gap-2xs mx-container"
     >
       <!-- Venstre kolonne: KUN på desktop (lg+) -->
       <div
-        class="hidden lg:block lg:col-span-3 sticky top-[108px] self-start pr-6 lg:pt-[100px]"
+        class="hidden lg:block lg:col-span-3 sticky self-start pr-m lg:pt-[100px]"
+        style="top: var(--header-h, 78px)"
       >
-        <nav class="flex items-center gap-3 mb-5">
+        <nav class="flex items-center gap-container-mobile mb-xs">
           <Text teksttype="p_medium" color="text-gray-400">
             <a href="/shop/alt" class="hover:text-gray-600 transition-colors"
               >Shop Alt</a
@@ -249,18 +265,18 @@ const images = [
             class="bc-cat hidden font-helv font-normal text-[14px] text-gray-400 hover:text-gray-600 transition-colors"
             href="#"></a>
         </nav>
-        <Heading htmlheading="h1" type="h1_small" stylingclasses="mb-[8px]"
+        <Heading htmlheading="h1" type="h1_small" stylingclasses="mb-xs"
           >{product.title}</Heading
         >
-        <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-[16px]"
+        <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-l"
           >{product.subtitle}</Heading
         >
         {
           product.member_price && (
-            <div class="inline-block mb-1 -ml-[20px]">
+            <div class="inline-block mb-1 -ml-container">
               <Text
                 teksttype="price_large"
-                stylingclasses="bg-gray-100 px-[20px] py-1.5"
+                stylingclasses="bg-gray-100 px-container py-2xs"
               >
                 Medlemspris {formatPrice(product.member_price)}
               </Text>
@@ -270,30 +286,36 @@ const images = [
         <Text teksttype="price_large">{formatPrice(product.regular_price)}</Text
         >
 
-        {images.length > 1 && (
-          <div class="flex flex-wrap gap-[4px] mt-4">
-            {images.map((img, i) => (
-              <button
-                class="desktop-thumb relative w-[70px] h-[100px] overflow-hidden flex-shrink-0 cursor-pointer"
-                data-index={i}
-              >
-                <img src={img} alt={`${product.title} billede ${i + 1}`} class="w-full h-full object-cover" />
-                <div class="absolute inset-0 bg-black/20 pointer-events-none"></div>
-              </button>
-            ))}
-          </div>
-        )}
+        {
+          images.length > 1 && (
+            <div class="flex flex-wrap gap-2xs mt-l mb-5xl">
+              {images.map((img, i) => (
+                <button
+                  class="desktop-thumb relative w-[70px] h-[100px] overflow-hidden flex-shrink-0 cursor-pointer"
+                  data-index={i}
+                >
+                  <img
+                    src={img}
+                    alt={`${product.title} billede ${i + 1}`}
+                    class="w-full h-full object-cover"
+                  />
+                  <div class="absolute inset-0 bg-black/20 pointer-events-none" />
+                </button>
+              ))}
+            </div>
+          )
+        }
       </div>
 
       <!-- Billeder: halv bredde på tablet, 6 col på desktop -->
-      <div class="md:col-span-1 lg:col-span-6 flex flex-col gap-[5px]">
+      <div class="md:col-span-1 lg:col-span-6 flex flex-col gap-2xs">
         {
           images.map((img, i) => (
             <img
               id={`desktop-img-${i}`}
               src={img}
               alt={product.title}
-              class="w-full aspect-[4/5] object-cover xl:aspect-auto xl:h-[calc(100vh-108px)]"
+              class="w-full aspect-[4/5] object-cover desktop-product-img"
             />
           ))
         }
@@ -301,11 +323,12 @@ const images = [
 
       <!-- Højre kolonne: al info på tablet / kun accordion+knapper på desktop -->
       <div
-        class="md:col-span-1 lg:col-span-3 sticky top-[108px] self-start md:pl-[20px] lg:pl-6 lg:pr-0 md:pt-[20px] lg:pt-[100px]"
+        class="md:col-span-1 lg:col-span-3 sticky self-start md:pl-container lg:pl-m lg:pr-0 md:pt-container lg:pt-[100px]"
+        style="top: var(--header-h, 78px)"
       >
         <!-- Kun på tablet: breadcrumb + titel + pris -->
-        <div class="lg:hidden mb-8">
-          <nav class="flex items-center gap-3 mb-5">
+        <div class="lg:hidden mb-l">
+          <nav class="flex items-center gap-container-mobile mb-xs">
             <Text teksttype="p_medium" color="text-gray-400">
               <a href="/shop/alt" class="hover:text-gray-600 transition-colors"
                 >Shop Alt</a
@@ -317,10 +340,10 @@ const images = [
               class="bc-cat hidden font-helv font-normal text-[14px] text-gray-400 hover:text-gray-600 transition-colors"
               href="#"></a>
           </nav>
-          <Heading htmlheading="h1" type="h1_small" stylingclasses="mb-[8px]"
+          <Heading htmlheading="h1" type="h1_small" stylingclasses="mb-xs"
             >{product.title}</Heading
           >
-          <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-[16px]"
+          <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-l"
             >{product.subtitle}</Heading
           >
           {
@@ -328,7 +351,7 @@ const images = [
               <div class="inline-block mb-1">
                 <Text
                   teksttype="price_large"
-                  stylingclasses="bg-gray-100 px-2 py-1.5"
+                  stylingclasses="bg-gray-100 px-2 py-2xs -ml-container-mobile"
                 >
                   Medlemspris {formatPrice(product.member_price)}
                 </Text>
@@ -345,7 +368,7 @@ const images = [
           <div class="border-b border-neutral-200">
             <button
               @click="open = open === 'om' ? null : 'om'"
-              class="w-full flex justify-between items-center py-4 cursor-pointer"
+              class="w-full flex justify-between items-center py-s cursor-pointer"
             >
               <Heading htmlheading="h3" type="h3">Om produktet</Heading>
               <span
@@ -354,7 +377,7 @@ const images = [
               >
             </button>
             <div x-show="open === 'om'" x-transition style="display:none">
-              <Text teksttype="p_xsmall" stylingclasses="pb-5"
+              <Text teksttype="p_xsmall" stylingclasses="pb-container"
                 >{product.description}</Text
               >
             </div>
@@ -362,7 +385,7 @@ const images = [
           <div class="border-b border-neutral-200">
             <button
               @click="open = open === 'maal' ? null : 'maal'"
-              class="w-full flex justify-between items-center py-4 cursor-pointer"
+              class="w-full flex justify-between items-center py-s cursor-pointer"
             >
               <Heading htmlheading="h3" type="h3">Mål & Materialer</Heading>
               <span
@@ -373,10 +396,10 @@ const images = [
             <div x-show="open === 'maal'" x-transition style="display:none">
               <Text
                 teksttype="p_xsmall"
-                stylingclasses="pb-2 whitespace-pre-line"
+                stylingclasses="pb-container whitespace-pre-line"
                 >{product.measurement}</Text
               >
-              <Text teksttype="p_xsmall" stylingclasses="pb-5"
+              <Text teksttype="p_xsmall" stylingclasses="pb-container"
                 >{product.materials}</Text
               >
             </div>
@@ -384,7 +407,7 @@ const images = [
           <div class="border-b border-neutral-200">
             <button
               @click="open = open === 'brug' ? null : 'brug'"
-              class="w-full flex justify-between items-center py-4 cursor-pointer"
+              class="w-full flex justify-between items-center py-s cursor-pointer"
             >
               <Heading htmlheading="h3" type="h3">Brugsspor</Heading>
               <span
@@ -393,7 +416,7 @@ const images = [
               >
             </button>
             <div x-show="open === 'brug'" x-transition style="display:none">
-              <Text teksttype="p_xsmall" stylingclasses="pb-5"
+              <Text teksttype="p_xsmall" stylingclasses="pb-container"
                 >{product.signs_of_use}</Text
               >
             </div>
@@ -401,21 +424,29 @@ const images = [
         </div>
 
         <!-- Altid: Medlemsfordele -->
-        <div class="mt-8 mb-6">
-          <Heading htmlheading="h3" type="h3" stylingclasses="mb-3"
+        <div class="mt-xl mb-xl">
+          <Heading htmlheading="h3" type="h3" stylingclasses="mb-xs"
             >Medlemsfordele</Heading
           >
-          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
-            >10% rabat på alle varer</Text
+          <Text
+            teksttype="p_xsmall"
+            color="text-gray-500"
+            stylingclasses="mb-2xs">10% rabat på alle varer</Text
           >
-          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
-            >Gratis fragt og levering</Text
+          <Text
+            teksttype="p_xsmall"
+            color="text-gray-500"
+            stylingclasses="mb-2xs">Gratis fragt og levering</Text
           >
-          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
-            >Pre-access til de nyeste drops</Text
+          <Text
+            teksttype="p_xsmall"
+            color="text-gray-500"
+            stylingclasses="mb-2xs">Pre-access til de nyeste drops</Text
           >
-          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-1"
-            >Levering indenfor 1–3 dage*</Text
+          <Text
+            teksttype="p_xsmall"
+            color="text-gray-500"
+            stylingclasses="mb-2xs">Levering indenfor 1–3 dage*</Text
           >
           <Text teksttype="p_xsmall" color="text-gray-500">
             <a href="/bliv-medlem" class="underline cursor-pointer"
@@ -428,13 +459,13 @@ const images = [
         <Button
           variant="secondary"
           href="/bliv-medlem"
-          stylingclasses="block w-full text-center mb-3"
+          stylingclasses="block w-full text-center mb-xs"
         >
           Bliv Medlem
         </Button>
         <Button
           variant="primary"
-          stylingclasses="flex justify-between items-center px-5"
+          stylingclasses="flex justify-between items-center px-container mb-5xl"
         >
           <span>Tilføj til kurv</span>
           <span>{formatPrice(product.regular_price)}</span>
@@ -445,30 +476,52 @@ const images = [
 
   <ProductCardCarousel
     title="Relaterede produkter"
-    category={product.category?.find((c) => c !== "Ny") ?? product.category?.[0]}
+    category={product.category?.find((c) => c !== "Ny") ??
+      product.category?.[0]}
     excludeId={product.id}
     limit={8}
   />
 
-  <script>
-    document.querySelectorAll<HTMLButtonElement>(".desktop-thumb").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const index = btn.dataset.index;
-        const img = document.getElementById(`desktop-img-${index}`);
-        if (img) {
-          const top = img.getBoundingClientRect().top + window.scrollY - 108;
-          window.scrollTo({ top, behavior: "smooth" });
-        }
-      });
-    });
+  <style>
+    @media (min-width: 1280px) {
+      .desktop-product-img {
+        aspect-ratio: auto;
+        height: calc(100vh - var(--header-h, 78px));
+      }
+    }
+  </style>
 
-    document.querySelectorAll<HTMLButtonElement>(".mobile-thumb").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const index = parseInt(btn.dataset.index ?? "0");
-        const scroll = document.getElementById("mobile-scroll");
-        if (scroll) scroll.scrollTo({ left: scroll.offsetWidth * index, behavior: "smooth" });
+  <script>
+    const headerH = document.querySelector("header")?.offsetHeight ?? 78;
+    document.documentElement.style.setProperty("--header-h", `${headerH}px`);
+
+    document
+      .querySelectorAll<HTMLButtonElement>(".desktop-thumb")
+      .forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const index = btn.dataset.index;
+          const img = document.getElementById(`desktop-img-${index}`);
+          if (img) {
+            const h = document.querySelector("header")?.offsetHeight ?? 0;
+            const top = img.getBoundingClientRect().top + window.scrollY - h;
+            window.scrollTo({ top, behavior: "smooth" });
+          }
+        });
       });
-    });
+
+    document
+      .querySelectorAll<HTMLButtonElement>(".mobile-thumb")
+      .forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const index = parseInt(btn.dataset.index ?? "0");
+          const scroll = document.getElementById("mobile-scroll");
+          if (scroll)
+            scroll.scrollTo({
+              left: scroll.offsetWidth * index,
+              behavior: "smooth",
+            });
+        });
+      });
   </script>
 
   <script>
