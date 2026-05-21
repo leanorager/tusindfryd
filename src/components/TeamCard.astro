@@ -1,5 +1,6 @@
 ---
 import Text from "./Text.astro";
+import Heading from "./Heading.astro";
 
 interface Props {
   navn: string;
@@ -10,15 +11,17 @@ interface Props {
 const { navn, jobbeskrivelse, billede } = Astro.props;
 ---
 
-<div class="flex flex-col gap-2 w-full max-w-[300px] md:max-w-none md:h-[497px]">
+<div
+  class="flex flex-col gap-xs w-full max-w-[300px] md:max-w-none md:h-[497px]"
+>
   <img
     src={billede}
     alt={navn}
     class="w-full object-cover object-top aspect-[3/4] md:aspect-auto md:flex-1 md:min-h-0"
   />
-  <div class="flex flex-col gap-0.5">
-    <Text teksttype="statement_medium">{navn}</Text>
-    <Text teksttype="statement_medium" stylingclasses="!text-[12px] opacity-60"
+  <div class="flex flex-col gap-2xs">
+    <Heading type="h3">{navn}</Heading>
+    <Text teksttype="p_medium" stylingclasses="text-gray-500"
       >{jobbeskrivelse}</Text
     >
   </div>

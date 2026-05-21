@@ -196,25 +196,26 @@
   --font-helv: "Helvetica Neue", sans-serif;
   --font-mont: "Neue Montreal", sans-serif;
   --font-ibm: "IBM Plex Sans", sans-serif;
-}
 
-@layer base {
-  main
-    > section:not(.OmHero):not(.IndexHero):not(.ShowroomHero):not(.Carousel) {
-    padding-top: 4rem;
-    padding-inline: 10px;
-    position: relative;
-    z-index: 10;
-    background-color: var(--color-white);
-  }
+  /* Spacing */
+  --spacing-4xs: 1px;
+  --spacing-3xs: 2px;
+  --spacing-2xs: 4px;
+  --spacing-xs: 8px;
+  --spacing-s: 16px;
+  --spacing-m: 24px;
+  --spacing-l: 32px;
+  --spacing-xl: 40px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  --spacing-4xl: 80px;
+  --spacing-5xl: 96px;
+  --spacing-6xl: 112px;
+  --spacing-7xl: 128px;
 
-  @media (min-width: 768px) {
-    main
-      > section:not(.OmHero):not(.IndexHero):not(.ShowroomHero):not(.Carousel) {
-      padding-top: 150px;
-      padding-bottom: 150px;
-    }
-  }
+  --spacing-container: 20px;
+  --spacing-container-mobile: 10px;
+  --spacing-section: 150px;
 }
 
 @layer components {
