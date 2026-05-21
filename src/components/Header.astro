@@ -187,7 +187,7 @@ import Button from "./Button.astro";
     x-transition:leave="transition ease-in duration-150"
     x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0"
-    class="fixed inset-0 top-[78px] bg-black/20 z-30"
+    class="fixed inset-0 top-[78px] z-30 bg-black/10 backdrop-blur-lg"
   >
   </div>
 
@@ -253,7 +253,7 @@ import Button from "./Button.astro";
     class="fixed top-0 right-0 w-full md:w-[420px] h-full bg-white z-50 flex flex-col border-l border-neutral-200"
   >
     <div
-      class="flex justify-between items-center px-5 h-[72px] border-b border-neutral-200 flex-shrink-0"
+      class="flex justify-between items-center px-5 h-[78px] border-b border-neutral-200 flex-shrink-0"
     >
       <Heading
         type="h4"
@@ -290,7 +290,7 @@ import Button from "./Button.astro";
     @keydown.escape.window="searchOpen = false"
   >
     <div
-      class="flex justify-between items-center px-5 h-[72px] border-b border-neutral-200 flex-shrink-0"
+      class="flex justify-between items-center px-5 h-[78px] border-b border-neutral-200 flex-shrink-0"
     >
       <Heading
         type="h4"
