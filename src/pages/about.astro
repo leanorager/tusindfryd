@@ -15,55 +15,57 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
     <section class="OmHero sticky top-0 z-0">
       <div
         class="w-full bg-gray-100 overflow-hidden
-                  pb-4 flex flex-col gap-5
-                  md:block md:relative md:h-[calc(100vh-108px)] md:pb-0"
+                  pb-s flex flex-col gap-3xl
+                  md:h-[calc(100vh-108px)] md:gap-0 md:justify-between"
       >
         <!-- Image strip -->
         <div
-          class="bg-gray-300 overflow-hidden
-                    px-5 pt-5 pb-4 flex justify-center items-center gap-3
-                    md:absolute md:left-0 md:top-0 md:w-full md:h-80
-                    md:px-0 md:pt-0 md:pb-0 md:pr-5 md:justify-end md:items-center md:gap-4"
+          class="bg-gray-300
+                    px-container-mobile pt-l pb-l flex justify-center items-center gap-2xs
+                    md:px-container md:py-s md:justify-end md:items-center md:gap-s"
         >
-          <img class="w-40 h-56 md:w-52 md:h-72" src="img/about_left.webp" />
-          <img class="w-40 h-56 md:w-52 md:h-72" src="img/about_right.webp" />
+          <img
+            class="w-40 h-56 md:w-[204px] md:h-[294px]"
+            src="img/about_left.webp"
+          />
+          <img
+            class="w-40 h-56 md:w-[204px] md:h-[294px]"
+            src="img/about_right.webp"
+          />
         </div>
 
         <!-- Text section -->
         <div
-          class="relative h-72
-                    md:absolute md:left-0 md:bottom-0 md:w-full md:h-auto md:p-5"
+          class="px-container-mobile flex flex-col gap-3xl
+                    md:px-container md:w-full md:gap-0"
         >
-          <!-- Inner content: mobile=absolutely offset, desktop=static full-width -->
-          <div
-            class="absolute left-[25px] top-0 w-80 flex flex-col gap-6
-                      md:static md:w-full md:gap-16"
-          >
-            <Text
-              teksttype="statement_medium"
-              stylingclasses="!text-3xl md:max-w-[505px]"
-            >
-              Tusindfryd er defineret af stil, design og interiør – udvalgt af
-              eksperter. <br />Her er historien bag.
-            </Text>
+          <Text teksttype="statement_large" stylingclasses="md:max-w-[505px]">
+            Tusindfryd er defineret af stil, design og interiør – udvalgt af
+            eksperter. <br />Her er historien bag.
+          </Text>
 
-            <Text teksttype="statement_large" stylingclasses="!text-8xl">
-              Om os
-            </Text>
-          </div>
+          <Heading
+            type="h1_large"
+            htmlheading="h1"
+            stylingclasses="md:pb-container"
+          >
+            Om os
+          </Heading>
         </div>
 
-        <!-- SCROLL NED: mobile=right-aligned flow, desktop=absolute bottom-right -->
+        <!-- SCROLL NED: desktop only -->
         <Text
-          teksttype="statement_medium"
-          stylingclasses="text-right px-5 md:absolute md:bottom-5 md:right-5 md:px-0 md:font-medium"
+          teksttype="statement_bolder"
+          stylingclasses="hidden md:block md:absolute md:bottom-container md:right-container"
         >
           (SCROLL NED)
         </Text>
       </div>
     </section>
 
-    <section class="OmText">
+    <section
+      class="OmText bg-white relative z-10 px-container-mobile md:px-container py-4xl md:py-section"
+    >
       <div>
         <Text
           teksttype="statement_medium"
@@ -94,16 +96,18 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
       </div>
     </section>
 
-    <section class="TeamImages">
+    <section
+      class="TeamImages bg-white relative z-10 px-container-mobile md:px-container pb-4xl md:pb-section"
+    >
       <div class="">
         <div
-          class="mb-4 opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-500 intersect-once"
+          class="opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-500 intersect-once"
         >
-          <Heading htmlheading="h2" type="h2_medium"
+          <Heading htmlheading="h2" type="h2_medium" stylingclasses="pb-s"
             >Teamet Bag Tusindfryd</Heading
           >
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-[5px]">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-x-2xs gap-y-s">
           <div
             class="opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-0 intersect-once"
           >
@@ -144,11 +148,13 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
       </div>
     </section>
 
-    <section class="TeamText">
-      <div class="grid grid-cols-12 gap-y-2 md:gap-0 items-start">
+    <section
+      class="TeamText bg-white relative z-10 px-container-mobile pb-3xl md:pb-section"
+    >
+      <div class="grid grid-cols-12 items-start">
         <Text
-          teksttype="statement_small"
-          stylingclasses="col-span-12 md:col-start-3 md:col-span-1 self-center !text-[12px] uppercase tracking-widest opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-500 intersect-once"
+          teksttype="p_medium"
+          stylingclasses="col-span-12 md:col-start-3 md:col-span-1 self-center uppercase tracking-widest opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-500 intersect-once"
           >Teamet</Text
         >
         <Text
@@ -172,10 +178,12 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
       </div>
     </section>
 
-    <section class="Princip">
-      <div class="grid grid-cols-12 gap-2">
+    <section
+      class="Princip bg-white relative z-10 px-container-mobile md:px-container pb-3xl md:pb-section"
+    >
+      <div class="grid grid-cols-12 gap-2xs">
         <!-- Mobile only: both images side by side -->
-        <div class="col-span-12 flex gap-2 order-1 md:hidden">
+        <div class="col-span-12 flex gap-2xs order-1 md:hidden">
           <img
             class="w-[40%] h-[200px] object-cover self-center opacity-0 intersect:opacity-100 transition-opacity duration-1000 intersect-once"
             src="img/princip_small.webp"
@@ -188,7 +196,7 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
 
         <!-- Left: square image (desktop only) + heading — order 2 on mobile -->
         <div
-          class="col-span-12 md:col-span-6 flex flex-col gap-2 md:pb-32 order-2 md:order-1"
+          class="col-span-12 md:col-span-6 flex flex-col gap-2xs order-2 md:order-1"
         >
           <div
             class="hidden md:block self-end w-96 h-96 overflow-hidden opacity-0 intersect:opacity-100 transition-opacity duration-1000 intersect-once"
@@ -198,17 +206,17 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
               src="img/princip_small.webp"
             />
           </div>
-          <Text
-            teksttype="statement_large"
-            stylingclasses="!text-5xl md:!text-7xl w-full md:pl-[calc(100%/6)] mt-8 md:mt-16 opacity-0 translate-y-8 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-150 intersect-once"
+          <Heading
+            type="h2_large"
+            stylingclasses="w-full md:pl-[calc(100%/6)] mt-8 md:mt-16 opacity-0 translate-y-8 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-150 intersect-once"
           >
             Princip:<br />Ting skal bruges<br />til de er færdige.
-          </Text>
+          </Heading>
         </div>
 
         <!-- Right tall image (desktop only) — order 1 on mobile -->
         <div
-          class="hidden md:block col-span-12 md:col-span-6 md:pt-32 order-1 md:order-2 opacity-0 intersect:opacity-100 transition-opacity duration-1000 intersect-once"
+          class="hidden md:block col-span-12 md:col-span-6 md:pt-7xl order-1 md:order-2 opacity-0 intersect:opacity-100 transition-opacity duration-1000 intersect-once"
         >
           <img
             class="w-full h-[659px] object-cover"
@@ -219,7 +227,7 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
         <!-- Caption — order 3 on mobile, sits below right image on desktop -->
         <Text
           teksttype="statement_medium"
-          stylingclasses="col-span-12 md:col-start-7 md:col-span-6 md:w-2/3 order-3 opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-200 intersect-once"
+          stylingclasses="pt-m md:pt-xs col-span-12 md:col-start-7 md:col-span-6 md:w-2/3 order-3 opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 delay-200 intersect-once"
         >
           Hos Tusindfryd siger vi nej, hvis du beder os ombetrække en sofa, der
           ikke trænger til det. Det er en holdning, vi tillader os at have.<br
@@ -231,7 +239,7 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
       </div>
     </section>
 
-    <section>
+    <section class="bg-white relative z-10">
       <ShowroomBlock
         image="img/showroomblock_about.webp"
         imageAlt="Billede af Tusindfryds showroom"
