@@ -10,7 +10,7 @@ import Button from "./Button.astro";
   class="sticky top-0 z-50"
 >
   <!-- Announcement bar -->
-  <div class="bg-black py-[7px] flex items-center px-[20px]">
+  <div class="bg-black py-[7px] flex items-center px-container">
     <Text teksttype="p_small" color="text-white">
       Gratis fragt og levering for alle medlemmer
     </Text>
@@ -18,17 +18,17 @@ import Button from "./Button.astro";
 
   <!-- Nav bar -->
   <div
-    class="bg-white border-b border-neutral-200 relative flex items-center py-[10px] px-[20px]"
+    class="bg-white border-b border-neutral-200 relative flex items-center py-container-mobile px-container"
   >
     <Button variant="plain" @click="menuOpen = true" stylingclasses="md:hidden">
       <img src="/svg/burger-icon.svg" alt="Menu" class="h-[18px] w-auto" />
     </Button>
 
-    <nav class="hidden md:flex items-center gap-[24px]">
+    <nav class="hidden md:flex items-center gap-m">
       <Button
         variant="plain"
         @click="shopOpen = !shopOpen"
-        stylingclasses="flex items-center gap-1 cursor-pointer"
+        stylingclasses="flex items-center gap-2xs cursor-pointer"
       >
         Shop
         <span
@@ -45,7 +45,7 @@ import Button from "./Button.astro";
     </a>
 
     <!-- Mobile: Søg + Kurv -->
-    <div class="md:hidden ml-auto flex items-center gap-5">
+    <div class="md:hidden ml-auto flex items-center gap-s">
       <Button
         variant="plain"
         @click="searchOpen = true; $nextTick(() => document.getElementById('search-input')?.focus())"
@@ -58,7 +58,7 @@ import Button from "./Button.astro";
     </div>
 
     <!-- Desktop: utility links -->
-    <nav class="hidden md:flex ml-auto items-center gap-[24px]">
+    <nav class="hidden md:flex ml-auto items-center gap-m">
       <Button
         variant="textlink"
         stylingclasses="cursor-pointer"
@@ -91,7 +91,7 @@ import Button from "./Button.astro";
     style="display: none"
   >
     <!-- Announcement bar -->
-    <div class="bg-black py-[7px] flex items-center px-[20px] flex-shrink-0">
+    <div class="bg-black py-[7px] flex items-center px-container flex-shrink-0">
       <Text teksttype="p_small" color="text-white">
         Gratis fragt og levering for alle medlemmer
       </Text>
@@ -99,7 +99,7 @@ import Button from "./Button.astro";
 
     <!-- Nav bar -->
     <div
-      class="bg-white border-b border-neutral-200 relative flex items-center py-[10px] px-[20px] flex-shrink-0"
+      class="bg-white border-b border-neutral-200 relative flex items-center py-container-mobile px-container flex-shrink-0"
     >
       <Button
         variant="plain"
@@ -113,7 +113,7 @@ import Button from "./Button.astro";
           class="h-[29px] w-auto"
         />
       </a>
-      <div class="ml-auto flex items-center gap-5">
+      <div class="ml-auto flex items-center gap-s">
         <Button
           variant="plain"
           @click="menuOpen = false; searchOpen = true; $nextTick(() => document.getElementById('search-input')?.focus())"
@@ -130,7 +130,7 @@ import Button from "./Button.astro";
 
     <!-- Menu content -->
     <div class="flex-1 overflow-y-auto flex flex-col">
-      <div class="flex flex-col px-5 pt-6 flex-1">
+      <div class="flex flex-col px-container pt-s flex-1">
         <a
           href="/shop/nyheder"
           class="font-helv font-medium text-[18px] text-black uppercase tracking-wide py-1 hover:underline transition-all duration-150"
@@ -141,7 +141,7 @@ import Button from "./Button.astro";
           class="font-helv font-medium text-[18px] text-black uppercase tracking-wide py-1 hover:underline transition-all duration-150 mb-5"
           >Shop alt</a
         >
-        <div class="flex flex-col gap-[8px] mb-8">
+        <div class="flex flex-col gap-xs mb-m">
           <Link href="/shop/sofaer" teksttype="p_large">Sofaer</Link>
           <Link href="/shop/stole" teksttype="p_large">Stole</Link>
           <Link href="/shop/borde" teksttype="p_large">Borde</Link>
@@ -150,7 +150,7 @@ import Button from "./Button.astro";
           <Link href="/shop/opbevaring" teksttype="p_large">Opbevaring</Link>
           <Link href="/shop/andet" teksttype="p_large">Andet</Link>
         </div>
-        <div class="flex flex-col gap-[8px]">
+        <div class="flex flex-col gap-xs">
           <Link href="/showroom" teksttype="p_large">Showroom</Link>
           <Link href="/about" teksttype="p_large">Om os</Link>
           <Link href="/bliv-medlem" teksttype="p_large">Bliv Medlem</Link>
@@ -202,7 +202,7 @@ import Button from "./Button.astro";
     x-transition:leave-end="opacity-0 -translate-y-1"
     class="fixed top-[76px] left-0 w-[430px] h-[calc(100vh-76px)] bg-white z-40 flex-col border-r border-neutral-200 hidden md:flex"
   >
-    <div class="flex flex-col flex-1 px-5 pt-6 overflow-y-auto">
+    <div class="flex flex-col flex-1 px-container pt-s overflow-y-auto">
       <a
         href="/shop/nyheder"
         class="font-helv font-medium text-[18px] text-black uppercase tracking-wide py-1 hover:underline transition-all duration-150"
