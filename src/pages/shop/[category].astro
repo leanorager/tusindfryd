@@ -103,7 +103,7 @@ const initialCategories =
     >
       <!-- Panel header -->
       <div
-        class="flex justify-between items-center px-6 pt-6 pb-4 flex-shrink-0"
+        class="flex justify-between items-center px-m pt-m pb-s flex-shrink-0"
       >
         <span class="font-helv font-normal text-[14px]">Filter</span>
         <button
@@ -114,7 +114,7 @@ const initialCategories =
       </div>
 
       <!-- Active chips -->
-      <div class="px-6 flex flex-wrap gap-2 flex-shrink-0 min-h-[10px] mb-3">
+      <div class="px-m flex flex-wrap gap-xs flex-shrink-0 min-h-[10px] mb-3">
         <template x-if="sort">
           <button
             @click="sort = null; scheduleCountUpdate()"
@@ -169,10 +169,10 @@ const initialCategories =
 
       <!-- Scrollable content -->
       <div class="flex-1 overflow-y-auto">
-        <div class="px-6">
+        <div class="px-m">
           <!-- Sort section -->
-          <div class="mb-5 mt-1">
-            <p class="font-helv font-normal text-[13px] text-neutral-400 mb-4">
+          <div class="mb-container mt-2xs">
+            <p class="font-helv font-normal text-[13px] text-neutral-400 mb-s">
               Sorter efter
             </p>
             <template x-for="option in sortOptions" :key="option.value">
@@ -232,7 +232,7 @@ const initialCategories =
               x-show="catOpen"
               x-transition
               style="display:none"
-              class="pb-4"
+              class="pb-s"
             >
               <template x-for="cat in categoryOptions" :key="cat.value">
                 <label
@@ -290,7 +290,7 @@ const initialCategories =
               x-show="matOpen"
               x-transition
               style="display:none"
-              class="pb-4"
+              class="pb-s"
             >
               <template x-for="mat in materialOptions" :key="mat">
                 <label
@@ -347,7 +347,7 @@ const initialCategories =
               x-show="colOpen"
               x-transition
               style="display:none"
-              class="pb-4"
+              class="pb-s"
             >
               <template x-for="col in colorOptions" :key="col">
                 <label
@@ -404,10 +404,10 @@ const initialCategories =
               x-show="priceOpen"
               x-transition
               style="display:none"
-              class="pb-6"
+              class="pb-m"
             >
               <!-- Dual range slider -->
-              <div class="relative mt-8 mb-2 range-wrap">
+              <div class="relative mt-l mb-xs range-wrap">
                 <!-- Track background -->
                 <div
                   class="absolute inset-x-0 h-[1px] bg-neutral-200 top-1/2 -translate-y-1/2 pointer-events-none"
@@ -443,7 +443,7 @@ const initialCategories =
                 />
               </div>
               <!-- Thumb position labels -->
-              <div class="relative h-5 mb-4">
+              <div class="relative h-5 mb-s">
                 <span
                   class="absolute font-helv font-normal text-[11px] whitespace-nowrap pointer-events-none"
                   :style="`left: clamp(0%, ${(minPrice/MAX_PRICE_VAL)*100}%, 100%); transform: translateX(${(maxPrice - minPrice) / MAX_PRICE_VAL < 0.2 ? '-100%' : '-50%'})`"
@@ -454,9 +454,9 @@ const initialCategories =
                   x-text="formatNum(maxPrice) + ' DKK'"></span>
               </div>
               <!-- Price text inputs -->
-              <div class="flex gap-2">
+              <div class="flex gap-xs">
                 <div
-                  class="flex-1 border border-black flex items-center px-3 py-1.5 gap-2"
+                  class="flex-1 border border-black flex items-center px-3 py-1.5 gap-xs"
                 >
                   <input
                     type="text"
@@ -471,7 +471,7 @@ const initialCategories =
                   >
                 </div>
                 <div
-                  class="flex-1 border border-black flex items-center px-3 py-1.5 gap-2"
+                  class="flex-1 border border-black flex items-center px-3 py-1.5 gap-xs"
                 >
                   <input
                     type="text"
@@ -493,17 +493,17 @@ const initialCategories =
 
       <!-- Footer buttons -->
       <div
-        class="flex-shrink-0 border-t border-neutral-200 flex gap-3 px-4 py-4"
+        class="flex-shrink-0 border-t border-neutral-200 flex gap-3 px-s py-s"
       >
         <button
           @click="clearAll()"
-          class="flex-1 border border-black font-helv font-normal text-[13px] py-4 hover:bg-black hover:text-white transition-all duration-150 cursor-pointer"
+          class="flex-1 border border-black font-helv font-normal text-[13px] py-s hover:bg-black hover:text-white transition-all duration-150 cursor-pointer"
         >
           Ryd alle
         </button>
         <button
           @click="applyFilters()"
-          class="flex-1 bg-black text-white font-helv font-normal text-[13px] py-4 hover:opacity-80 transition-opacity cursor-pointer"
+          class="flex-1 bg-black text-white font-helv font-normal text-[13px] py-s hover:opacity-80 transition-opacity cursor-pointer"
         >
           <span x-show="!countLoading" x-text="'Vis (' + resultCount + ')'"
           ></span>
@@ -515,10 +515,14 @@ const initialCategories =
     </div>
 
     <!-- Main content -->
-    <main class="px-[10px] md:px-[20px] pt-8 pb-16">
+    <main class="px-container-mobile md:px-container pt-l pb-3xl md:pt-3xl">
       <!-- Page header -->
-      <div class="mb-6 md:mb-8 md:max-w-sm">
-        <Heading htmlheading="h3" type="h3" stylingclasses="uppercase mb-3">
+      <div class="mb-l md:mb-3xl md:max-w-sm">
+        <Heading
+          htmlheading="h3"
+          type="h3"
+          stylingclasses="uppercase mb-container-mobile"
+        >
           {categoryConfig.title}
         </Heading>
         {
@@ -531,10 +535,10 @@ const initialCategories =
       </div>
 
       <!-- Filter bar -->
-      <div class="flex justify-end mb-6">
+      <div class="flex justify-end mb-l md:mb-3xl">
         <button
           @click="panelOpen = true"
-          class="flex items-center gap-[8px] border border-black px-[20px] py-2.5 font-helv font-normal text-[13px] transition-all duration-150 cursor-pointer"
+          class="flex items-center gap-xs border border-black px-container py-container-mobile font-helv font-normal text-[13px] transition-all duration-150 cursor-pointer"
           :class="activeFilterCount > 0 ? 'bg-black text-white' : 'hover:bg-black hover:text-white'"
         >
           <svg
@@ -565,7 +569,7 @@ const initialCategories =
         products.length > 0 ? (
           <div
             id="product-grid"
-            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-[5px] gap-y-[40px] lg:gap-y-[64px]"
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2xs gap-y-xl lg:gap-y-3xl"
           >
             {products.map((product) => (
               <ListProductCard
@@ -580,7 +584,7 @@ const initialCategories =
             ))}
           </div>
         ) : (
-          <div class="flex items-center justify-center py-24">
+          <div class="flex items-center justify-center py-4xl">
             <Text teksttype="p_medium" color="text-neutral-400">
               Ingen produkter fundet i denne kategori.
             </Text>
@@ -591,7 +595,7 @@ const initialCategories =
       <!-- Pagination footer -->
       <div
         id="pagination-footer"
-        class={`mt-12 flex flex-col items-center gap-3 ${products.length === 0 ? "hidden" : ""}`}
+        class={`mt-2xl flex flex-col items-center gap-3 ${products.length === 0 ? "hidden" : ""}`}
       >
         <button
           id="load-more-btn"
