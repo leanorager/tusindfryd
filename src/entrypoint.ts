@@ -1,6 +1,8 @@
 import type { Alpine } from "alpinejs";
+import Collapse from "@alpinejs/collapse";
 
 export default (Alpine: Alpine) => {
+  Alpine.plugin(Collapse);
   const stored = localStorage.getItem("tusindfryd_cart");
   Alpine.store("cart", {
     items: (stored ? JSON.parse(stored) : []) as any[],
