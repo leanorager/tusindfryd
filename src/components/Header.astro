@@ -39,10 +39,12 @@ import Button from "./Button.astro";
         stylingclasses="flex items-center gap-2xs cursor-pointer"
       >
         Shop
-        <span
-          class="text-[14px] transition-transform duration-200"
-          :class="shopOpen ? 'rotate-180' : ''">∨</span
-        >
+        <img
+          src="/svg/arrow-down.svg"
+          alt=""
+          class="h-[5px] w-auto transition-transform duration-200"
+          :class="shopOpen ? 'rotate-180' : ''"
+        />
       </Button>
       <Link stylingclasses="text-gray-700" href="/showroom">Showroom</Link>
       <Link stylingclasses="text-gray-700" href="/about">Om os</Link>
