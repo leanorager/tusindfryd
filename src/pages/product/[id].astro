@@ -223,6 +223,7 @@ const images = [
         </div>
 
         <div
+          x-data
           class="sticky bottom-0 z-40 -mx-[10px] bg-white px-container-mobile pb-container-mobile pt-container-mobile border-t border-neutral-100"
         >
           <Button
@@ -235,6 +236,7 @@ const images = [
           <Button
             variant="primary"
             stylingclasses="flex justify-between items-center px-container"
+            @click={`$store.cart.add({ id: ${product.id}, title: ${JSON.stringify(product.title)}, subtitle: ${JSON.stringify(product.subtitle)}, price: ${product.regular_price}, image: ${JSON.stringify(product.image1 ?? "")} })`}
           >
             <span>Tilføj til kurv</span>
             <span>{formatPrice(product.regular_price)}</span>
@@ -456,20 +458,23 @@ const images = [
         </div>
 
         <!-- Altid: knapper -->
-        <Button
-          variant="secondary"
-          href="/bliv-medlem"
-          stylingclasses="block w-full text-center mb-xs"
-        >
-          Bliv Medlem
-        </Button>
-        <Button
-          variant="primary"
-          stylingclasses="flex justify-between items-center px-container mb-5xl"
-        >
-          <span>Tilføj til kurv</span>
-          <span>{formatPrice(product.regular_price)}</span>
-        </Button>
+        <div x-data>
+          <Button
+            variant="secondary"
+            href="/bliv-medlem"
+            stylingclasses="block w-full text-center mb-xs"
+          >
+            Bliv Medlem
+          </Button>
+          <Button
+            variant="primary"
+            stylingclasses="flex justify-between items-center px-container mb-5xl"
+            @click={`$store.cart.add({ id: ${product.id}, title: ${JSON.stringify(product.title)}, subtitle: ${JSON.stringify(product.subtitle)}, price: ${product.regular_price}, image: ${JSON.stringify(product.image1 ?? "")} })`}
+          >
+            <span>Tilføj til kurv</span>
+            <span>{formatPrice(product.regular_price)}</span>
+          </Button>
+        </div>
       </div>
     </div>
   </main>
