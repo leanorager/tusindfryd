@@ -146,7 +146,7 @@ const images = [
                 :class="open === 'om' ? 'rotate-180' : ''">∨</span
               >
             </button>
-            <div x-show="open === 'om'" x-transition style="display:none">
+            <div x-show="open === 'om'" x-collapse style="display:none">
               <Text teksttype="p_xsmall" stylingclasses="pb-container"
                 >{product.description}</Text
               >
@@ -163,7 +163,7 @@ const images = [
                 :class="open === 'maal' ? 'rotate-180' : ''">∨</span
               >
             </button>
-            <div x-show="open === 'maal'" x-transition style="display:none">
+            <div x-show="open === 'maal'" x-collapse style="display:none">
               <Text
                 teksttype="p_xsmall"
                 stylingclasses="pb-2 whitespace-pre-line"
@@ -185,7 +185,7 @@ const images = [
                 :class="open === 'brug' ? 'rotate-180' : ''">∨</span
               >
             </button>
-            <div x-show="open === 'brug'" x-transition style="display:none">
+            <div x-show="open === 'brug'" x-collapse style="display:none">
               <Text teksttype="p_xsmall" stylingclasses="pb-container"
                 >{product.signs_of_use}</Text
               >
@@ -366,7 +366,10 @@ const images = [
         </div>
 
         <!-- Altid: accordion -->
-        <div x-data="{ open: null }" class="border-t border-neutral-200">
+        <div
+          x-data="{ open: window.innerWidth >= 1024 ? 'om' : null }"
+          class="border-t border-neutral-200"
+        >
           <div class="border-b border-neutral-200">
             <button
               @click="open = open === 'om' ? null : 'om'"
@@ -378,7 +381,7 @@ const images = [
                 :class="open === 'om' ? 'rotate-180' : ''">∨</span
               >
             </button>
-            <div x-show="open === 'om'" x-transition style="display:none">
+            <div x-show="open === 'om'" x-collapse style="display:none">
               <Text teksttype="p_xsmall" stylingclasses="pb-container"
                 >{product.description}</Text
               >
@@ -395,7 +398,7 @@ const images = [
                 :class="open === 'maal' ? 'rotate-180' : ''">∨</span
               >
             </button>
-            <div x-show="open === 'maal'" x-transition style="display:none">
+            <div x-show="open === 'maal'" x-collapse style="display:none">
               <Text
                 teksttype="p_xsmall"
                 stylingclasses="pb-container whitespace-pre-line"
@@ -417,7 +420,7 @@ const images = [
                 :class="open === 'brug' ? 'rotate-180' : ''">∨</span
               >
             </button>
-            <div x-show="open === 'brug'" x-transition style="display:none">
+            <div x-show="open === 'brug'" x-collapse style="display:none">
               <Text teksttype="p_xsmall" stylingclasses="pb-container"
                 >{product.signs_of_use}</Text
               >
