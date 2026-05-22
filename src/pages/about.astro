@@ -12,11 +12,15 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
 
 <MainLayout title="Om os">
   <main>
-    <section class="OmHero sticky top-0 z-0">
+    <section
+      class="OmHero sticky z-0 w-full overflow-hidden"
+      style="top: var(--header-h, 78px)"
+    >
       <div
         class="w-full bg-gray-100 overflow-hidden
                   pb-s flex flex-col gap-3xl
-                  md:h-[calc(100vh-108px)] md:gap-0 md:justify-between"
+                  md:gap-0 md:justify-between"
+        style="height: calc(100vh - var(--header-h, 78px))"
       >
         <!-- Image strip -->
         <div
@@ -248,3 +252,12 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
     </section>
   </main>
 </MainLayout>
+
+<script>
+  function setHeaderHeight() {
+    const h = document.querySelector("header")?.offsetHeight ?? 78;
+    document.documentElement.style.setProperty("--header-h", `${h}px`);
+  }
+  setHeaderHeight();
+  window.addEventListener("resize", setHeaderHeight);
+</script>
