@@ -6,7 +6,7 @@ import Button from "./Button.astro";
 ---
 
 <header
-  x-data="{ shopOpen: false, cartOpen: false, menuOpen: false, searchOpen: false }"
+  x-data="{ shopOpen: false, menuOpen: false, searchOpen: false, formatPrice(p) { return new Intl.NumberFormat('da-DK').format(p) + ' DKK'; } }"
   class="sticky top-0 z-50"
 >
   <!-- Announcement bar -->
@@ -52,8 +52,11 @@ import Button from "./Button.astro";
       >
         <img src="/svg/search-icon.svg" alt="Søg" class="h-[18px] w-auto" />
       </Button>
-      <Button teksttype="p_xsmall" variant="plain" @click="cartOpen = true"
-        >Kurv (0)</Button
+      <Button
+        teksttype="p_xsmall"
+        variant="plain"
+        @click="$store.cart.open = true"
+        >Kurv (<span x-text="$store.cart.items.length">0</span>)</Button
       >
     </div>
 
@@ -72,8 +75,9 @@ import Button from "./Button.astro";
       >
       <Button
         variant="textlink"
-        @click="cartOpen = true"
-        stylingclasses="cursor-pointer">Kurv (0)</Button
+        @click="$store.cart.open = true"
+        stylingclasses="cursor-pointer"
+        >Kurv (<span x-text="$store.cart.items.length">0</span>)</Button
       >
     </nav>
   </div>
@@ -123,7 +127,8 @@ import Button from "./Button.astro";
         <Button
           teksttype="p_xsmall"
           variant="plain"
-          @click="menuOpen = false; cartOpen = true">Kurv (0)</Button
+          @click="menuOpen = false; $store.cart.open = true"
+          >Kurv (<span x-text="$store.cart.items.length">0</span>)</Button
         >
       </div>
     </div>
@@ -179,8 +184,8 @@ import Button from "./Button.astro";
 
   <!-- Backdrop -->
   <div
-    x-show="shopOpen || cartOpen || searchOpen"
-    @click="shopOpen = false; cartOpen = false; searchOpen = false"
+    x-show="shopOpen || $store.cart.open || searchOpen"
+    @click="shopOpen = false; $store.cart.open = false; searchOpen = false"
     x-transition:enter="transition ease-out duration-200"
     x-transition:enter-start="opacity-0"
     x-transition:enter-end="opacity-100"
@@ -243,7 +248,7 @@ import Button from "./Button.astro";
 
   <!-- Kurv panel -->
   <div
-    x-show="cartOpen"
+    x-show="$store.cart.open"
     x-transition:enter="transition ease-out duration-300"
     x-transition:enter-start="translate-x-full"
     x-transition:enter-end="translate-x-0"
@@ -251,7 +256,9 @@ import Button from "./Button.astro";
     x-transition:leave-start="translate-x-0"
     x-transition:leave-end="translate-x-full"
     class="fixed top-0 right-0 w-full md:w-[420px] h-full bg-white z-50 flex flex-col border-l border-neutral-200"
+    style="display:none"
   >
+    <!-- Panel header -->
     <div
       class="flex justify-between items-center px-5 h-[78px] border-b border-neutral-200 flex-shrink-0"
     >
@@ -260,20 +267,94 @@ import Button from "./Button.astro";
         htmlheading="h4"
         stylingclasses="uppercase tracking-wide"
       >
-        Din Kurv (0)
+        Kurv (<span x-text="$store.cart.items.length">0</span>)
       </Heading>
       <Button
         variant="plain"
-        @click="cartOpen = false"
+        @click="$store.cart.open = false"
         stylingclasses="!text-base hover:opacity-60 transition-opacity duration-150 cursor-pointer"
         >✕</Button
       >
     </div>
-    <div class="flex-1 flex items-center justify-center p-5">
+
+    <!-- Tom kurv -->
+    <div
+      x-show="$store.cart.items.length === 0"
+      class="flex-1 flex items-center justify-center p-5"
+    >
       <Text teksttype="p_large" color="text-gray-500">Din kurv er tom.</Text>
     </div>
-    <div class="p-5 border-t border-neutral-200 flex-shrink-0">
-      <Button variant="primary">GÅ TIL KASSE</Button>
+
+    <!-- Vareliste -->
+    <div
+      x-show="$store.cart.items.length > 0"
+      class="flex-1 overflow-y-auto"
+      style="display:none"
+    >
+      <template x-for="item in $store.cart.items" :key="item.id">
+        <div
+          class="flex items-start gap-4 px-5 py-4 border-b border-neutral-100"
+        >
+          <img
+            :src="item.image || 'https://placehold.co/80x100'"
+            :alt="item.title"
+            class="w-[80px] h-[100px] object-cover flex-shrink-0"
+          />
+          <div class="flex-1 min-w-0 pt-1">
+            <p
+              class="font-helv font-medium text-[14px] text-black leading-tight mb-1"
+              x-text="item.title"
+            >
+            </p>
+            <p
+              class="font-helv font-light text-[12px] text-gray-500 leading-tight"
+              x-text="item.subtitle"
+            >
+            </p>
+          </div>
+          <div
+            class="flex flex-col items-end justify-between h-[100px] flex-shrink-0"
+          >
+            <p
+              class="font-ibm font-normal text-[14px] text-black"
+              x-text="formatPrice(item.price)"
+            >
+            </p>
+            <button
+              @click="$store.cart.remove(item.id)"
+              class="font-helv font-light text-[16px] text-gray-400 hover:text-black transition-colors duration-150 cursor-pointer"
+              >✕</button
+            >
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <!-- Footer: total + knap -->
+    <div
+      x-show="$store.cart.items.length > 0"
+      class="flex-shrink-0 border-t border-neutral-200 px-5 pt-4 pb-6"
+      style="display:none"
+    >
+      <div class="flex justify-between items-center mb-1">
+        <span class="font-helv font-normal text-[14px]">Total</span>
+        <span
+          class="font-ibm font-normal text-[14px]"
+          x-text="formatPrice($store.cart.total)"></span>
+      </div>
+      <div class="flex justify-between items-center mb-5">
+        <span class="font-helv font-light text-[12px] text-gray-500">
+          Standard Levering <span class="text-gray-400"
+            >(1-2 dages levering)</span
+          >
+        </span>
+        <span class="font-helv font-normal text-[12px] text-green-600"
+          >Gratis</span
+        >
+      </div>
+      <button
+        class="w-full bg-black text-white font-helv font-normal text-[13px] uppercase tracking-wide py-4 hover:opacity-80 transition-opacity duration-150 cursor-pointer"
+        x-text="`GÅ TIL KASSE  -  ${formatPrice($store.cart.total)}`"></button>
     </div>
   </div>
 
