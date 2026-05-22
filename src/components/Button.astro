@@ -3,7 +3,7 @@ const {
   variant = "primary",
   href,
   target = "_self",
-  teksttype = "p_medium",
+  teksttype = "p_small",
   stylingclasses = "",
   ...rest
 } = Astro.props as {
@@ -42,9 +42,9 @@ const teksttypeClasses = {
 
 const variantClasses = {
   primary:
-    "w-full bg-black text-white hover:opacity-80 transition-opacity duration-150 py-4",
+    "w-full bg-black text-white hover:opacity-80 transition-opacity duration-150 py-[15px] px-container",
   secondary:
-    "border border-black text-black hover:bg-black hover:text-white transition-all duration-150 px-5 py-3.5",
+    "border border-black text-black hover:bg-black hover:text-white transition-all duration-150 px-container py-[15px]",
   textlink: "text-gray-700 hover:underline transition-all duration-150",
   plain: "text-black",
 };

@@ -70,7 +70,7 @@ const images = [
 ---
 
 <MainLayout title={`${product.title} – Tusindfryd`}>
-  <main>
+  <main class="pb-3xl md:pb-0">
     <!-- MOBIL: skjult på desktop -->
     <div class="md:hidden">
       <div
@@ -477,15 +477,14 @@ const images = [
         </div>
       </div>
     </div>
+    <ProductCardCarousel
+      title="Relaterede produkter"
+      category={product.category?.find((c) => c !== "Ny") ??
+        product.category?.[0]}
+      excludeId={product.id}
+      limit={8}
+    />
   </main>
-
-  <ProductCardCarousel
-    title="Relaterede produkter"
-    category={product.category?.find((c) => c !== "Ny") ??
-      product.category?.[0]}
-    excludeId={product.id}
-    limit={8}
-  />
 
   <style>
     @media (min-width: 1280px) {
