@@ -10,9 +10,17 @@ import Button from "./Button.astro";
   class="sticky top-0 z-50"
 >
   <!-- Announcement bar -->
-  <div class="bg-black py-[7px] flex items-center px-container">
+  <div
+    class="bg-black py-[7px] flex items-baseline px-container flex-row gap-2xs"
+  >
+    <Text teksttype="p_small" color="text-white"> 4.7 </Text>
+    <img
+      src="/svg/star.svg"
+      alt="stjerne"
+      class="h-[12px] w-auto self-center"
+    />
     <Text teksttype="p_small" color="text-white">
-      Gratis fragt og levering for alle medlemmer
+      på Trustpilot - Gratis levering til medlemmer
     </Text>
   </div>
 
@@ -31,10 +39,12 @@ import Button from "./Button.astro";
         stylingclasses="flex items-center gap-2xs cursor-pointer"
       >
         Shop
-        <span
-          class="text-[14px] transition-transform duration-200"
-          :class="shopOpen ? 'rotate-180' : ''">∨</span
-        >
+        <img
+          src="/svg/arrow-down.svg"
+          alt=""
+          class="h-[5px] w-auto transition-transform duration-200"
+          :class="shopOpen ? 'rotate-180' : ''"
+        />
       </Button>
       <Link stylingclasses="text-gray-700" href="/showroom">Showroom</Link>
       <Link stylingclasses="text-gray-700" href="/about">Om os</Link>
@@ -163,12 +173,12 @@ import Button from "./Button.astro";
       </div>
 
       <!-- Bliv medlem billede -->
-      <div class="relative h-[220px] flex-shrink-0 overflow-hidden">
-        <a href="/bliv-medlem">
+      <div class="relative h-[371px] flex-shrink-0 overflow-hidden">
+        <a href="/bliv-medlem" class="group">
           <img
-            src="https://placehold.co/430x220"
+            src="/img/shop-panel.webp"
             alt="Bliv medlem og få fordele"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
           />
           <div class="absolute inset-0 flex justify-center items-center">
             <Text
@@ -228,18 +238,19 @@ import Button from "./Button.astro";
         <Link href="/shop/andet" teksttype="p_large">Andet</Link>
       </div>
     </div>
-    <div class="relative h-[220px] flex-shrink-0 overflow-hidden">
-      <a href="/bliv-medlem">
+    <div class="relative h-[371px] flex-shrink-0 overflow-hidden">
+      <a href="/bliv-medlem" class="group">
         <img
-          src="https://placehold.co/430x220"
+          src="/img/shop-panel.webp"
           alt="Bliv medlem"
-          class="w-full h-full object-cover"
+          class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
         />
         <div class="absolute inset-0 flex justify-center items-center">
           <Text
             teksttype="p_medium"
             color="text-white"
-            stylingclasses="py-0.5 border-b border-white">Bliv medlem</Text
+            stylingclasses="py-0.5 border-b border-white transition-opacity duration-300 group-hover:opacity-70"
+            >Bliv medlem</Text
           >
         </div>
       </a>
