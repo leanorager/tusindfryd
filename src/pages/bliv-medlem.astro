@@ -188,18 +188,6 @@ import Heading from "../components/Heading.astro";
               >
             </button>
           </div>
-
-          <Button
-            variant="textlink"
-            @click="next()"
-            stylingclasses="flex items-center gap-[10px]"
-          >
-            Fortsæt <img
-              src="/svg/ArrowBlack.svg"
-              alt=""
-              class="w-[25px] h-[10px]"
-            />
-          </Button>
         </div>
 
         <!-- Trin 2: Navn -->
@@ -232,18 +220,6 @@ import Heading from "../components/Heading.astro";
             @keydown.enter="navn && next()"
             class="w-full border-b border-gray-500 focus:border-black outline-none py-[15px] px-[20px] font-helv font-normal text-[13px] text-black bg-transparent placeholder:text-gray-500 transition-colors duration-150"
           />
-          <Button
-            variant="textlink"
-            @click="next()"
-            :disabled="!navn"
-            stylingclasses="mt-s flex items-center gap-[10px] disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            Næste <img
-              src="/svg/ArrowBlack.svg"
-              alt=""
-              class="w-[25px] h-[10px]"
-            />
-          </Button>
         </div>
 
         <!-- Trin 3: E-mail -->
@@ -276,18 +252,6 @@ import Heading from "../components/Heading.astro";
             @keydown.enter="email && next()"
             class="w-full border-b border-gray-500 focus:border-black outline-none py-[15px] px-[20px] font-helv font-normal text-[13px] text-black bg-transparent placeholder:text-gray-500 transition-colors duration-150"
           />
-          <Button
-            variant="textlink"
-            @click="next()"
-            :disabled="!email"
-            stylingclasses="mt-s flex items-center gap-[10px] disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            Næste <img
-              src="/svg/ArrowBlack.svg"
-              alt=""
-              class="w-[25px] h-[10px]"
-            />
-          </Button>
         </div>
 
         <!-- Trin 4: Telefon -->
@@ -321,26 +285,6 @@ import Heading from "../components/Heading.astro";
             @keydown.enter="next()"
             class="w-full border-b border-gray-500 focus:border-black outline-none py-[15px] px-[20px] font-helv font-normal text-[13px] text-black bg-transparent placeholder:text-gray-500 transition-colors duration-150"
           />
-          <div class="mt-s flex items-center gap-[10px]">
-            <Button
-              variant="textlink"
-              @click="next()"
-              stylingclasses="flex items-center gap-[10px]"
-            >
-              Næste <img
-                src="/svg/ArrowBlack.svg"
-                alt=""
-                class="w-[25px] h-[10px]"
-              />
-            </Button>
-            <Button
-              variant="plain"
-              @click="next()"
-              stylingclasses="!text-gray-500 hover:text-black transition-colors duration-150"
-            >
-              Spring over
-            </Button>
-          </div>
         </div>
 
         <!-- Trin 5: Opsummering + samtykke -->
@@ -402,18 +346,6 @@ import Heading from "../components/Heading.astro";
               >
             </label>
           </div>
-          <Button
-            variant="textlink"
-            @click="next()"
-            :disabled="!samtykke"
-            stylingclasses="flex items-center gap-[10px] disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            Gå til betaling <img
-              src="/svg/ArrowBlack.svg"
-              alt=""
-              class="w-[25px] h-[10px]"
-            />
-          </Button>
         </div>
 
         <!-- Trin 6: Betaling -->
@@ -497,26 +429,37 @@ import Heading from "../components/Heading.astro";
             x-text="loading ? 'Behandler...' : `Betal – ${planLabel()}`"
           />
         </div>
-      </div>
-    </div>
 
-    <!-- Tilbage -->
-    <div
-      class="px-5 pb-8 flex-shrink-0 h-12 flex items-center relative z-10"
-      x-show="!confirmed"
-    >
-      <Button
-        variant="plain"
-        x-show="step > 1"
-        @click="prev()"
-        stylingclasses="!text-black transition-colors duration-150 flex items-center gap-1 !text-xs"
-      >
-        <img
-          src="/svg/ArrowBlack.svg"
-          alt=""
-          class="w-[25px] h-[10px] rotate-180"
-        /> Tilbage
-      </Button>
+        <!-- Navigation -->
+        <div
+          class="mt-s flex justify-end items-center gap-m"
+          x-show="!confirmed && step < 6"
+        >
+          <button
+            x-show="step > 1"
+            @click="prev()"
+            class="font-helv font-normal text-[13px] text-gray-500 flex items-center gap-[10px] cursor-pointer hover:text-black transition-colors duration-150"
+          >
+            <img
+              src="/svg/ArrowBlack.svg"
+              alt=""
+              class="w-[25px] h-[10px] rotate-180 opacity-40"
+            />
+            Tilbage
+          </button>
+          <button
+            @click="next()"
+            :disabled="(step === 2 && !navn) || (step === 3 && !email) || (step === 5 && !samtykke)"
+            class="font-helv font-medium text-[13px] text-black flex items-center gap-[10px] cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            Forsæt <img
+              src="/svg/ArrowBlack.svg"
+              alt=""
+              class="w-[25px] h-[10px]"
+            />
+          </button>
+        </div>
+      </div>
     </div>
   </main>
 </MainLayout>
