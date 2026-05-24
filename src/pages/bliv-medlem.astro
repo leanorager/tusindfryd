@@ -3,6 +3,7 @@ import MainLayout from "../layouts/MainLayout.astro";
 import Text from "../components/Text.astro";
 import Link from "../components/Link.astro";
 import Button from "../components/Button.astro";
+import Heading from "../components/Heading.astro";
 ---
 
 <MainLayout title="Bliv Medlem – Tusindfryd" showFooter={false}>
@@ -53,20 +54,15 @@ import Button from "../components/Button.astro";
       x-transition:enter-end="opacity-100 translate-y-0"
       class="absolute inset-0 z-20 bg-white flex items-center justify-center px-5"
     >
-      <div class="w-full max-w-[560px] flex flex-col gap-6">
-        <Text teksttype="statement_large" stylingclasses="leading-tight">
-          Velkommen,<br /><span x-text="navn.split(' ')[0]"></span>.
-        </Text>
-        <Text
-          teksttype="p_large"
-          color="text-gray-500"
-          stylingclasses="max-w-xs"
-        >
+      <div class="w-full max-w-[408px] flex flex-col gap-s">
+        <Heading type="h1_small">
+          Velkommen, <span x-text="navn.split(' ')[0]"></span>.
+        </Heading>
+        <Text teksttype="p_medium">
           Dit medlemsskab er aktiveret. Du modtager en bekræftelse på <span
-            x-text="email"
-            class="text-black"></span>.
+            x-text="email"></span>.
         </Text>
-        <Link href="/" stylingclasses="flex items-center gap-2 mt-2">
+        <Link href="/" stylingclasses="flex items-center gap-[10px] mt-s">
           Gå til shoppen <img
             src="/svg/ArrowBlack.svg"
             alt=""
@@ -93,7 +89,7 @@ import Button from "../components/Button.astro";
       class="flex-1 flex items-center justify-center px-5 overflow-hidden relative z-10"
       x-show="!confirmed"
     >
-      <div class="w-full max-w-[560px]">
+      <div class="w-full max-w-[408px]">
         <!-- Trin 1: Fordele + planvalg -->
         <div
           x-show="step === 1"
@@ -107,95 +103,88 @@ import Button from "../components/Button.astro";
           <Text
             teksttype="p_xsmall"
             color="text-gray-500"
-            stylingclasses="uppercase tracking-widest mb-4"
+            stylingclasses="uppercase tracking-widest mb-2xs"
           >
             1 / 6
           </Text>
-          <Text teksttype="statement_large" stylingclasses="mb-6 leading-tight">
+          <Heading htmlheading="h1" type="h1_small" stylingclasses="mb-m">
             Vælg dit medlemsskab
-          </Text>
+          </Heading>
 
           <!-- Fordele — <li> med flex-layout, <p> inde i <li> ville bryde gap-layoutet -->
-          <ul class="flex flex-col gap-2 mb-8">
-            <li
-              class="flex items-start gap-3 font-helv font-light text-sm text-black"
-            >
-              <span class="text-gray-500">—</span><span
-                >10% rabat på alle ordrer</span
+          <ul class="flex flex-col gap-2xs mb-l">
+            <li>
+              <Text stylingclasses="flex items-start gap-xs">
+                <span>—</span><span>10% rabat på alle ordrer</span>
+              </Text>
+            </li>
+            <li>
+              <Text stylingclasses="flex items-start gap-xs">
+                <span>—</span><span>Gratis standardlevering</span></Text
               >
             </li>
-            <li
-              class="flex items-start gap-3 font-helv font-light text-sm text-black"
-            >
-              <span class="text-gray-500">—</span><span
-                >Gratis standardlevering</span
+            <li>
+              <Text stylingclasses="flex items-start gap-xs">
+                <span>—</span><span>Tidlig adgang til nye drops</span></Text
               >
             </li>
-            <li
-              class="flex items-start gap-3 font-helv font-light text-sm text-black"
-            >
-              <span class="text-gray-500">—</span><span
-                >Tidlig adgang til nye drops</span
+            <li>
+              <Text stylingclasses="flex items-start gap-xs">
+                <span>—</span><span
+                  >Eksklusive tilbud og events i showroomet</span
+                ></Text
               >
             </li>
-            <li
-              class="flex items-start gap-3 font-helv font-light text-sm text-black"
-            >
-              <span class="text-gray-500">—</span><span
-                >Eksklusive tilbud og events i showroomet</span
-              >
-            </li>
-            <li
-              class="flex items-start gap-3 font-helv font-light text-sm text-black"
-            >
-              <span class="text-gray-500">—</span><span
-                >Prioriteret adgang til begrænsede fund</span
+            <li>
+              <Text stylingclasses="flex items-start gap-xs">
+                <span>—</span><span>Prioriteret adgang til begrænsede fund</span
+                ></Text
               >
             </li>
           </ul>
 
           <!-- Planvalg — <span> inde i <button>, kan ikke bruge Text -->
-          <div class="grid grid-cols-2 gap-3 mb-8">
+          <div class="grid grid-cols-2 gap-xs mb-s">
             <button
               @click="plan = 'monthly'"
-              class="flex flex-col gap-1 p-4 border text-left transition-all duration-150"
+              class="flex flex-col p-s border text-left transition-all duration-150"
               :class="plan === 'monthly' ? 'border-black bg-black text-white' : 'border-gray-500 hover:border-gray-700'"
             >
               <span
-                class="font-helv font-light text-xs uppercase tracking-widest"
-                :class="plan === 'monthly' ? 'text-gray-300' : 'text-gray-500'"
+                class="font-helv font-normal text-[13px] uppercase tracking-widest"
+                :class="plan === 'monthly' ? 'text-white' : 'text-black'"
                 >Månedlig</span
               >
               <span
-                class="font-mont font-medium text-xl"
+                class="font-helv font-medium text-[25px] mb-xs"
                 :class="plan === 'monthly' ? 'text-white' : 'text-black'"
-                >29 DKK</span
+                >39 DKK</span
               >
               <span
-                class="font-helv font-light text-xs"
-                :class="plan === 'monthly' ? 'text-gray-300' : 'text-gray-500'"
+                class="font-helv font-normal text-[12px]"
+                :class="plan === 'monthly' ? 'text-white' : 'text-black'"
                 >pr. måned</span
               >
             </button>
             <button
               @click="plan = 'yearly'"
-              class="flex flex-col gap-1 p-4 border text-left transition-all duration-150 relative"
+              class="flex flex-col p-s border text-left transition-all duration-150 relative"
               :class="plan === 'yearly' ? 'border-black bg-black text-white' : 'border-gray-500 hover:border-gray-700'"
             >
               <span
-                class="font-helv font-light text-xs uppercase tracking-widest"
-                :class="plan === 'yearly' ? 'text-gray-300' : 'text-gray-500'"
+                class="font-helv font-normal text-[13px] uppercase tracking-widest"
+                :class="plan === 'yearly' ? 'text-white' : 'text-black'"
                 >Årlig</span
               >
               <span
-                class="font-mont font-medium text-xl"
+                class="font-helv font-medium text-[25px] mb-xs"
                 :class="plan === 'yearly' ? 'text-white' : 'text-black'"
                 >279 DKK</span
               >
               <span
-                class="font-helv font-light text-xs"
-                :class="plan === 'yearly' ? 'text-gray-300' : 'text-gray-500'"
-                >pr. år — spar 69 DKK</span
+                class="font-helv font-normal text-[12px]"
+                :class="plan === 'yearly' ? 'text-white' : 'text-black'"
+                >pr. år — spar 189 DKK</span
               >
             </button>
           </div>
@@ -203,7 +192,7 @@ import Button from "../components/Button.astro";
           <Button
             variant="textlink"
             @click="next()"
-            stylingclasses="flex items-center gap-2"
+            stylingclasses="flex items-center gap-[10px]"
           >
             Fortsæt <img
               src="/svg/ArrowBlack.svg"
@@ -226,12 +215,12 @@ import Button from "../components/Button.astro";
           <Text
             teksttype="p_xsmall"
             color="text-gray-500"
-            stylingclasses="uppercase tracking-widest mb-4">2 / 6</Text
+            stylingclasses="uppercase tracking-widest mb-2xs">2 / 6</Text
           >
           <!-- <label> kan ikke indeholde <p> (Text renderer) — bruges raw -->
           <label
             for="navn"
-            class="font-mont font-medium text-3xl md:text-4xl text-black block mb-8 leading-tight"
+            class="font-helv font-medium text-[25px] text-black block mb-m leading-tight"
           >
             Hvad hedder du?
           </label>
@@ -241,13 +230,13 @@ import Button from "../components/Button.astro";
             x-model="navn"
             placeholder="Fulde navn"
             @keydown.enter="navn && next()"
-            class="w-full border-b border-gray-500 focus:border-black outline-none py-3 font-helv font-light text-lg text-black bg-transparent placeholder:text-gray-500 transition-colors duration-150"
+            class="w-full border-b border-gray-500 focus:border-black outline-none py-[15px] px-[20px] font-helv font-normal text-[13px] text-black bg-transparent placeholder:text-gray-500 transition-colors duration-150"
           />
           <Button
             variant="textlink"
             @click="next()"
             :disabled="!navn"
-            stylingclasses="mt-8 flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed"
+            stylingclasses="mt-s flex items-center gap-[10px] disabled:opacity-30 disabled:cursor-not-allowed"
           >
             Næste <img
               src="/svg/ArrowBlack.svg"
@@ -270,12 +259,12 @@ import Button from "../components/Button.astro";
           <Text
             teksttype="p_xsmall"
             color="text-gray-500"
-            stylingclasses="uppercase tracking-widest mb-4">3 / 6</Text
+            stylingclasses="uppercase tracking-widest mb-2xs">3 / 6</Text
           >
           <!-- <label> kan ikke indeholde <p> (Text renderer) — bruges raw -->
           <label
             for="email"
-            class="font-mont font-medium text-3xl md:text-4xl text-black block mb-8 leading-tight"
+            class="font-helv font-medium text-[25px] text-black block mb-m leading-tight"
           >
             Hvad er din e-mailadresse?
           </label>
@@ -285,13 +274,13 @@ import Button from "../components/Button.astro";
             x-model="email"
             placeholder="sara@email.dk"
             @keydown.enter="email && next()"
-            class="w-full border-b border-gray-500 focus:border-black outline-none py-3 font-helv font-light text-lg text-black bg-transparent placeholder:text-gray-500 transition-colors duration-150"
+            class="w-full border-b border-gray-500 focus:border-black outline-none py-[15px] px-[20px] font-helv font-normal text-[13px] text-black bg-transparent placeholder:text-gray-500 transition-colors duration-150"
           />
           <Button
             variant="textlink"
             @click="next()"
             :disabled="!email"
-            stylingclasses="mt-8 flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed"
+            stylingclasses="mt-s flex items-center gap-[10px] disabled:opacity-30 disabled:cursor-not-allowed"
           >
             Næste <img
               src="/svg/ArrowBlack.svg"
@@ -314,31 +303,29 @@ import Button from "../components/Button.astro";
           <Text
             teksttype="p_xsmall"
             color="text-gray-500"
-            stylingclasses="uppercase tracking-widest mb-4">4 / 6</Text
+            stylingclasses="uppercase tracking-widest mb-2xs">4 / 6</Text
           >
           <!-- <label> kan ikke indeholde <p> (Text renderer) — bruges raw -->
           <label
             for="telefon"
-            class="font-mont font-medium text-3xl md:text-4xl text-black block mb-2 leading-tight"
+            class="font-helv font-medium text-[25px] text-black block mb-m leading-tight"
           >
             Hvad er dit telefonnummer?
           </label>
-          <Text teksttype="p_xsmall" color="text-gray-500" stylingclasses="mb-8"
-            >Valgfrit</Text
-          >
+
           <input
             type="tel"
             id="telefon"
             x-model="telefon"
             placeholder="+45 12 34 56 78"
             @keydown.enter="next()"
-            class="w-full border-b border-gray-500 focus:border-black outline-none py-3 font-helv font-light text-lg text-black bg-transparent placeholder:text-gray-500 transition-colors duration-150"
+            class="w-full border-b border-gray-500 focus:border-black outline-none py-[15px] px-[20px] font-helv font-normal text-[13px] text-black bg-transparent placeholder:text-gray-500 transition-colors duration-150"
           />
-          <div class="mt-8 flex items-center gap-6">
+          <div class="mt-s flex items-center gap-[10px]">
             <Button
               variant="textlink"
               @click="next()"
-              stylingclasses="flex items-center gap-2"
+              stylingclasses="flex items-center gap-[10px]"
             >
               Næste <img
                 src="/svg/ArrowBlack.svg"
@@ -369,24 +356,28 @@ import Button from "../components/Button.astro";
           <Text
             teksttype="p_xsmall"
             color="text-gray-500"
-            stylingclasses="uppercase tracking-widest mb-4">5 / 6</Text
+            stylingclasses="uppercase tracking-widest mb-2xs">5 / 6</Text
           >
-          <Text teksttype="statement_large" stylingclasses="mb-8 leading-tight">
+          <Heading
+            htmlheading="h1"
+            type="h1_small"
+            stylingclasses="mb-m leading-tight"
+          >
             Næsten der, <span x-text="navn.split(' ')[0]"></span>.
-          </Text>
+          </Heading>
           <div
-            class="flex flex-col gap-3 border-t border-b border-gray-400 py-5 mb-6"
+            class="flex flex-col gap-xs border-t border-b border-gray-400 py-m mb-m"
           >
-            <Text teksttype="p_large" stylingclasses="flex justify-between">
+            <Text stylingclasses="flex justify-between">
               <span>Tusindfryd Medlemsskab</span>
               <span x-text="planLabel()"></span>
             </Text>
-            <Text teksttype="p_xsmall" color="text-gray-500">
-              Fornyes automatisk — opsiges til enhver tid
+            <Text color="text-gray-500">
+              Fornyes automatisk — kan opsiges til enhver tid
             </Text>
           </div>
           <!-- <label> med links inde — <p> er ugyldig i <label> og linkene har unik hover-farve -->
-          <div class="flex items-start gap-3 mb-6">
+          <div class="flex items-start gap-s mb-s">
             <input
               type="checkbox"
               id="samtykke"
@@ -395,7 +386,7 @@ import Button from "../components/Button.astro";
             />
             <label
               for="samtykke"
-              class="font-helv font-light text-xs text-gray-500 leading-relaxed"
+              class="font-helv font-normal text-[12px] text-gray-500 leading-relaxed"
             >
               Jeg accepterer Tusindfryd's
               <a
@@ -415,7 +406,7 @@ import Button from "../components/Button.astro";
             variant="textlink"
             @click="next()"
             :disabled="!samtykke"
-            stylingclasses="flex items-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed"
+            stylingclasses="flex items-center gap-[10px] disabled:opacity-30 disabled:cursor-not-allowed"
           >
             Gå til betaling <img
               src="/svg/ArrowBlack.svg"
@@ -438,17 +429,21 @@ import Button from "../components/Button.astro";
           <Text
             teksttype="p_xsmall"
             color="text-gray-500"
-            stylingclasses="uppercase tracking-widest mb-4">6 / 6</Text
+            stylingclasses="uppercase tracking-widest mb-2xs">6 / 6</Text
           >
-          <Text teksttype="statement_large" stylingclasses="mb-8 leading-tight">
+          <Heading
+            htmlheading="h1"
+            type="h1_small"
+            stylingclasses="mb-l leading-tight"
+          >
             Kortoplysninger
-          </Text>
-          <div class="flex flex-col gap-6 mb-8">
+          </Heading>
+          <div class="flex flex-col gap-m mb-m">
             <div>
               <!-- <label> kan ikke indeholde <p> (Text renderer) — bruges raw -->
               <label
                 for="kortnummer"
-                class="font-helv font-normal text-[12px] text-gray-500 uppercase tracking-widest block mb-2"
+                class="font-helv font-normal text-[14px] text-gray-500 block mb-xs"
                 >Kortnummer</label
               >
               <input
@@ -457,14 +452,14 @@ import Button from "../components/Button.astro";
                 x-model="kortnummer"
                 placeholder="1234 5678 9012 3456"
                 maxlength="19"
-                class="w-full border-b border-gray-500 focus:border-black outline-none py-3 font-helv font-light text-lg text-black bg-transparent placeholder:text-gray-500 transition-colors duration-150"
+                class="w-full border-b border-gray-500 focus:border-black outline-none py-[15px] px-[20px] font-helv font-normal text-[13px] text-black bg-transparent placeholder:text-gray-500 transition-colors duration-150"
               />
             </div>
             <div class="grid grid-cols-2 gap-6">
               <div>
                 <label
                   for="udloeb"
-                  class="font-helv font-normal text-[12px] text-gray-500 uppercase tracking-widest block mb-2"
+                  class="font-helv font-normal text-[14px] text-gray-500 block mb-xs"
                   >Udløbsdato</label
                 >
                 <input
@@ -473,13 +468,13 @@ import Button from "../components/Button.astro";
                   x-model="udloeb"
                   placeholder="MM/ÅÅ"
                   maxlength="5"
-                  class="w-full border-b border-gray-500 focus:border-black outline-none py-3 font-helv font-light text-lg text-black bg-transparent placeholder:text-gray-500 transition-colors duration-150"
+                  class="w-full border-b border-gray-500 focus:border-black outline-none py-[15px] px-[20px] font-helv font-normal text-[13px] text-black bg-transparent placeholder:text-gray-500 transition-colors duration-150"
                 />
               </div>
               <div>
                 <label
                   for="cvv"
-                  class="font-helv font-normal text-[12px] text-gray-500 uppercase tracking-widest block mb-2"
+                  class="font-helv font-normal text-[14px] text-gray-500 block mb-xs"
                   >CVV</label
                 >
                 <input
@@ -488,7 +483,7 @@ import Button from "../components/Button.astro";
                   x-model="cvv"
                   placeholder="123"
                   maxlength="3"
-                  class="w-full border-b border-gray-500 focus:border-black outline-none py-3 font-helv font-light text-lg text-black bg-transparent placeholder:text-gray-500 transition-colors duration-150"
+                  class="w-full border-b border-gray-500 focus:border-black outline-none py-[15px] px-[20px] font-helv font-normal text-[13px] text-black bg-transparent placeholder:text-gray-500 transition-colors duration-150"
                 />
               </div>
             </div>
