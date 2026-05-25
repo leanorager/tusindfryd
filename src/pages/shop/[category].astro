@@ -935,7 +935,7 @@ const initialCategories =
 
             if (firstBatch.length > 0) {
               grid.innerHTML = firstBatch
-                .map((p) => this.renderCard(p))
+                .map((p, i) => this.renderCard(p, i))
                 .join("");
             } else {
               grid.innerHTML = `<div class="col-span-full flex items-center justify-center py-24"><p class="font-helv font-normal text-[14px] text-neutral-400">Ingen produkter matcher dine filtre.</p></div>`;
@@ -976,8 +976,8 @@ const initialCategories =
                 this.offset,
                 this.offset + PAGE_SIZE,
               );
-              nextBatch.forEach((p) => {
-                grid.insertAdjacentHTML("beforeend", this.renderCard(p));
+              nextBatch.forEach((p, i) => {
+                grid.insertAdjacentHTML("beforeend", this.renderCard(p, i));
               });
               this.offset += nextBatch.length;
             } else {
@@ -995,8 +995,8 @@ const initialCategories =
                 },
               });
               const newProducts = await res.json();
-              newProducts.forEach((p) => {
-                grid.insertAdjacentHTML("beforeend", this.renderCard(p));
+              newProducts.forEach((p, i) => {
+                grid.insertAdjacentHTML("beforeend", this.renderCard(p, i));
               });
               this.offset += newProducts.length;
             }
@@ -1025,7 +1025,7 @@ const initialCategories =
           this.loading = false;
         },
 
-        renderCard(product) {
+        renderCard(product, i = 0) {
           const imageSrc =
             product.image1 ?? "https://placehold.co/600x750/f5f5f5/999999";
           const image2Src = product.image2 ?? null;
@@ -1035,8 +1035,9 @@ const initialCategories =
           const hoverImg = image2Src
             ? `<img src="${image2Src}" alt="" aria-hidden="true" class="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300" />`
             : "";
+          const delay = Math.min(i % 4, 3) * 75;
 
-          return `<a href="/product/${product.id}" class="block group">
+          return `<div class="opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-500" style="transition-delay: ${delay}ms"><a href="/product/${product.id}" class="block group">
   <div class="relative overflow-hidden">
     <img src="${imageSrc}" alt="${product.title}" class="w-full aspect-[52/75] object-cover" />
     ${hoverImg}
@@ -1049,7 +1050,7 @@ const initialCategories =
     </div>
     <p class="font-helv font-normal text-[14px]">${product.subtitle}</p>
   </div>
-</a>`;
+</a></div>`;
         },
       };
     });

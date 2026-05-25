@@ -2,7 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/tailwind.css";
-const { title, showFooter = true } = Astro.props;
+const { title, showFooter = true, noLenis = false } = Astro.props;
 ---
 
 <html lang="da" class="scroll-smooth">
@@ -25,3 +25,19 @@ const { title, showFooter = true } = Astro.props;
     {showFooter && <Footer />}
   </body>
 </html>
+
+<script define:vars={{ noLenis }} is:inline>
+  window.__noLenis = noLenis;
+</script>
+
+<script>
+  import Lenis from "lenis";
+  if (!(window as any).__noLenis) {
+    const lenis = new Lenis({ duration: 0.8, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  }
+</script>
