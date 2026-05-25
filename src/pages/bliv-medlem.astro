@@ -25,16 +25,9 @@ import Heading from "../components/Heading.astro";
       planLabel() { return this.plan === 'yearly' ? '279 DKK / år' : '29 DKK / md' },
       next() { if (this.step < this.total) this.step++ },
       prev() { if (this.step > 1) this.step-- },
-      async submit() {
-        if (!this.kortnummer || !this.udloeb || !this.cvv || this.loading) return;
-        this.loading = true;
-        const res = await fetch('/api/bliv-medlem', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ navn: this.navn, email: this.email, plan: this.plan })
-        });
-        this.loading = false;
-        if (res.ok) this.confirmed = true;
+      submit() {
+        if (!this.kortnummer || !this.udloeb || !this.cvv) return;
+        this.confirmed = true;
       }
     }"
   >
