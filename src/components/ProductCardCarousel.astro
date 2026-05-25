@@ -87,7 +87,7 @@ try {
       class="Carousel relative z-10 bg-white pt-l md:py-3xl px-container-mobile md:px-container"
       data-carousel
     >
-      <div class="flex justify-between items-baseline mb-s">
+      <div class="flex justify-between items-baseline mb-s opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700">
         <Heading htmlheading="h2" type="h2_small">
           {title}
         </Heading>
@@ -103,10 +103,11 @@ try {
         {products.map((product, i) => (
           <div
             class:list={[
-              "flex-shrink-0 w-[calc(46.5vw-7px)] lg:w-[calc(24vw-9px)] snap-start",
+              "flex-shrink-0 w-[calc(46.5vw-7px)] lg:w-[calc(24vw-9px)] snap-start opacity-0 translate-y-3 intersect:opacity-100 intersect:translate-y-0 transition-all duration-500",
               i === 0 && "ml-[10px] md:ml-[20px]",
               i === products.length - 1 && "mr-[10px] md:mr-[20px]",
             ]}
+            style={`transition-delay: ${Math.min(i, 5) * 60}ms`}
           >
             <ListProductCard
               id={product.id}

@@ -98,7 +98,7 @@ import SplashScreen from "../../components/SplashScreen.astro";
     return new Intl.NumberFormat("da-DK").format(n) + " DKK";
   }
 
-  function renderCard(product: Product) {
+  function renderCard(product: Product, i: number = 0) {
     const imageSrc =
       product.image1 ?? "https://placehold.co/600x750/f5f5f5/999999";
     const hoverImg = product.image2
@@ -107,8 +107,9 @@ import SplashScreen from "../../components/SplashScreen.astro";
     const memberBadge = product.member_price
       ? `<div class="absolute bottom-0 right-0 bg-gray-100 px-2 py-1.5"><p class="font-ibm font-normal text-[12px]">MEDLEMSPRIS ${formatPrice(product.member_price)}</p></div>`
       : "";
+    const delay = Math.min(i % 4, 3) * 75;
 
-    return `<a href="/product/${product.id}" class="block group">
+    return `<div class="opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-500" style="transition-delay: ${delay}ms"><a href="/product/${product.id}" class="block group">
   <div class="relative overflow-hidden">
     <img src="${imageSrc}" alt="${product.title}" class="w-full aspect-[52/75] object-cover" />
     ${hoverImg}
@@ -121,7 +122,7 @@ import SplashScreen from "../../components/SplashScreen.astro";
     </div>
     <p class="font-helv font-normal text-[14px]">${product.subtitle}</p>
   </div>
-</a>`;
+</a></div>`;
   }
 
   let allMatches: Product[] = [];
@@ -190,15 +191,15 @@ import SplashScreen from "../../components/SplashScreen.astro";
     const firstBatch = allMatches.slice(0, PAGE_SIZE);
     offset = firstBatch.length;
 
-    if (grid) grid.innerHTML = firstBatch.map(renderCard).join("");
+    if (grid) grid.innerHTML = firstBatch.map((p, i) => renderCard(p, i)).join("");
 
     updatePagination(offset, total);
 
     if (loadMoreBtn) {
       loadMoreBtn.addEventListener("click", () => {
         const nextBatch = allMatches.slice(offset, offset + PAGE_SIZE);
-        nextBatch.forEach((p) => {
-          grid?.insertAdjacentHTML("beforeend", renderCard(p));
+        nextBatch.forEach((p, i) => {
+          grid?.insertAdjacentHTML("beforeend", renderCard(p, i));
         });
         offset += nextBatch.length;
         updatePagination(offset, total);

@@ -3,10 +3,20 @@ import MainLayout from "../layouts/MainLayout.astro";
 import Text from "../components/Text.astro";
 import ArrowLink from "../components/ArrowLink.astro";
 import Heading from "../components/Heading.astro";
-
-const fadeIn =
-  "opacity-0 translate-y-6 intersect:opacity-100 intersect:translate-y-0 transition-all duration-700 intersect-once";
 ---
+
+<style is:global>
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .anim { opacity: 0; animation: fade-up 0.7s ease-out forwards; }
+  .anim-1 { animation-delay: 0ms; }
+  .anim-2 { animation-delay: 120ms; }
+  .anim-3 { animation-delay: 240ms; }
+  .anim-4 { animation-delay: 360ms; }
+  .anim-5 { animation-delay: 480ms; }
+</style>
 
 <MainLayout title="Showroom – Tusindfryd">
   <main>
@@ -14,14 +24,14 @@ const fadeIn =
       class="ShowroomEditorial md:!pt-12 !pb-16 md:!pb-24 bg-white md:relative px-container-mobile md:px-container py-3xl md:py-section"
     >
       <div class="mb-s md:mb-m">
-        <Heading type="h1_small" stylingclasses={`max-w-[290px] ${fadeIn}`}>
+        <Heading type="h1_small" stylingclasses="max-w-[290px] anim anim-1">
           Kom forbi og oplev møblerne i virkeligheden.
         </Heading>
       </div>
 
       <!-- Mobil: åbningstider + adresse -->
       <div
-        class="flex flex-col gap-xl mb-l md:hidden bg-gray-50 -mx-container-mobile px-container-mobile py-l"
+        class="flex flex-col gap-xl mb-l md:hidden bg-gray-50 -mx-container-mobile px-container-mobile py-l anim anim-2"
       >
         <div class="flex flex-col gap-2xs">
           <Text
@@ -55,12 +65,14 @@ const fadeIn =
       <div
         class="grid grid-cols-2 md:grid-cols-3 gap-container-mobile md:gap-container items-start md:pr-[26%]"
       >
-        <div class={`flex flex-col gap-2.5 ${fadeIn}`}>
-          <img
-            src="img/showroom_1.png"
-            alt="Showroom"
-            class="w-full h-44 md:h-[calc(100vh-480px)] object-cover"
-          />
+        <div class="flex flex-col gap-2.5 anim anim-2">
+          <div class="overflow-hidden">
+            <img
+              src="/img/showroom_1.png"
+              alt="Showroom"
+              class="w-full h-44 md:h-[calc(100vh-480px)] object-cover transition-transform duration-700 ease-out hover:scale-105"
+            />
+          </div>
           <div class="flex flex-col gap-2xs">
             <Heading type="h3">Mærk det selv</Heading>
             <Text teksttype="p_medium" color="text-gray-500"
@@ -70,12 +82,14 @@ const fadeIn =
           </div>
         </div>
 
-        <div class={`flex flex-col gap-xs md-gap-s delay-100 ${fadeIn}`}>
-          <img
-            src="img/showroom_2.png"
-            alt="Værksted"
-            class="w-full h-60 md:h-[calc(100vh-390px)] object-cover"
-          />
+        <div class="flex flex-col gap-xs md-gap-s anim anim-3">
+          <div class="overflow-hidden">
+            <img
+              src="/img/showroom_2.png"
+              alt="Værksted"
+              class="w-full h-60 md:h-[calc(100vh-390px)] object-cover transition-transform duration-700 ease-out hover:scale-105"
+            />
+          </div>
           <div class="flex flex-col gap-2xs">
             <Heading type="h3">Lad dig inspirere af et levende univers</Heading>
             <Text teksttype="p_medium" color="text-gray-500"
@@ -84,12 +98,14 @@ const fadeIn =
           </div>
         </div>
 
-        <div class={`flex flex-col gap-2.5 delay-200 ${fadeIn}`}>
-          <img
-            src="img/showroom_3.png"
-            alt="Udvalget"
-            class="w-full h-52 md:h-[calc(100vh-450px)] object-cover"
-          />
+        <div class="flex flex-col gap-2.5 anim anim-4">
+          <div class="overflow-hidden">
+            <img
+              src="/img/showroom_3.png"
+              alt="Udvalget"
+              class="w-full h-52 md:h-[calc(100vh-450px)] object-cover transition-transform duration-700 ease-out hover:scale-105"
+            />
+          </div>
           <div class="flex flex-col gap-2xs">
             <Heading type="h3">Nye fund, hele tiden</Heading>
             <Text teksttype="p_medium" color="text-gray-500"
@@ -101,7 +117,7 @@ const fadeIn =
 
         <!-- Desktop sidebar -->
         <div
-          class="hidden md:flex absolute top-0 right-0 bottom-0 w-1/4 flex-col gap-xl bg-gray-50 px-container pt-section"
+          class="hidden md:flex absolute top-0 right-0 bottom-0 w-1/4 flex-col gap-xl bg-gray-50 px-container pt-section anim anim-5"
         >
           <div class="flex flex-col gap-2xs">
             <Text
