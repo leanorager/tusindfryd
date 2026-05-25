@@ -1,0 +1,43 @@
+<style is:global>
+  @keyframes logo-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.88);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes splash-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  #splash {
+    animation: splash-out 0.5s ease-in-out 1s forwards;
+  }
+  #splash-icon {
+    animation: logo-in 0.8s ease-out forwards;
+  }
+</style>
+
+<div
+  id="splash"
+  class="fixed inset-0 z-[9999] bg-white pointer-events-none flex items-center justify-center"
+>
+  <img
+    id="splash-icon"
+    src="/img/logo_combi.png"
+    alt="Tusindfryd"
+    class="h-24 w-auto"
+  />
+</div>
+
+<script>
+  const splash = document.getElementById("splash");
+  if (splash) setTimeout(() => splash.remove(), 2700);
+</script>

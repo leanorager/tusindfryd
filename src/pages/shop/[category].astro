@@ -3,6 +3,7 @@ import MainLayout from "../../layouts/MainLayout.astro";
 import Heading from "../../components/Heading.astro";
 import Text from "../../components/Text.astro";
 import ListProductCard from "../../components/ListProductCard.astro";
+import SplashScreen from "../../components/SplashScreen.astro";
 import { CATEGORIES } from "../../lib/categories";
 import type { CategoryConfig } from "../../lib/categories";
 
@@ -71,6 +72,7 @@ const initialCategories =
     : [];
 ---
 
+<SplashScreen />
 <MainLayout title={`${categoryConfig.title} – Tusindfryd`}>
   <div x-data="filterPanel">
     <!-- Backdrop -->
