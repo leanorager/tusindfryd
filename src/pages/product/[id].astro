@@ -611,6 +611,8 @@ const images = [
 
       window.addEventListener("wheel", (e) => {
         if (window.innerWidth < 1280) return;
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+
         const pos = positions();
         const y = window.scrollY;
         const first = pos[0];
