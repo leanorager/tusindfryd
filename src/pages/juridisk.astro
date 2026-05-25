@@ -2,6 +2,8 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import Heading from "../components/Heading.astro";
 import Text from "../components/Text.astro";
+
+const fadeUp = "opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-600";
 ---
 
 <MainLayout title="Juridisk – Tusindfryd">
@@ -10,10 +12,10 @@ import Text from "../components/Text.astro";
       class="flex flex-col gap-l px-container pt-3xl md:pt-section pb-section"
     >
       <section class="JuridiskHero">
-        <Heading htmlheading="h1" type="h2_large">Juridisk</Heading>
+        <Heading htmlheading="h1" type="h2_large" stylingclasses={fadeUp}>Juridisk</Heading>
       </section>
 
-      <section class="scroll-mt-[108px]" id="ombytning">
+      <section class={`scroll-mt-[108px] ${fadeUp}`} id="ombytning">
         <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-s">
           Ombytnings- & returret
         </Heading>
@@ -32,7 +34,7 @@ import Text from "../components/Text.astro";
         </div>
       </section>
 
-      <section class="scroll-mt-[108px]" id="returpolitik">
+      <section class={`scroll-mt-[108px] ${fadeUp}`} id="returpolitik">
         <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-s">
           Returpolitik
         </Heading>
@@ -55,7 +57,7 @@ import Text from "../components/Text.astro";
         </div>
       </section>
 
-      <section class="scroll-mt-[108px]" id="privatlivspolitik">
+      <section class={`scroll-mt-[108px] ${fadeUp}`} id="privatlivspolitik">
         <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-s">
           Privatlivspolitik
         </Heading>
@@ -79,7 +81,7 @@ import Text from "../components/Text.astro";
         </div>
       </section>
 
-      <section class="scroll-mt-[108px]" id="handelsbetingelser">
+      <section class={`scroll-mt-[108px] ${fadeUp}`} id="handelsbetingelser">
         <Heading htmlheading="h2" type="h2_small" stylingclasses="mb-s">
           Handelsbetingelser
         </Heading>

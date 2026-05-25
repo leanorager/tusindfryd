@@ -541,16 +541,21 @@ const initialCategories =
             id="product-grid"
             class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-2xs gap-y-xl lg:gap-y-3xl"
           >
-            {products.map((product) => (
-              <ListProductCard
-                id={product.id}
-                title={product.title}
-                subtitle={product.subtitle}
-                regular_price={product.regular_price}
-                member_price={product.member_price}
-                image1={product.image1}
-                image2={product.image2}
-              />
+            {products.map((product, i) => (
+              <div
+                class="opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-500"
+                style={`transition-delay: ${Math.min(i % 4, 3) * 75}ms`}
+              >
+                <ListProductCard
+                  id={product.id}
+                  title={product.title}
+                  subtitle={product.subtitle}
+                  regular_price={product.regular_price}
+                  member_price={product.member_price}
+                  image1={product.image1}
+                  image2={product.image2}
+                />
+              </div>
             ))}
           </div>
         ) : (
