@@ -183,7 +183,7 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
     </section>
 
     <section
-      class="Princip bg-white relative z-10 px-container-mobile md:px-container pb-3xl md:pb-section"
+      class="Princip bg-white relative z-10 px-container-mobile md:px-container pb-xl md:pb-4xl"
     >
       <div class="grid grid-cols-12 gap-2xs">
         <!-- Mobile only: both images side by side -->
@@ -244,6 +244,15 @@ import ShowroomBlock from "../components/ShowroomBlock.astro";
     </section>
 
     <section class="bg-white relative z-10">
+      <video
+        src="/vid/værksted.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        class="relative left-1/2 w-screen -translate-x-1/2 block h-[250px] pb-2xs md:h-[700px] object-cover"
+      ></video>
+
       <ShowroomBlock
         image="/img/showroomblock_about.webp"
         imageAlt="Billede af Tusindfryds showroom"
