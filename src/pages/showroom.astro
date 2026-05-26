@@ -7,15 +7,34 @@ import Heading from "../components/Heading.astro";
 
 <style is:global>
   @keyframes fade-up {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  .anim { opacity: 0; animation: fade-up 0.7s ease-out forwards; }
-  .anim-1 { animation-delay: 0ms; }
-  .anim-2 { animation-delay: 120ms; }
-  .anim-3 { animation-delay: 240ms; }
-  .anim-4 { animation-delay: 360ms; }
-  .anim-5 { animation-delay: 480ms; }
+  .anim {
+    opacity: 0;
+    animation: fade-up 0.7s ease-out forwards;
+  }
+  .anim-1 {
+    animation-delay: 0ms;
+  }
+  .anim-2 {
+    animation-delay: 120ms;
+  }
+  .anim-3 {
+    animation-delay: 240ms;
+  }
+  .anim-4 {
+    animation-delay: 360ms;
+  }
+  .anim-5 {
+    animation-delay: 480ms;
+  }
 </style>
 
 <MainLayout title="Showroom – Tusindfryd">
@@ -68,7 +87,7 @@ import Heading from "../components/Heading.astro";
         <div class="flex flex-col gap-2.5 anim anim-2">
           <div class="overflow-hidden">
             <img
-              src="/img/showroom_1.png"
+              src="/img/showroom_1.webp"
               alt="Showroom"
               class="w-full h-44 md:h-[calc(100vh-480px)] object-cover transition-transform duration-700 ease-out hover:scale-105"
             />
@@ -85,7 +104,7 @@ import Heading from "../components/Heading.astro";
         <div class="flex flex-col gap-xs md-gap-s anim anim-3">
           <div class="overflow-hidden">
             <img
-              src="/img/showroom_2.png"
+              src="/img/showroom_2.webp"
               alt="Værksted"
               class="w-full h-60 md:h-[calc(100vh-390px)] object-cover transition-transform duration-700 ease-out hover:scale-105"
             />
@@ -101,7 +120,7 @@ import Heading from "../components/Heading.astro";
         <div class="flex flex-col gap-2.5 anim anim-4">
           <div class="overflow-hidden">
             <img
-              src="/img/showroom_3.png"
+              src="/img/showroom_3.webp"
               alt="Udvalget"
               class="w-full h-52 md:h-[calc(100vh-450px)] object-cover transition-transform duration-700 ease-out hover:scale-105"
             />
