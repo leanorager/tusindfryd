@@ -79,7 +79,7 @@ import Button from "./Button.astro";
         >Søg</Button
       >
       <Text teksttype="p_medium" stylingclasses="text-gray-700">
-        <strong>DA</strong><span class="font-light"> / EN</span>
+        <strong>DA</strong><span> / DKK</span>
       </Text>
       <Link stylingclasses="text-gray-700" href="/bliv-medlem">Bliv Medlem</Link
       >
@@ -105,9 +105,17 @@ import Button from "./Button.astro";
     style="display: none"
   >
     <!-- Announcement bar -->
-    <div class="bg-black py-[7px] flex items-center px-container flex-shrink-0">
+    <div
+      class="bg-black py-[7px] flex items-baseline px-container flex-row gap-2xs"
+    >
+      <Text teksttype="p_small" color="text-white"> 4.7 </Text>
+      <img
+        src="/svg/star.svg"
+        alt="stjerne"
+        class="h-[12px] w-auto self-center"
+      />
       <Text teksttype="p_small" color="text-white">
-        Gratis fragt og levering for alle medlemmer
+        på Trustpilot - Gratis levering til medlemmer
       </Text>
     </div>
 
@@ -144,16 +152,16 @@ import Button from "./Button.astro";
     </div>
 
     <!-- Menu content -->
-    <div class="flex-1 overflow-y-auto flex flex-col">
-      <div class="flex flex-col px-container pt-s flex-1">
+    <div class="flex-1 overflow-y-auto flex flex-col pt-s">
+      <div class="flex flex-col px-container flex-1">
         <a
           href="/shop/nyheder"
-          class="font-helv font-medium text-[18px] text-black uppercase tracking-wide py-1 hover:underline transition-all duration-150"
+          class="font-helv font-medium text-[18px] text-black uppercase tracking-wide pb-xs hover:underline transition-all duration-150"
           >Nyheder</a
         >
         <a
           href="/shop/alt"
-          class="font-helv font-medium text-[18px] text-black uppercase tracking-wide py-1 hover:underline transition-all duration-150 mb-5"
+          class="font-helv font-medium text-[18px] text-black uppercase tracking-wide pb-m hover:underline transition-all duration-150"
           >Shop alt</a
         >
         <div class="flex flex-col gap-xs mb-m">
@@ -165,10 +173,18 @@ import Button from "./Button.astro";
           <Link href="/shop/opbevaring" teksttype="p_large">Opbevaring</Link>
           <Link href="/shop/andet" teksttype="p_large">Andet</Link>
         </div>
-        <div class="flex flex-col gap-xs">
-          <Link href="/showroom" teksttype="p_large">Showroom</Link>
-          <Link href="/about" teksttype="p_large">Om os</Link>
-          <Link href="/bliv-medlem" teksttype="p_large">Bliv Medlem</Link>
+        <div class="flex flex-col gap-xs mb-s">
+          <Link href="/showroom" teksttype="p_large" stylingclasses="underline"
+            >Showroom</Link
+          >
+          <Link href="/about" teksttype="p_large" stylingclasses="underline"
+            >Om os</Link
+          >
+          <Link
+            href="/bliv-medlem"
+            teksttype="p_large"
+            stylingclasses="underline">Bliv Medlem</Link
+          >
         </div>
       </div>
 
