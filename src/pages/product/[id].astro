@@ -316,7 +316,9 @@ const images = [
       </div>
 
       <!-- Billeder: halv bredde på tablet, 6 col på desktop -->
-      <div class="md:col-span-1 lg:col-span-6 flex flex-col gap-2xs xl:gap-0 opacity-0 intersect:opacity-100 transition-opacity duration-1000">
+      <div
+        class="md:col-span-1 lg:col-span-6 flex flex-col gap-2xs xl:gap-0 opacity-0 intersect:opacity-100 transition-opacity duration-1000"
+      >
         {
           images.map((img, i) => (
             <img
@@ -507,7 +509,7 @@ const images = [
     @media (min-width: 1280px) {
       .desktop-product-img {
         aspect-ratio: auto;
-        height: calc(100vh - var(--header-h, 78px));
+        height: min(calc(100vh - var(--header-h, 78px)), 800px);
       }
     }
   </style>
@@ -581,8 +583,12 @@ const images = [
     (function () {
       if (window.innerWidth < 1280) return;
 
-      const imgs = [...document.querySelectorAll<HTMLElement>(".desktop-product-img")];
-      const related = document.querySelector<HTMLElement>("[data-related-snap]");
+      const imgs = [
+        ...document.querySelectorAll<HTMLElement>(".desktop-product-img"),
+      ];
+      const related = document.querySelector<HTMLElement>(
+        "[data-related-snap]",
+      );
       const targets = related ? [...imgs, related] : imgs;
       if (targets.length === 0) return;
 
@@ -592,12 +598,18 @@ const images = [
       let locked = false;
 
       function headerH() {
-        return parseFloat(document.documentElement.style.getPropertyValue("--header-h")) || 78;
+        return (
+          parseFloat(
+            document.documentElement.style.getPropertyValue("--header-h"),
+          ) || 78
+        );
       }
 
       function positions() {
         const h = headerH();
-        return targets.map((el) => el.getBoundingClientRect().top + window.scrollY - h);
+        return targets.map(
+          (el) => el.getBoundingClientRect().top + window.scrollY - h,
+        );
       }
 
       function currentIdx(pos: number[]) {
@@ -609,38 +621,50 @@ const images = [
         return idx;
       }
 
-      window.addEventListener("wheel", (e) => {
-        if (window.innerWidth < 1280) return;
-        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      window.addEventListener(
+        "wheel",
+        (e) => {
+          if (window.innerWidth < 1280) return;
+          if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
 
-        const pos = positions();
-        const y = window.scrollY;
-        const first = pos[0];
-        const last = pos[pos.length - 1];
+          const pos = positions();
+          const y = window.scrollY;
+          const first = pos[0];
+          const last = pos[pos.length - 1];
 
-        if (y < first - 50 || y > last + window.innerHeight * 0.5) {
+          if (y < first - 50 || y > last + window.innerHeight * 0.5) {
+            accum = 0;
+            return;
+          }
+
+          if (locked) {
+            e.preventDefault();
+            return;
+          }
+
+          accum += e.deltaY;
+          if (Math.abs(accum) < THRESHOLD) {
+            e.preventDefault();
+            return;
+          }
+
+          const dir = accum > 0 ? 1 : -1;
           accum = 0;
-          return;
-        }
 
-        if (locked) { e.preventDefault(); return; }
+          const idx = currentIdx(pos);
+          const next = Math.max(0, Math.min(pos.length - 1, idx + dir));
 
-        accum += e.deltaY;
-        if (Math.abs(accum) < THRESHOLD) { e.preventDefault(); return; }
+          if (next === idx) return;
 
-        const dir = accum > 0 ? 1 : -1;
-        accum = 0;
-
-        const idx = currentIdx(pos);
-        const next = Math.max(0, Math.min(pos.length - 1, idx + dir));
-
-        if (next === idx) return;
-
-        e.preventDefault();
-        locked = true;
-        window.scrollTo({ top: pos[next], behavior: "smooth" });
-        setTimeout(() => { locked = false; }, COOLDOWN);
-      }, { passive: false });
+          e.preventDefault();
+          locked = true;
+          window.scrollTo({ top: pos[next], behavior: "smooth" });
+          setTimeout(() => {
+            locked = false;
+          }, COOLDOWN);
+        },
+        { passive: false },
+      );
     })();
   </script>
 </MainLayout>
