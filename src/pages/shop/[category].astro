@@ -1039,7 +1039,7 @@ const initialCategories =
 
           return `<div class="opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-500" style="transition-delay: ${delay}ms"><a href="/product/${product.id}" class="block group">
   <div class="relative overflow-hidden">
-    <img src="${imageSrc}" alt="${product.title}" class="w-full aspect-[52/75] object-cover" />
+    <img src="${imageSrc}" alt="${product.title}" loading="lazy" class="w-full aspect-[52/75] object-cover" />
     ${hoverImg}
     ${memberBadge}
   </div>

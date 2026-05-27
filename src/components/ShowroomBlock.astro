@@ -20,7 +20,7 @@ const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
 >
   <!-- Billede -->
   <div class="w-full h-[550px] md:h-[720px] opacity-0 intersect:opacity-100 transition-opacity duration-1000">
-    <img src={image} alt={imageAlt} class="w-full h-full object-cover" />
+    <img src={image} alt={imageAlt} loading="lazy" class="w-full h-full object-cover" />
   </div>
 
   <!-- Sort boks -->

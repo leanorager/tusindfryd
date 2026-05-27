@@ -17,6 +17,7 @@ const { navn, jobbeskrivelse, billede } = Astro.props;
   <img
     src={billede}
     alt={navn}
+    loading="lazy"
     class="w-full object-cover object-top aspect-[3/4] md:aspect-auto md:flex-1 md:min-h-0"
   />
   <div class="flex flex-col gap-2xs">

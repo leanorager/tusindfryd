@@ -101,7 +101,7 @@ import Text from "../components/Text.astro";
 
     return `<a href="/product/${product.id}" class="block group">
   <div class="relative overflow-hidden">
-    <img src="${imageSrc}" alt="${product.title}" class="w-full aspect-[4/5] object-cover" />
+    <img src="${imageSrc}" alt="${product.title}" loading="lazy" class="w-full aspect-[4/5] object-cover" />
     ${hoverImg}
     ${memberBadge}
   </div>

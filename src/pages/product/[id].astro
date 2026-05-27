@@ -83,6 +83,7 @@ const images = [
               <img
                 src={img}
                 alt={product.title}
+                loading={i === 0 ? "eager" : "lazy"}
                 class="w-full aspect-[4/5] object-cover"
               />
             </div>
@@ -125,6 +126,7 @@ const images = [
                   <img
                     src={img}
                     alt={`${product.title} billede ${i + 1}`}
+                    loading="lazy"
                     class="w-full h-full object-cover"
                   />
                   <div class="absolute inset-0 bg-black/20 pointer-events-none" />
@@ -305,6 +307,7 @@ const images = [
                   <img
                     src={img}
                     alt={`${product.title} billede ${i + 1}`}
+                    loading="lazy"
                     class="w-full h-full object-cover"
                   />
                   <div class="absolute inset-0 bg-black/20 pointer-events-none" />
@@ -325,6 +328,7 @@ const images = [
               id={`desktop-img-${i}`}
               src={img}
               alt={product.title}
+              loading={i === 0 ? "eager" : "lazy"}
               class="w-full aspect-[4/5] object-cover desktop-product-img"
             />
           ))
