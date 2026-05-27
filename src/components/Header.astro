@@ -57,7 +57,7 @@ import Button from "./Button.astro";
     </nav>
 
     <a href="/" class="absolute left-1/2 -translate-x-1/2">
-      <img src="/svg/logo_icon.svg" alt="Tusindfryd" class="h-[29px] w-auto" />
+      <img src="/svg/logo-icon.svg" alt="Tusindfryd" class="h-[29px] w-auto" />
     </a>
 
     <!-- Mobile: Søg + Kurv -->
@@ -134,7 +134,7 @@ import Button from "./Button.astro";
       >
       <a href="/" class="absolute left-1/2 -translate-x-1/2">
         <img
-          src="/svg/logo_icon.svg"
+          src="/svg/logo-icon.svg"
           alt="Tusindfryd"
           class="h-[29px] w-auto"
         />
@@ -242,15 +242,15 @@ import Button from "./Button.astro";
     <div class="flex flex-col flex-1 px-container pt-s overflow-y-auto">
       <a
         href="/shop/nyheder"
-        class="font-helv font-medium text-[18px] text-black uppercase tracking-wide py-1 hover:underline transition-all duration-150"
+        class="font-helv font-medium text-[18px] text-black uppercase tracking-wide py-2xs hover:underline transition-all duration-150"
         >Nyeste drop</a
       >
       <a
         href="/shop/alt"
-        class="font-helv font-medium text-[18px] text-black uppercase tracking-wide py-1 hover:underline transition-all duration-150 mb-5"
+        class="font-helv font-medium text-[18px] text-black uppercase tracking-wide py-2xs hover:underline transition-all duration-150 mb-container"
         >Shop alt</a
       >
-      <div class="flex flex-col gap-[8px]">
+      <div class="flex flex-col gap-xs">
         <Link href="/shop/sofaer" teksttype="p_large">Sofaer</Link>
         <Link href="/shop/stole" teksttype="p_large">Stole</Link>
         <Link href="/shop/borde" teksttype="p_large">Borde</Link>
@@ -293,7 +293,7 @@ import Button from "./Button.astro";
   >
     <!-- Panel header -->
     <div
-      class="flex justify-between items-center px-5 h-[78px] border-b border-neutral-200 flex-shrink-0"
+      class="flex justify-between items-center px-container h-[78px] border-b border-neutral-200 flex-shrink-0"
     >
       <Heading
         type="h4"
@@ -326,14 +326,14 @@ import Button from "./Button.astro";
     >
       <template x-for="item in $store.cart.items" :key="item.id">
         <div
-          class="flex items-start gap-4 px-5 py-4 border-b border-neutral-100"
+          class="flex items-start gap-s px-container py-s border-b border-neutral-100"
         >
           <img
             :src="item.image || 'https://placehold.co/80x100'"
             :alt="item.title"
             class="w-[80px] h-[100px] object-cover flex-shrink-0"
           />
-          <div class="flex-1 min-w-0 pt-1">
+          <div class="flex-1 min-w-0 pt-2xs">
             <p
               class="font-helv font-medium text-[14px] text-black leading-tight mb-1"
               x-text="item.title"
@@ -366,18 +366,18 @@ import Button from "./Button.astro";
     <!-- Footer: total + knap -->
     <div
       x-show="$store.cart.items.length > 0"
-      class="flex-shrink-0 border-t border-neutral-200 px-5 pt-4 pb-6"
+      class="flex-shrink-0 border-t border-neutral-200 px-container pt-s pb-m"
       style="display:none"
     >
-      <div class="flex justify-between items-center mb-1">
+      <div class="flex justify-between items-center mb-2xs">
         <span class="font-helv font-normal text-[14px]">Total</span>
         <span
           class="font-ibm font-normal text-[14px]"
           x-text="formatPrice($store.cart.total)"></span>
       </div>
-      <div class="flex justify-between items-center mb-5">
-        <span class="font-helv font-light text-[12px] text-gray-500">
-          Standard Levering <span class="text-gray-400"
+      <div class="flex justify-between items-center mb-container">
+        <span class="font-helv font-light text-[12px]">
+          Standard Levering <span class="text-gray-500"
             >(1-2 dages levering)</span
           >
         </span>
@@ -386,7 +386,7 @@ import Button from "./Button.astro";
         >
       </div>
       <button
-        class="w-full bg-black text-white font-helv font-normal text-[13px] uppercase tracking-wide py-4 hover:opacity-80 transition-opacity duration-150 cursor-pointer"
+        class="w-full bg-black text-white font-helv font-normal text-[13px] uppercase tracking-wide py-s hover:opacity-80 transition-opacity duration-150 cursor-pointer"
         x-text="`GÅ TIL KASSE  -  ${formatPrice($store.cart.total)}`"></button>
     </div>
   </div>
@@ -405,7 +405,7 @@ import Button from "./Button.astro";
     @keydown.escape.window="searchOpen = false"
   >
     <div
-      class="flex justify-between items-center px-5 h-[78px] border-b border-neutral-200 flex-shrink-0"
+      class="flex justify-between items-center px-container h-[78px] border-b border-neutral-200 flex-shrink-0"
     >
       <Heading
         type="h4"
@@ -420,7 +420,7 @@ import Button from "./Button.astro";
       >
     </div>
 
-    <div class="px-5 pt-6 flex-shrink-0">
+    <div class="px-container pt-m flex-shrink-0">
       <input
         id="search-input"
         type="text"
@@ -429,17 +429,18 @@ import Button from "./Button.astro";
       />
     </div>
 
-    <div id="search-results" class="flex-1 overflow-y-auto px-5 pt-4"></div>
+    <div id="search-results" class="flex-1 overflow-y-auto px-container pt-s">
+    </div>
 
     <div
       id="search-footer"
       style="display:none"
-      class="flex-shrink-0 border-t border-neutral-100 p-4"
+      class="flex-shrink-0 border-t border-neutral-100 p-s"
     >
       <a
         id="search-see-all"
         href="/search"
-        class="block w-full border border-black py-4 font-helv font-normal text-[13px] text-center hover:bg-black hover:text-white transition-colors duration-150"
+        class="block w-full border border-black py-s font-helv font-normal text-[13px] text-center hover:bg-black hover:text-white transition-colors duration-150"
       >
         SE ALLE
       </a>

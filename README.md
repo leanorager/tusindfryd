@@ -47,7 +47,7 @@ Statiske filer (billeder, fonte, videoer) placeres i `public/` og refereres med 
 
 - **Filer og mapper:** små bogstaver, bindestreg som separator – fx `about.astro`, `bliv-medlem.astro`
 - **Komponenter:** PascalCase – fx `ProductCardCarousel.astro`, `ShowroomBlock.astro`
-- **Billeder:** snake_case – fx `about_left.webp`, `princip_big.webp`
+- **Billeder:** kebab-case – fx `about-left.webp`, `princip-big.webp`
 - **CSS-klasser:** Tailwind utility-klasser. Egne klasser bruger kebab-case – fx `.desktop-product-img`
 - **TypeScript-typer:** PascalCase – fx `Product`, `CategoryConfig`
 
@@ -58,6 +58,7 @@ Statiske filer (billeder, fonte, videoer) placeres i `public/` og refereres med 
 Scripts placeres i bunden af den relevante `.astro`-fil med Astros `<script>`-tag. Lenis (smooth scroll) initialiseres i `MainLayout.astro` og gælder alle sider. Alpine.js initialiseres globalt via `src/entrypoint.ts`.
 
 Eksempel fra `MainLayout.astro`:
+
 ```astro
 <script>
   import Lenis from "lenis";
@@ -73,8 +74,9 @@ Eksempel fra `MainLayout.astro`:
 Navngivning: `kebab-case` der beskriver hvad branchen indeholder.
 
 Eksempler:
+
 - `fix-horizontal-scroll`
-- `fix-images`
+- `header-v2`
 - `readme-file`
 
 Branches oprettes fra `master` og merges tilbage via pull request på GitHub.
@@ -135,6 +137,7 @@ Bruges i `shop/[category].astro` og `shop/search.astro` til dynamisk at generere
 **Beskrivelse:** Tager et produktobjekt og et indeks og returnerer en HTML-streng med animationsklasser og kortets indhold. Kaldes med `.map()` ved initial rendering og med `insertAdjacentHTML` ved paginering.
 
 **Parametre:**
+
 - `product` – produktobjekt med felterne `id`, `title`, `subtitle`, `regular_price`, `member_price`, `image1`, `image2`
 - `i` – indeks i den aktuelle batch, bruges til at beregne animation-delay (stagger)
 
