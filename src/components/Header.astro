@@ -193,7 +193,7 @@ import Button from "./Button.astro";
       </div>
 
       <!-- Bliv medlem billede -->
-      <div class="relative h-[371px] flex-shrink-0 overflow-hidden">
+      <div class="relative h-[371px] shrink min-h-0 overflow-hidden">
         <a href="/bliv-medlem" class="group">
           <img
             src="/img/shop-panel.webp"
@@ -239,7 +239,9 @@ import Button from "./Button.astro";
     class="fixed top-[76px] left-0 w-[430px] h-[calc(100vh-76px)] bg-white z-40 flex-col border-r border-neutral-200 hidden md:flex"
     style="display: none"
   >
-    <div class="flex flex-col flex-1 px-container pt-s overflow-y-auto">
+    <div
+      class="flex flex-col flex-1 px-container pt-s pb-m overflow-y-auto min-h-fit"
+    >
       <a
         href="/shop/nyheder"
         class="font-helv font-medium text-[18px] text-black uppercase tracking-wide py-2xs hover:underline transition-all duration-150"
@@ -260,7 +262,7 @@ import Button from "./Button.astro";
         <Link href="/shop/andet" teksttype="p_large">Andet</Link>
       </div>
     </div>
-    <div class="relative h-[371px] flex-shrink-0 overflow-hidden">
+    <div class="relative h-[371px] shrink min-h-0 overflow-hidden">
       <a href="/bliv-medlem" class="group">
         <img
           src="/img/shop-panel.webp"
