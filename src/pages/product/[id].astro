@@ -652,6 +652,18 @@ const images = [
             return;
           }
 
+          // If already at the boundary in the direction of scroll, let native scroll through
+          const earlyDir = e.deltaY > 0 ? 1 : -1;
+          const earlyIdx = currentIdx(pos);
+          const earlyNext = Math.max(
+            0,
+            Math.min(pos.length - 1, earlyIdx + earlyDir),
+          );
+          if (earlyNext === earlyIdx) {
+            accum = 0;
+            return;
+          }
+
           accum += e.deltaY;
           if (Math.abs(accum) < THRESHOLD) {
             e.preventDefault();
