@@ -69,7 +69,7 @@ const images = [
 ].filter(Boolean) as string[];
 ---
 
-<MainLayout title={`${product.title} – Tusindfryd`} noLenis={true}>
+<MainLayout title={`${product.title} – Tusindfryd`} description={product.description ?? `${product.title} – ${product.subtitle}. Shop vintage møbler hos Tusindfryd.`} noLenis={true}>
   <main class="pb-3xl md:pb-0">
     <!-- MOBIL: skjult på desktop -->
     <div class="md:hidden">

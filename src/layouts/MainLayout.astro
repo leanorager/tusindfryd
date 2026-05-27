@@ -2,7 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/tailwind.css";
-const { title, showFooter = true, noLenis = false } = Astro.props;
+const { title, description, showFooter = true, noLenis = false } = Astro.props;
 ---
 
 <html lang="da" class="scroll-smooth">
@@ -12,6 +12,7 @@ const { title, showFooter = true, noLenis = false } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    {description && <meta name="description" content={description} />}
     <script
       defer
       src="https://unpkg.com/tailwindcss-intersect@2.x.x/dist/observer.min.js"
