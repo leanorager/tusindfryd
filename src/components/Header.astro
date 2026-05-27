@@ -222,7 +222,7 @@ import Button from "./Button.astro";
     x-transition:leave="transition ease-in duration-150"
     x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0"
-    class="fixed inset-0 top-[78px] z-30 bg-black/10 backdrop-blur-lg"
+    class="fixed inset-0 top-[73px] md:top-[76px] z-30 bg-black/10 backdrop-blur-lg"
     style="display: none"
   >
   </div>
@@ -492,7 +492,7 @@ import Button from "./Button.astro";
     ) {
       resultsEl.innerHTML = `
       <h3 class="font-helv font-medium text-[12px] uppercase mb-4">Populære søgninger</h3>
-      <div class="flex flex-wrap gap-x-6 gap-y-2">
+      <div style="display:flex; flex-wrap:wrap; gap:8px 24px;">
         ${POPULAR_SEARCHES.map(
           (term) => `<a href="/shop/search?q=${encodeURIComponent(term)}"
             class="hover:underline transition-all duration-150 font-helv font-light text-[14px] text-gray-700">${term}</a>`,
