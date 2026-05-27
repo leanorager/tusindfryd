@@ -17,7 +17,7 @@ const { title, showFooter = true, noLenis = false } = Astro.props;
       src="https://unpkg.com/tailwindcss-intersect@2.x.x/dist/observer.min.js"
     ></script>
   </head>
-  <body class="bg-white antialiased">
+  <body class="max-w-[1600px] mx-auto bg-white antialiased">
     <Header />
 
     <slot />
@@ -33,7 +33,10 @@ const { title, showFooter = true, noLenis = false } = Astro.props;
 <script>
   import Lenis from "lenis";
   if (!(window as any).__noLenis) {
-    const lenis = new Lenis({ duration: 0.8, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+    const lenis = new Lenis({
+      duration: 0.8,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    });
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
