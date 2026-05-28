@@ -151,7 +151,9 @@ const images = [
               />
             </button>
             <div x-show="open === 'om'" x-collapse style="display:none">
-              <Text teksttype="p_xsmall" stylingclasses="pb-container"
+              <Text
+                teksttype="p_xsmall"
+                stylingclasses="text-gray-700 pb-container"
                 >{product.description}</Text
               >
             </div>
@@ -172,10 +174,12 @@ const images = [
             <div x-show="open === 'maal'" x-collapse style="display:none">
               <Text
                 teksttype="p_xsmall"
-                stylingclasses="pb-2 whitespace-pre-line"
+                stylingclasses="text-gray-700 pb-2 whitespace-pre-line"
                 >{product.measurement}</Text
               >
-              <Text teksttype="p_xsmall" stylingclasses="pb-container"
+              <Text
+                teksttype="p_xsmall"
+                stylingclasses="text-gray-700 pb-container"
                 >{product.materials}</Text
               >
             </div>
@@ -194,7 +198,9 @@ const images = [
               />
             </button>
             <div x-show="open === 'brug'" x-collapse style="display:none">
-              <Text teksttype="p_xsmall" stylingclasses="pb-container"
+              <Text
+                teksttype="p_xsmall"
+                stylingclasses="text-gray-700 pb-container"
                 >{product.signs_of_use}</Text
               >
             </div>
@@ -396,7 +402,9 @@ const images = [
               />
             </button>
             <div x-show="open === 'om'" x-collapse style="display:none">
-              <Text teksttype="p_xsmall" stylingclasses="pb-container"
+              <Text
+                teksttype="p_xsmall"
+                stylingclasses="text-gray-700 pb-container"
                 >{product.description}</Text
               >
             </div>
@@ -417,10 +425,12 @@ const images = [
             <div x-show="open === 'maal'" x-collapse style="display:none">
               <Text
                 teksttype="p_xsmall"
-                stylingclasses="pb-container whitespace-pre-line"
+                stylingclasses="text-gray-700 pb-container whitespace-pre-line"
                 >{product.measurement}</Text
               >
-              <Text teksttype="p_xsmall" stylingclasses="pb-container"
+              <Text
+                teksttype="p_xsmall"
+                stylingclasses="text-gray-700 pb-container"
                 >{product.materials}</Text
               >
             </div>
@@ -439,7 +449,9 @@ const images = [
               />
             </button>
             <div x-show="open === 'brug'" x-collapse style="display:none">
-              <Text teksttype="p_xsmall" stylingclasses="pb-container"
+              <Text
+                teksttype="p_xsmall"
+                stylingclasses="text-gray-700 pb-container"
                 >{product.signs_of_use}</Text
               >
             </div>
@@ -472,9 +484,7 @@ const images = [
             stylingclasses="mb-2xs">Levering indenfor 1–3 dage*</Text
           >
           <Text teksttype="p_xsmall" color="text-gray-500">
-            <a href="/bliv-medlem" class="underline cursor-pointer"
-              >For virksomheder</a
-            >
+            <a href="/#" class="underline cursor-pointer">For virksomheder</a>
           </Text>
         </div>
 
@@ -643,6 +653,18 @@ const images = [
 
           if (locked) {
             e.preventDefault();
+            return;
+          }
+
+          // If already at the boundary in the direction of scroll, let native scroll through
+          const earlyDir = e.deltaY > 0 ? 1 : -1;
+          const earlyIdx = currentIdx(pos);
+          const earlyNext = Math.max(
+            0,
+            Math.min(pos.length - 1, earlyIdx + earlyDir),
+          );
+          if (earlyNext === earlyIdx) {
+            accum = 0;
             return;
           }
 

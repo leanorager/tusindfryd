@@ -24,14 +24,14 @@ const teksttypeClasses = {
   target={target}
   rel={target === "_blank" ? "noopener noreferrer" : undefined}
   class:list={[
-    "inline-flex items-end gap-[5px] pb-[1px] border-b transition-opacity duration-100 hover:opacity-90",
+    "inline-flex items-end gap-[10px] pb-3xs border-b transition-opacity duration-100 hover:opacity-90",
     color === "white" ? "border-white text-white" : "border-black text-black",
     stylingclasses,
   ]}
 >
   <span class:list={[teksttypeClasses[teksttype], "min-w-0"]}><slot /></span>
   <img
-    src={color === "white" ? "/svg/ArrowWhite.svg" : "/svg/ArrowBlack.svg"}
+    src={color === "white" ? "/svg/arrow-white.svg" : "/svg/arrow-black.svg"}
     alt=""
     aria-hidden="true"
     class="shrink-0 self-center w-[25px] h-[10px]"

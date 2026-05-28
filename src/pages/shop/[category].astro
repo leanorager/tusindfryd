@@ -495,7 +495,9 @@ const initialCategories =
     <!-- Main content -->
     <main class="px-container-mobile md:px-container pt-l pb-3xl md:pt-3xl">
       <!-- Page header + filter bar -->
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-l md:mb-3xl">
+      <div
+        class="flex flex-col md:flex-row md:items-end md:justify-between mb-l md:mb-3xl"
+      >
         <div class="mb-l md:mb-0 md:max-w-sm">
           <Heading
             htmlheading="h3"
@@ -506,7 +508,7 @@ const initialCategories =
           </Heading>
           {
             categoryConfig.description && (
-              <Text teksttype="statement_small">
+              <Text teksttype="statement_small" stylingclasses="text-gray-700">
                 {categoryConfig.description}
               </Text>
             )

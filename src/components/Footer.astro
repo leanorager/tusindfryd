@@ -13,7 +13,7 @@ import Button from "./Button.astro";
     >
       <a href="/">
         <img
-          src="/img/logo_word.png"
+          src="/img/logo-word.png"
           alt="Tusindfryd"
           class="h-[12px] w-auto"
         />
@@ -33,10 +33,21 @@ import Button from "./Button.astro";
         variant="secondary"
         href="/bliv-medlem"
         teksttype="p_xsmall"
-        stylingclasses="h-11 flex justify-between items-center"
+        stylingclasses="group h-11 flex justify-between items-center"
       >
         Bliv medlem
-        <span class="font-helv text-sm">→</span>
+        <img
+          src="/svg/arrow-black.svg"
+          alt=""
+          aria-hidden="true"
+          class="shrink-0 w-[25px] h-[10px] block group-hover:hidden"
+        />
+        <img
+          src="/svg/arrow-white.svg"
+          alt=""
+          aria-hidden="true"
+          class="shrink-0 w-[25px] h-[10px] hidden group-hover:block"
+        />
       </Button>
     </div>
 
