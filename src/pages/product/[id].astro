@@ -69,7 +69,12 @@ const images = [
 ].filter(Boolean) as string[];
 ---
 
-<MainLayout title={`${product.title} – Tusindfryd`} description={product.description ?? `${product.title} – ${product.subtitle}. Shop vintage møbler hos Tusindfryd.`} noLenis={true}>
+<MainLayout
+  title={`${product.title} – Tusindfryd`}
+  description={product.description ??
+    `${product.title} – ${product.subtitle}. Shop vintage møbler hos Tusindfryd.`}
+  noLenis={true}
+>
   <main class="pb-3xl md:pb-0">
     <!-- MOBIL: skjult på desktop -->
     <div class="md:hidden">
@@ -213,25 +218,25 @@ const images = [
           >
           <Text
             teksttype="p_xsmall"
-            color="text-gray-500"
+            color="text-gray-600"
             stylingclasses="mb-2xs">10% rabat på alle varer</Text
           >
           <Text
             teksttype="p_xsmall"
-            color="text-gray-500"
+            color="text-gray-600"
             stylingclasses="mb-2xs">Gratis fragt og levering</Text
           >
           <Text
             teksttype="p_xsmall"
-            color="text-gray-500"
+            color="text-gray-600"
             stylingclasses="mb-2xs">Pre-access til de nyeste drops</Text
           >
           <Text
             teksttype="p_xsmall"
-            color="text-gray-500"
+            color="text-gray-600"
             stylingclasses="mb-2xs">Levering indenfor 1–3 dage*</Text
           >
-          <Text teksttype="p_xsmall" color="text-gray-500">
+          <Text teksttype="p_xsmall" color="text-gray-600">
             <a href="/#" class="underline cursor-pointer">For virksomheder</a>
           </Text>
         </div>
@@ -270,8 +275,8 @@ const images = [
         style="top: var(--header-h, 78px)"
       >
         <nav class="flex items-center gap-container-mobile mb-xs">
-          <Text teksttype="p_medium" color="text-gray-400">
-            <a href="/shop/alt" class="hover:text-gray-600 transition-colors"
+          <Text teksttype="p_medium" color="text-gray-600">
+            <a href="/shop/alt" class="hover:text-gray-700 transition-colors"
               >Shop Alt</a
             >
           </Text>
@@ -349,8 +354,8 @@ const images = [
         <!-- Kun på tablet: breadcrumb + titel + pris -->
         <div class="lg:hidden mb-l">
           <nav class="flex items-center gap-container-mobile mb-xs">
-            <Text teksttype="p_medium" color="text-gray-400">
-              <a href="/shop/alt" class="hover:text-gray-600 transition-colors"
+            <Text teksttype="p_medium" color="text-gray-600">
+              <a href="/shop/alt" class="hover:text-gray-700 transition-colors"
                 >Shop Alt</a
               >
             </Text>
@@ -465,25 +470,25 @@ const images = [
           >
           <Text
             teksttype="p_xsmall"
-            color="text-gray-500"
+            color="text-gray-600"
             stylingclasses="mb-2xs">10% rabat på alle varer</Text
           >
           <Text
             teksttype="p_xsmall"
-            color="text-gray-500"
+            color="text-gray-600"
             stylingclasses="mb-2xs">Gratis fragt og levering</Text
           >
           <Text
             teksttype="p_xsmall"
-            color="text-gray-500"
+            color="text-gray-600"
             stylingclasses="mb-2xs">Pre-access til de nyeste drops</Text
           >
           <Text
             teksttype="p_xsmall"
-            color="text-gray-500"
+            color="text-gray-600"
             stylingclasses="mb-2xs">Levering indenfor 1–3 dage*</Text
           >
-          <Text teksttype="p_xsmall" color="text-gray-500">
+          <Text teksttype="p_xsmall" color="text-gray-600">
             <a href="/#" class="underline cursor-pointer">For virksomheder</a>
           </Text>
         </div>

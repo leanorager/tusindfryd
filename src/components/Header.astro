@@ -317,7 +317,7 @@ import Button from "./Button.astro";
       x-show="$store.cart.items.length === 0"
       class="flex-1 flex items-center justify-center p-5"
     >
-      <Text teksttype="p_large" color="text-gray-500">Din kurv er tom.</Text>
+      <Text teksttype="p_large" color="text-gray-600">Din kurv er tom.</Text>
     </div>
 
     <!-- Vareliste -->
@@ -342,7 +342,7 @@ import Button from "./Button.astro";
             >
             </p>
             <p
-              class="font-helv font-light text-[12px] text-gray-500 leading-tight"
+              class="font-helv font-normal text-[12px] text-gray-600 leading-tight"
               x-text="item.subtitle"
             >
             </p>
@@ -357,7 +357,7 @@ import Button from "./Button.astro";
             </p>
             <button
               @click="$store.cart.remove(item.id)"
-              class="font-helv font-light text-[16px] text-gray-400 hover:text-black transition-colors duration-150 cursor-pointer"
+              class="font-helv font-normal text-[16px] text-gray-600 hover:text-black transition-colors duration-150 cursor-pointer"
               >✕</button
             >
           </div>
@@ -378,8 +378,8 @@ import Button from "./Button.astro";
           x-text="formatPrice($store.cart.total)"></span>
       </div>
       <div class="flex justify-between items-center mb-container">
-        <span class="font-helv font-light text-[12px]">
-          Standard Levering <span class="text-gray-500"
+        <span class="font-helv font-normal text-[12px]">
+          Standard Levering <span class="text-gray-600"
             >(1-2 dages levering)</span
           >
         </span>
@@ -498,7 +498,7 @@ import Button from "./Button.astro";
       <div style="display:flex; flex-wrap:wrap; gap:8px 24px;">
         ${POPULAR_SEARCHES.map(
           (term) => `<a href="/shop/search?q=${encodeURIComponent(term)}"
-            class="hover:underline transition-all duration-150 font-helv font-light text-[14px] text-gray-700">${term}</a>`,
+            class="hover:underline transition-all duration-150 font-helv font-normal text-[13px] text-gray-700">${term}</a>`,
         ).join("")}
       </div>
     `;
