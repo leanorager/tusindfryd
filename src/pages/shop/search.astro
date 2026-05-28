@@ -6,7 +6,7 @@ import SplashScreen from "../../components/SplashScreen.astro";
 ---
 
 <SplashScreen />
-<MainLayout title="Søgeresultater – Tusindfryd">
+<MainLayout title="Søgeresultater – Tusindfryd" description="Søg i Tusindfryds udvalg af håndplukkede vintage møbler og interiør.">
   <main class="px-container-mobile md:px-container pt-l pb-3xl md:pt-3xl">
     <!-- Page header -->
     <div class="mb-l md:mb-3xl md:max-w-sm">
@@ -111,7 +111,7 @@ import SplashScreen from "../../components/SplashScreen.astro";
 
     return `<div class="opacity-0 translate-y-4 intersect:opacity-100 intersect:translate-y-0 transition-all duration-500" style="transition-delay: ${delay}ms"><a href="/product/${product.id}" class="block group">
   <div class="relative overflow-hidden">
-    <img src="${imageSrc}" alt="${product.title}" class="w-full aspect-[52/75] object-cover" />
+    <img src="${imageSrc}" alt="${product.title}" loading="lazy" class="w-full aspect-[52/75] object-cover" />
     ${hoverImg}
     ${memberBadge}
   </div>
